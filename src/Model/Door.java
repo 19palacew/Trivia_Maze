@@ -25,6 +25,10 @@ public class Door {
         }
     }
 
+    public void unlockedFromOtherSide(){
+        myLocked = false;
+    }
+
     public String getQuestion(){
         return  myQuestion.getQuestion();
     }

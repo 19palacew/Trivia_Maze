@@ -25,7 +25,16 @@ public class Room {
         return myBlockedDoors;
     }
 
-    public Door getDoor(final int myDoorIndex){
-        return myRoomDoors[myDoorIndex];
+    public Door getDoor(final int theDoorIndex){
+        return myRoomDoors[theDoorIndex];
+    }
+
+    public void enterRoom(Direction theDirection){
+        switch (theDirection){
+            case NORTH -> getDoor(0).unlockedFromOtherSide();
+            case SOUTH -> getDoor(1).unlockedFromOtherSide();
+            case EAST -> getDoor(2).unlockedFromOtherSide();
+            case WEST -> getDoor(3).unlockedFromOtherSide();
+        }
     }
 }
