@@ -6,7 +6,7 @@ public class Door {
     private final char theAnswer;
     private boolean theLocked;
 
-    public Door(final char myAnswer, final String myQuestion){
+    public Door(final char myAnswer, final String myQuestion) {
         theLocked = true;
         theAnswer = myAnswer;
         theQuestion = myQuestion;
@@ -14,6 +14,7 @@ public class Door {
 
     /**
      * Returns if the door is unlocked or locked
+     *
      * @return Returns a boolean of the state of the Model.Door
      */
     public boolean isLocked() {
@@ -22,14 +23,15 @@ public class Door {
 
     /**
      * Returns the trivia question
+     *
      * @return Returns a String of a question
      */
     public String getTheQuestion() {
         return theQuestion;
     }
 
-    public void unlock(final char myUserAnswer){
-        if (myUserAnswer == theAnswer){
+    public void unlock(final char myUserAnswer) {
+        if (myUserAnswer == theAnswer) {
             theLocked = false;
         }
     }
