@@ -1,31 +1,31 @@
 package Model;
 
 public class Room {
-    private final Door[] theRoomDoors;
-    private final RoomBlocker theBlockedDoors;
+    private final Door[] myRoomDoors;
+    private final RoomBlocker myBlockedDoors;
 
-    public Room(final RoomBlocker myBlocker){
-        this.theBlockedDoors = myBlocker;
-        this.theRoomDoors = new Door[4];
-        if (myBlocker.getNorth()){
-            this.theRoomDoors[0] = new Door();
+    public Room(final RoomBlocker theBlocker){
+        this.myBlockedDoors = theBlocker;
+        this.myRoomDoors = new Door[4];
+        if (theBlocker.getNorth()){
+            this.myRoomDoors[0] = new Door();
         }
-        if (myBlocker.getSouth()){
-            this.theRoomDoors[1] = new Door();
+        if (theBlocker.getSouth()){
+            this.myRoomDoors[1] = new Door();
         }
-        if (myBlocker.getEast()){
-            this.theRoomDoors[2] = new Door();
+        if (theBlocker.getEast()){
+            this.myRoomDoors[2] = new Door();
         }
-        if (myBlocker.getWest()){
-            this.theRoomDoors[3] = new Door();
+        if (theBlocker.getWest()){
+            this.myRoomDoors[3] = new Door();
         }
     }
 
     public RoomBlocker getBlockedDoors() {
-        return theBlockedDoors;
+        return myBlockedDoors;
     }
 
     public Door getDoor(final int myDoorIndex){
-        return theRoomDoors[myDoorIndex];
+        return myRoomDoors[myDoorIndex];
     }
 }

@@ -1,31 +1,31 @@
 package Model;
 
 public class RoomBlocker {
-    private final boolean theNorth;
-    private final boolean theSouth;
-    private final boolean theEast;
-    private final boolean theWest;
+    private final boolean myNorth;
+    private final boolean mySouth;
+    private final boolean myEast;
+    private final boolean myWest;
 
-    public RoomBlocker(final boolean myNorth, final boolean mySouth, final boolean myEast, final boolean myWest){
-        this.theNorth = myNorth;
-        this.theSouth = mySouth;
-        this.theEast = myEast;
-        this.theWest = myWest;
+    public RoomBlocker(final boolean theNorth, final boolean theSouth, final boolean theEast, final boolean theWest){
+        this.myNorth = theNorth;
+        this.mySouth = theSouth;
+        this.myEast = theEast;
+        this.myWest = theWest;
     }
 
     public boolean getNorth() {
-        return theNorth;
+        return myNorth;
     }
 
     public boolean getSouth() {
-        return theSouth;
+        return mySouth;
     }
 
     public boolean getEast() {
-        return theEast;
+        return myEast;
     }
 
     public boolean getWest() {
-        return theWest;
+        return myWest;
     }
 }

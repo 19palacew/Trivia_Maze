@@ -1,12 +1,12 @@
 package Model;
 
 public class Door {
-    private final Question theQuestion;
-    private boolean theLocked;
+    private final Question myQuestion;
+    private boolean myLocked;
 
     public Door(){
-        this.theLocked = true;
-        this.theQuestion = new Question();
+        this.myLocked = true;
+        this.myQuestion = new Question();
     }
 
     /**
@@ -15,17 +15,17 @@ public class Door {
      * @return Returns a boolean of the state of the Model.Door
      */
     public boolean isLocked() {
-        return theLocked;
+        return myLocked;
     }
 
 
-    public void unlock(final char myUserAnswer) {
-        if (myUserAnswer == theQuestion.getTheAnswer()) {
-            theLocked = false;
+    public void unlock(final char theUserAnswer) {
+        if (theUserAnswer == myQuestion.getAnswer()) {
+            myLocked = false;
         }
     }
 
     public String getQuestion(){
-        return  theQuestion.getTheQuestion();
+        return  myQuestion.getQuestion();
     }
 }
