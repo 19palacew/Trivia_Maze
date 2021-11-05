@@ -14,11 +14,11 @@ public class Maze {
     /**
      * Class constant containing the max X-width of the maze
      */
-    private static final int MY_MAX_X = 8;
+    private static final int MAX_X = 8;
     /**
      * Class constant containing the max Y-width of the maze
      */
-    private static final int MY_MAX_Y = 8;
+    private static final int MAX_Y = 8;
 
     /**
      * Constructor that builds the 2D-array representation of the maze.
@@ -29,7 +29,7 @@ public class Maze {
     public Maze() {
         myX = 1;
         myY = 1;
-        myMaze = new Room[MY_MAX_X][MY_MAX_Y];
+        myMaze = new Room[MAX_X][MAX_Y];
         roomSetup();
     }
 
