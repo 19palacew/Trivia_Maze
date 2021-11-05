@@ -1,3 +1,5 @@
+package Model;
+
 public class Door {
     private final String theQuestion;
     // Keeping it multiple choice for now, free response seems painful
@@ -12,7 +14,7 @@ public class Door {
 
     /**
      * Returns if the door is unlocked or locked
-     * @return Returns a boolean of the state of the Door
+     * @return Returns a boolean of the state of the Model.Door
      */
     public boolean isLocked() {
         return theLocked;
