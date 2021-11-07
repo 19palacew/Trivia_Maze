@@ -1,30 +1,40 @@
 package Model;
 
-public class Room{
+public class Room {
+    private final Door[] myRoomDoors;
+    private final RoomBlocker myBlockedDoors;
 
-    private final Door[] myDoors;
-    private Door myNorth;
-    private Door mySouth;
-    private Door myEast;
-    private Door myWest;
-
-    public Room(Boolean theNorth,Boolean theSouth, Boolean theEast, Boolean theWest) {
-        if (theNorth){
-            myNorth = new Door('a', "test?");
+    public Room(final RoomBlocker theBlocker){
+        this.myBlockedDoors = theBlocker;
+        this.myRoomDoors = new Door[4];
+        if (theBlocker.getNorth()){
+            this.myRoomDoors[0] = new Door();
         }
-        if (theSouth){
-            mySouth = new Door('a', "test?");
+        if (theBlocker.getSouth()){
+            this.myRoomDoors[1] = new Door();
         }
-        if (theEast){
-            myEast = new Door('a', "test?");
+        if (theBlocker.getEast()){
+            this.myRoomDoors[2] = new Door();
         }
-        if (theWest){
-            myWest = new Door('a', "test?");
+        if (theBlocker.getWest()){
+            this.myRoomDoors[3] = new Door();
         }
-        myDoors = new Door[]{myNorth, mySouth, myEast, myWest};
     }
 
-    public Door[] getDoors() {
-        return myDoors;
+    public RoomBlocker getBlockedDoors() {
+        return myBlockedDoors;
+    }
+
+    public Door getDoor(final int theDoorIndex){
+        return myRoomDoors[theDoorIndex];
+    }
+
+    public void enterRoom(Direction theDirection){
+        switch (theDirection){
+            case NORTH -> getDoor(0).unlockedFromOtherSide();
+            case SOUTH -> getDoor(1).unlockedFromOtherSide();
+            case EAST -> getDoor(2).unlockedFromOtherSide();
+            case WEST -> getDoor(3).unlockedFromOtherSide();
+        }
     }
 }

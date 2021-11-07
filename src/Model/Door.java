@@ -1,15 +1,12 @@
 package Model;
 
 public class Door {
-    private final String theQuestion;
-    // Keeping it multiple choice for now, free response seems painful
-    private final char theAnswer;
-    private boolean theLocked;
+    private final Question myQuestion;
+    private boolean myLocked;
 
-    public Door(final char myAnswer, final String myQuestion) {
-        theLocked = true;
-        theAnswer = myAnswer;
-        theQuestion = myQuestion;
+    public Door(){
+        this.myLocked = true;
+        this.myQuestion = new Question();
     }
 
     /**
@@ -18,21 +15,21 @@ public class Door {
      * @return Returns a boolean of the state of the Model.Door
      */
     public boolean isLocked() {
-        return theLocked;
+        return myLocked;
     }
 
-    /**
-     * Returns the trivia question
-     *
-     * @return Returns a String of a question
-     */
-    public String getTheQuestion() {
-        return theQuestion;
-    }
 
-    public void unlock(final char myUserAnswer) {
-        if (myUserAnswer == theAnswer) {
-            theLocked = false;
+    public void unlock(final char theUserAnswer) {
+        if (theUserAnswer == myQuestion.getAnswer()) {
+            myLocked = false;
         }
+    }
+
+    public void unlockedFromOtherSide(){
+        myLocked = false;
+    }
+
+    public String getQuestion(){
+        return  myQuestion.getQuestion();
     }
 }

@@ -1,3 +1,5 @@
+package Model;
+
 public class Maze {
     /**
      * Field containing the 2D array of Room Objects that represents the overall maze
@@ -62,7 +64,7 @@ public class Maze {
                 if (j > 0) {
                     west = true;
                 }
-                myMaze[i][j] = new Room(north,south,east,west);
+                myMaze[i][j] = new Room(new RoomBlocker(north,south,east,west));
             }
         }
     }
