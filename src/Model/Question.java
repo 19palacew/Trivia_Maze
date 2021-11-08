@@ -2,7 +2,7 @@ package Model;
 
 public class Question {
     private final String myQuestion;
-    private final char myAnswer;
+    private final Answer myAnswer;
     public Question(){
         this.myQuestion = genQuestion();
         this.myAnswer = genAnswer();
@@ -12,7 +12,7 @@ public class Question {
         return myQuestion;
     }
 
-    public char getAnswer() {
+    public Answer getAnswer() {
         return myAnswer;
     }
 
@@ -20,7 +20,7 @@ public class Question {
         return "SQLite Coming Soon";
     }
 
-    private char genAnswer(){
-        return 'X';
+    private Answer genAnswer(){
+        return null;
     }
 }

@@ -19,7 +19,7 @@ public class Door {
     }
 
 
-    public void unlock(final char theUserAnswer) {
+    public void unlock(final Answer theUserAnswer) {
         if (theUserAnswer == myQuestion.getAnswer()) {
             myLocked = false;
         }
