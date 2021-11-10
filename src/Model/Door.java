@@ -3,10 +3,12 @@ package Model;
 public class Door {
     private final Question myQuestion;
     private boolean myLocked;
+    private boolean myDoorDead;
 
     public Door(){
         this.myLocked = true;
-        this.myQuestion = new Question();
+        this.myDoorDead = false;
+        this.myQuestion = Database.genQuestion();
     }
 
     /**
@@ -18,10 +20,22 @@ public class Door {
         return myLocked;
     }
 
+    /**
+     * Returns if the door is dead
+     *
+     * @return Returns a boolean of the state of the Model.Door
+     */
+    public boolean isDead() {
+        return myDoorDead;
+    }
+
 
     public void unlock(final Answer theUserAnswer) {
-        if (theUserAnswer == myQuestion.getAnswer()) {
+        if (!myDoorDead && theUserAnswer == myQuestion.getAnswer()) {
             myLocked = false;
+        }
+        else{
+            myDoorDead = true;
         }
     }
 
