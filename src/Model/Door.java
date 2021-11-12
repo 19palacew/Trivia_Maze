@@ -30,7 +30,12 @@ public class Door {
     }
 
 
+    /**
+     * Unlocks the door when the correct answer is given
+     * @param theUserAnswer Response that the user gives
+     */
     public void unlock(final Answer theUserAnswer) {
+        // When the door is still unlockable and the correct answer is given, the door will unlock
         if (!myDoorDead && theUserAnswer == myQuestion.getAnswer()) {
             myLocked = false;
         }
@@ -39,10 +44,18 @@ public class Door {
         }
     }
 
+    /**
+     * When entering a room, the door that the player used to enter is unlocked.
+     * (Allows us to keep doors from different rooms unlinked)
+     */
     public void unlockedFromOtherSide(){
         myLocked = false;
     }
 
+    /**
+     * Returns the question
+     * @return Returns a String of the Question
+     */
     public String getQuestion(){
         return  myQuestion.getQuestion();
     }

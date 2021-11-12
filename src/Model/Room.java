@@ -26,20 +26,37 @@ public class Room {
         }
     }
 
+    /**
+     * Returns which doors are permanently blocked
+     * @return Returns a RoomBlocker
+     */
     public RoomBlocker getBlockedDoors() {
         return myBlockedDoors;
     }
 
+    /**
+     *
+     * @param theDoorIndex The index of the door
+     * @return Returns a door based on the index
+     */
     public Door getDoor(final int theDoorIndex){
         return myRoomDoors[theDoorIndex];
     }
 
+    /**
+     * When Player enters a Room, the door that they entered is unlocked
+     * North Direction (Unlocks South Door)
+     * South Direction (Unlocks North Door)
+     * East Direction (Unlocks West Door)
+     * West Direction (Unlocks East Door)
+     * @param theDirection The direction that the player comes from.
+     */
     public void enterRoom(Direction theDirection){
         switch (theDirection){
-            case NORTH -> getDoor(DOOR1_INDEX).unlockedFromOtherSide();
-            case SOUTH -> getDoor(DOOR2_INDEX).unlockedFromOtherSide();
-            case EAST -> getDoor(DOOR3_INDEX).unlockedFromOtherSide();
-            case WEST -> getDoor(DOOR4_INDEX).unlockedFromOtherSide();
+            case NORTH -> getDoor(DOOR2_INDEX).unlockedFromOtherSide();
+            case SOUTH -> getDoor(DOOR1_INDEX).unlockedFromOtherSide();
+            case EAST -> getDoor(DOOR4_INDEX).unlockedFromOtherSide();
+            case WEST -> getDoor(DOOR3_INDEX).unlockedFromOtherSide();
         }
     }
 }

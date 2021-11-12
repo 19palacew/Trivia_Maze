@@ -8,10 +8,18 @@ public class Question {
         this.myAnswer = theAnswer;
     }
 
+    /**
+     * Returns the question
+     * @return Returns a String of a Question
+     */
     public String getQuestion() {
         return myQuestion;
     }
 
+    /**
+     * Returns the correct answer
+     * @return Returns an enum (Answer) of the correct answer.
+     */
     public Answer getAnswer() {
         return myAnswer;
     }
