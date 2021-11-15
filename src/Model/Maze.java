@@ -74,9 +74,25 @@ public class Maze {
      * @param theX the next X position the player will be in
      * @param theY the next Y position the player will be in
      */
-    public void setX (int theX, int theY) {
+    public void setXAndY (int theX, int theY) {
         myX = theX;
         myY = theY;
+    }
+
+    /**
+     * Getter for the player's X position
+     * @return myX the current X position
+     */
+    public int getX () {
+        return myX;
+    }
+
+    /**
+     * Getter for the player's Y position
+     * @return myY the current Y position
+     */
+    public int getY () {
+        return myY;
     }
 
     /**
