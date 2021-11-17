@@ -40,45 +40,45 @@ public class Maze {
      */
     private void roomSetup() {
 
-        for (int i = 0; i < myMaze.length; i++){
-            for (int j = 0; j < myMaze[i].length; j++){
-                //We put our directions in the innermost loop so they reset for each room
-                boolean north = false;
-                boolean east = false;
-                boolean south = false;
+        for (int xMazeCoord = 0; xMazeCoord < myMaze.length; xMazeCoord++){
+            for (int yMazeCoord = 0; yMazeCoord < myMaze[xMazeCoord].length; yMazeCoord++){
+                //We put our directions in the innermost loop, so they reset for each room
                 boolean west = false;
+                boolean south = false;
+                boolean east = false;
+                boolean north = false;
                 Door northDoor;
                 Door southDoor = new Door();
                 Door eastDoor = new Door();
                 Door westDoor;
-                //If row value above is greater or equal to 0 we know exists north door
-                if (i-1 >= 0) {
+                //If column is greater than 0 we know there is a north facing door
+                if (yMazeCoord > 0) {
                     north = true;
-                    // Sets the north door of this room to the south door of the previous room.
-                    northDoor = myMaze[i-1][j].getDoor(1);
+                    northDoor = myMaze[xMazeCoord][yMazeCoord-1].getDoor(1);
                 }
                 else {
                     northDoor = new Door();
                 }
-                /* If column value is 1 less than the inner mazes length - 1 there is an
-                   east facing door */
-                if (j < myMaze[i].length - 1) {
-                    east = true;
-                    // Sets the east door of this room to the west door of the previous room.
-                }
-                //If room is not in a row on the southern edge, there is a south door
-                if (i <= myMaze.length - 1) {
+                /* If column value is 1 less than the inner maze's length - 1 there is a
+                   south facing door */
+                if (yMazeCoord < myMaze[xMazeCoord].length - 1) {
                     south = true;
+                    // Sets the south door of this room to the north door of the previous room.
                 }
-                //If column is greater than 0 we know there is a west facing door
-                if (j > 0) {
+                //If room is not in a row on the southern edge, there is a east door
+                if (xMazeCoord <= myMaze.length - 1) {
+                    east = true;
+                }
+                //If row value above is greater or equal to 0 we know exists west door
+                if (xMazeCoord-1 >= 0) {
                     west = true;
-                    westDoor = myMaze[i][j-1].getDoor(2);
+                    // Sets the west door of this room to the east door of the previous room.
+                    westDoor = myMaze[xMazeCoord-1][yMazeCoord].getDoor(2);
                 }
                 else {
                     westDoor = new Door();
                 }
-                myMaze[i][j] = new Room(new RoomBlocker(north,south,east,west), northDoor, southDoor, eastDoor, westDoor);
+                myMaze[xMazeCoord][yMazeCoord] = new Room(new RoomBlocker(north,south,east,west), northDoor, southDoor, eastDoor, westDoor);
             }
         }
     }
@@ -124,7 +124,7 @@ public class Maze {
             mazeDisplayString = mazeDisplayString + "\n";
             // Loop through all elements of current row
             for (int j = 0; j < myMaze[i].length; j++) {
-                if (i == myX && j == myY) {
+                if (i == myY && j == myX) {
                     mazeDisplayString = mazeDisplayString + "[P]";
                 } else {
                     mazeDisplayString = mazeDisplayString + "[X]";

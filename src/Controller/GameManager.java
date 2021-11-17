@@ -13,7 +13,7 @@ public class GameManager {
         Display.printInstructions();
         Display.printMaze(mainMaze);
         System.out.println(mainMaze.getCurrentRoom().getDoor(1).getQuestion());
-        mainMaze.setXAndY(1,0);
+        mainMaze.setXAndY(0,1);
         System.out.println(mainMaze.getCurrentRoom().getDoor(0).getQuestion());
         Display.printMaze(mainMaze);
         mainMaze.setXAndY(1,1);
