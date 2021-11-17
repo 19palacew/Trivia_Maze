@@ -102,4 +102,22 @@ public class Maze {
     public Room getCurrentRoom () {
         return myMaze[myX][myY];
     }
+
+
+    public String displayMaze() {
+        String mazeDisplayString = "";
+        for (int i = 0; i < myMaze.length; i++) {
+            mazeDisplayString = mazeDisplayString + "\n";
+            // Loop through all elements of current row
+            for (int j = 0; j < myMaze[i].length; j++) {
+                if (i == myX && j == myY) {
+                    mazeDisplayString = mazeDisplayString + "[P]";
+                } else {
+                    mazeDisplayString = mazeDisplayString + "[X]";
+
+                }
+            }
+        }
+        return mazeDisplayString;
+    }
 }
