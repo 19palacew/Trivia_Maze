@@ -45,14 +45,6 @@ public class Door {
     }
 
     /**
-     * When entering a room, the door that the player used to enter is unlocked.
-     * (Allows us to keep doors from different rooms unlinked)
-     */
-    public void unlockedFromOtherSide(){
-        myLocked = false;
-    }
-
-    /**
      * Returns the question
      * @return Returns a String of the Question
      */

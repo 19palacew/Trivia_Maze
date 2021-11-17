@@ -9,20 +9,20 @@ public class Room {
     private static final int DOOR4_INDEX = 3;
     private static final int TOTAL_DOORS = 4;
 
-    public Room(final RoomBlocker theBlocker){
+    public Room(final RoomBlocker theBlocker, Door theNorthDoor, Door theSouthDoor, Door theEastDoor, Door theWestDoor){
         this.myBlockedDoors = theBlocker;
         this.myRoomDoors = new Door[TOTAL_DOORS];
         if (theBlocker.getNorth()){
-            this.myRoomDoors[DOOR1_INDEX] = new Door();
+            this.myRoomDoors[DOOR1_INDEX] = theNorthDoor;
         }
         if (theBlocker.getSouth()){
-            this.myRoomDoors[DOOR2_INDEX] = new Door();
+            this.myRoomDoors[DOOR2_INDEX] = theSouthDoor;
         }
         if (theBlocker.getEast()){
-            this.myRoomDoors[DOOR3_INDEX] = new Door();
+            this.myRoomDoors[DOOR3_INDEX] = theEastDoor;
         }
         if (theBlocker.getWest()){
-            this.myRoomDoors[DOOR4_INDEX] = new Door();
+            this.myRoomDoors[DOOR4_INDEX] = theWestDoor;
         }
     }
 
@@ -41,22 +41,5 @@ public class Room {
      */
     public Door getDoor(final int theDoorIndex){
         return myRoomDoors[theDoorIndex];
-    }
-
-    /**
-     * When Player enters a Room, the door that they entered is unlocked
-     * North Direction (Unlocks South Door)
-     * South Direction (Unlocks North Door)
-     * East Direction (Unlocks West Door)
-     * West Direction (Unlocks East Door)
-     * @param theDirection The direction that the player comes from.
-     */
-    public void enterRoom(Direction theDirection){
-        switch (theDirection){
-            case NORTH -> getDoor(DOOR2_INDEX).unlockedFromOtherSide();
-            case SOUTH -> getDoor(DOOR1_INDEX).unlockedFromOtherSide();
-            case EAST -> getDoor(DOOR4_INDEX).unlockedFromOtherSide();
-            case WEST -> getDoor(DOOR3_INDEX).unlockedFromOtherSide();
-        }
     }
 }
