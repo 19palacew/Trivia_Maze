@@ -1,11 +1,13 @@
 package View;
 
+import Model.Maze;
+
 public class Display {
     /**
      * Displays the Maze to The User
      */
-    public static void printMaze() {
-
+    public static void printMaze(Maze theMaze) {
+        System.out.println(theMaze.displayMaze());
     }
 
     public static void printInstructions() {

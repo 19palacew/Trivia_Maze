@@ -29,8 +29,8 @@ public class Maze {
      * doors.
      */
     public Maze() {
-        myX = 1;
-        myY = 1;
+        myX = 0;
+        myY = 0;
         myMaze = new Room[MAX_X][MAX_Y];
         roomSetup();
     }

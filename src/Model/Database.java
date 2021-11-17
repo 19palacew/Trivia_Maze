@@ -39,13 +39,12 @@ public class Database {
         String query = "SELECT * FROM QuestionAnswer";
         //Set up the connection
         try ( Connection conn = ds.getConnection();
-              Statement stmt = conn.createStatement(); ) {
+              Statement stmt = conn.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
                 String question = rs.getString("Question");
                 String answer = rs.getString("Answer");
-
                 questionBank.add(question);
                 answerBank.add(answer);
             }
@@ -64,6 +63,7 @@ public class Database {
      * @return question at index counter field is set to
      */
     public static String getQuestion() {
+        incrementCounter();
         return questionBank.get(counter);
     }
 
@@ -87,6 +87,11 @@ public class Database {
      * Increment counter to get next question
      */
     public static void incrementCounter() {
-        counter++;
+        if (counter >= questionBank.size()-1){
+            counter = 0;
+        }
+        else {
+            counter++;
+        }
     }
 }
