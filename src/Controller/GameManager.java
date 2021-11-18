@@ -9,53 +9,48 @@ import java.util.Scanner;
 public class GameManager {
     private static Display display;
     private static Maze mainMaze;
+    private static final Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
         Database.connectToDatabase();
         Display.printInstructions();
-        System.out.println("1) New Game");
-        System.out.println("2) Load Game");
-        Scanner input = new Scanner(System.in);
+        Display.startMsg();
+        bootGame();
+        runGame();
+        input.close();
+    }
+
+    private static void bootGame(){
         // Load Game / Start New Game
         boolean gameStarted = false;
         String userGameStartInput = "";
         while (!gameStarted) {
             userGameStartInput = input.nextLine();
-            if (userGameStartInput.equalsIgnoreCase("1")
-                    || userGameStartInput.equalsIgnoreCase("2")
-                    || userGameStartInput.equalsIgnoreCase("quit")) {
+            if (userGameStartInput.toLowerCase().matches("load game|new game")) {
                 gameStarted = true;
-            } else {
-                System.out.println("Please Type 1 or 2");
+            }else {
+                Display.beginGameWarning();
             }
         }
-        input.close();
-        if (userGameStartInput.equalsIgnoreCase("1")) {
-            newGame();
-        } else if (userGameStartInput.equalsIgnoreCase("2")) {
+        if (userGameStartInput.equalsIgnoreCase("load game")) {
             loadGame();
-        } else if (userGameStartInput.equalsIgnoreCase("File")) {
-            File();
-        } else if (userGameStartInput.equalsIgnoreCase("Help")) {
-            Help();
+        } else {
+            newGame();
         }
-        else {
-            //This should never be reached
-            System.out.println("Wait what?");
+    }
+
+    private static void runGame(){
+        updateScreen();
+        nextAction();
+        if (!mainMaze.isPossible()){
+            Display.playerLost();
+            return;
         }
-        boolean gameOver = false;
-        while (!gameOver){
-            updateScreen();
-            nextAction();
-            if (!mainMaze.isPossible()){
-                Display.playerLost();
-                gameOver = true;
-            }
-            if (mainMaze.goalReached()){
-                Display.playerWon();
-                gameOver = true;
-            }
+        if (mainMaze.goalReached()){
+            Display.playerWon();
+            return;
         }
+        runGame();
     }
 
     private static void newGame() {
@@ -68,7 +63,14 @@ public class GameManager {
     }
 
     private static void nextAction(){
-        // Not Yet Implemented
+        boolean inputGood = false;
+        String userAction;
+        while (!inputGood){
+            userAction = input.nextLine();
+            if (userAction.toLowerCase().matches("north|south|east|west|file|help")){
+                inputGood = true;
+            }
+        }
     }
 
     private static void updateScreen(){

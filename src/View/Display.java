@@ -36,4 +36,29 @@ public class Display {
     public static void playerLost() {
         System.out.println("No Possible Pathways Left: Game Over");
     }
+
+    public static void fileMenu() {
+        System.out.println("""
+                File:
+                - Save Game
+                - Load Game
+                - Exit""");
+    }
+
+    public static void startMsg(){
+        System.out.println("- New Game");
+        System.out.println("- Load Game");
+    }
+
+    public static void beginGameWarning(){
+        System.out.println("Please Type \"New Game\" or \"Load Game\"");
+    }
+
+    public static void helpMenu() {
+        System.out.println("""
+                Help:
+                - About
+                - Game Play Instructions
+                - Cheats""");
+    }
 }
