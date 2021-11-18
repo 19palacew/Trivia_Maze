@@ -29,6 +29,7 @@ public class GameManager {
                 System.out.println("Please Type 1 or 2");
             }
         }
+        input.close();
         if (userGameStartInput.equalsIgnoreCase("1")) {
             newGame();
         } else if (userGameStartInput.equalsIgnoreCase("2")) {
