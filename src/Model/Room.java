@@ -42,4 +42,57 @@ public class Room {
     public Door getDoor(final int theDoorIndex){
         return myRoomDoors[theDoorIndex];
     }
+
+    /**
+     * toString method for the room, includes whether each direction is blocked
+     * and shows the player in the center of each room
+     * @return string representing the room
+     */
+    @Override
+    public String toString() {
+        //StringBuilder to build our output
+        StringBuilder roomString = new StringBuilder();
+        //Center the North movement message
+        roomString.append("\t\t\t");
+        //Check movement North
+        if (myRoomDoors[0] == null) {
+            roomString.append("BLOCKED");
+        } else if (myRoomDoors[0].isDead()){
+            roomString.append("DEAD DOOR");
+        } else {
+            roomString.append("MOVE NORTH");
+        }
+        //Go to next line for West,Player, and East
+        roomString.append("\n\n");
+        //Check movement West
+        if (myRoomDoors[3] == null) {
+            roomString.append("BLOCKED");
+        } else if (myRoomDoors[3].isDead()){
+            roomString.append("DEAD DOOR");
+        } else {
+            roomString.append("MOVE WEST");
+        }
+        //Center the placement of player
+        roomString.append("\t\tPlayer\t\t");
+        //Check movement East
+        if (myRoomDoors[2] == null) {
+            roomString.append("BLOCKED");
+        } else if (myRoomDoors[2].isDead()){
+            roomString.append("DEAD DOOR");
+        } else {
+            roomString.append("MOVE EAST");
+        }
+        //Go to next line
+        roomString.append("\n\n\t\t\t");
+        //Check movement South
+        if (myRoomDoors[1] == null) {
+            roomString.append("BLOCKED");
+        } else if (myRoomDoors[1].isDead()){
+            roomString.append("DEAD DOOR");
+        } else {
+            roomString.append("MOVE SOUTH");
+        }
+        return roomString.toString();
+    }
+
 }

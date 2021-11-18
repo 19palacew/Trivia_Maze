@@ -7,7 +7,11 @@ public class Display {
      * Displays the Maze to The User
      */
     public static void printMaze(Maze theMaze) {
-        System.out.println(theMaze.displayMaze());
+        System.out.println(theMaze.toString());
+    }
+
+    public static void printRoom(Maze theMaze) {
+        System.out.println(theMaze.getCurrentRoom().toString());
     }
 
     public static void printInstructions() {

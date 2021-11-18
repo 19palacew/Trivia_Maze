@@ -117,21 +117,30 @@ public class Maze {
         return myMaze[myX][myY];
     }
 
-
-    public String displayMaze() {
-        StringBuilder sb = new StringBuilder();
+    /**
+     * toString displays the overview of the maze, including the player, the rooms,
+     * the finish, and the start when the player is not in the start.
+     * @return string representing maze
+     */
+    @Override
+    public String toString() {
+        StringBuilder mazeString = new StringBuilder();
         for (int i = 0; i < myMaze.length; i++) {
-            sb.append("\n");
+            mazeString.append("\n");
             // Loop through all elements of current row
             for (int j = 0; j < myMaze[i].length; j++) {
                 if (i == myY && j == myX) {
-                    sb.append("[P]");
+                    mazeString.append("[PLYR]");
+                } else if(i == MAX_X-1 && j == MAX_Y-1) {
+                    mazeString.append("[FNSH]");
+                } else if(i == 0 && j == 0) {
+                    mazeString.append("[STRT]");
                 } else {
-                    sb.append("[X]");
+                    mazeString.append("[ROOM]");
 
                 }
             }
         }
-        return sb.toString();
+        return mazeString.toString();
     }
 }
