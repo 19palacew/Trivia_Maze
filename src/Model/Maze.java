@@ -119,19 +119,19 @@ public class Maze {
 
 
     public String displayMaze() {
-        String mazeDisplayString = "";
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < myMaze.length; i++) {
-            mazeDisplayString = mazeDisplayString + "\n";
+            sb.append("\n");
             // Loop through all elements of current row
             for (int j = 0; j < myMaze[i].length; j++) {
                 if (i == myY && j == myX) {
-                    mazeDisplayString = mazeDisplayString + "[P]";
+                    sb.append("[P]");
                 } else {
-                    mazeDisplayString = mazeDisplayString + "[X]";
+                    sb.append("[X]");
 
                 }
             }
         }
-        return mazeDisplayString;
+        return sb.toString();
     }
 }
