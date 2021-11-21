@@ -53,7 +53,7 @@ public class Room {
         //StringBuilder to build our output
         StringBuilder roomString = new StringBuilder();
         //Center the North movement message
-        roomString.append("\t\t\t");
+        roomString.append("\n\t\t\t");
         //Check movement North
         if (myRoomDoors[0] == null) {
             roomString.append("BLOCKED");
