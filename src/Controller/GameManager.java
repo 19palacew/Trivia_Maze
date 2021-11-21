@@ -66,9 +66,23 @@ public class GameManager {
         boolean inputGood = false;
         String userAction;
         while (!inputGood){
+            Display.printPrompt();
             userAction = input.nextLine();
-            if (userAction.toLowerCase().matches("north|south|east|west|file|help")){
+            if (userAction.toLowerCase().matches("north|south|east|west")){
+                //TODO needs to ask question first
+                Move movement = new Move(mainMaze, userAction);
+                inputGood = movement.checkValidMove();
+                if (!inputGood) {
+                    Display.directionWarning();
+                }
+            } else if (userAction.toLowerCase().matches("help")){
                 inputGood = true;
+                Help();
+            } else if (userAction.toLowerCase().matches("file")) {
+                inputGood = true;
+                File();
+            } else {
+                Display.userActionWarning();
             }
         }
     }
@@ -83,6 +97,24 @@ public class GameManager {
     }
 
     private static void Help() {
-        // Not Yet Implemented
+        Display.helpMenu();
+        boolean inputGood = false;
+        String helpAction;
+        while (!inputGood){
+            Display.printPrompt();
+            helpAction = input.nextLine();
+            if (helpAction.toLowerCase().matches("about")) {
+                inputGood = true;
+                //TODO menu about
+            } else if (helpAction.toLowerCase().matches("instructions")) {
+                inputGood = true;
+                Display.printInstructions();
+            } else if (helpAction.toLowerCase().matches("cheats")) {
+                inputGood = true;
+                //TODO menu cheats
+            } else {
+                Display.menuWarning();
+            }
+        }
     }
 }
