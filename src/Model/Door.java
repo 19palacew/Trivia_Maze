@@ -34,9 +34,9 @@ public class Door {
      * Unlocks the door when the correct answer is given
      * @param theUserAnswer Response that the user gives
      */
-    public void unlock(final String theUserAnswer) {
+    public void unlock(final Answer theUserAnswer) {
         // When the door is still unlockable and the correct answer is given, the door will unlock
-        if (!myDoorDead && theUserAnswer.equalsIgnoreCase(myQuestion.getAnswer())) {
+        if (!myDoorDead && theUserAnswer == myQuestion.getAnswer()) {
             myLocked = false;
         }
         else{

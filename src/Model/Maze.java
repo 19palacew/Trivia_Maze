@@ -133,18 +133,6 @@ public class Maze {
         return myMaze[myX][myY];
     }
 
-    public boolean isPossible(){
-        return true;
-    }
-
-    /**
-     * Returns true when the player reaches the end of the maze
-     * @return Returns a boolean of if the player has reached the end of the maze.
-     */
-    public boolean goalReached(){
-        return false;
-    }
-
     /**
      * toString displays the overview of the maze, including the player, the rooms,
      * the finish, and the start when the player is not in the start.
