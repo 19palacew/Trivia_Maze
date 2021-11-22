@@ -66,7 +66,7 @@ public class Maze {
                     // Sets the south door of this room to the north door of the previous room.
                 }
                 //If room is not in a row on the southern edge, there is a east door
-                if (xMazeCoord <= myMaze.length - 1) {
+                if (xMazeCoord < myMaze.length - 1) {
                     east = true;
                 }
                 //If row value above is greater or equal to 0 we know exists west door
