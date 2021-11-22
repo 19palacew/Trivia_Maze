@@ -3,6 +3,7 @@ package Model;
 public class Room {
     private final Door[] myRoomDoors;
     private final RoomBlocker myBlockedDoors;
+    private boolean myVisited = false;
     private static final int DOOR1_INDEX = 0;
     private static final int DOOR2_INDEX = 1;
     private static final int DOOR3_INDEX = 2;
@@ -24,6 +25,22 @@ public class Room {
         if (theBlocker.getWest()){
             this.myRoomDoors[DOOR4_INDEX] = theWestDoor;
         }
+    }
+    
+    /**
+     * Setter to change the visited status of room
+     * @param visited true if visited, false if else
+     */
+    public void setVisited(boolean theVisited) {
+        this.myVisited = theVisited;
+    }
+
+    /**
+     * Getter to get the visited status of room
+     * @return myVisited, the field that holds whether room has been visited
+     */
+    public boolean getVisited() {
+        return myVisited;
     }
 
     /**
@@ -53,7 +70,7 @@ public class Room {
         //StringBuilder to build our output
         StringBuilder roomString = new StringBuilder();
         //Center the North movement message
-        roomString.append("\t\t\t");
+        roomString.append("\n\t\t\t");
         //Check movement North
         if (myRoomDoors[0] == null) {
             roomString.append("BLOCKED");

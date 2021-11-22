@@ -2,8 +2,8 @@ package Model;
 
 public class Question {
     private final String myQuestion;
-    private final Answer myAnswer;
-    public Question(final String theQuestion,final Answer theAnswer){
+    private final String myAnswer;
+    public Question(final String theQuestion,final String theAnswer){
         this.myQuestion = theQuestion;
         this.myAnswer = theAnswer;
     }
@@ -20,7 +20,7 @@ public class Question {
      * Returns the correct answer
      * @return Returns an enum (Answer) of the correct answer.
      */
-    public Answer getAnswer() {
+    public String getAnswer() {
         return myAnswer;
     }
 }
