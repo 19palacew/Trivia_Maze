@@ -69,7 +69,7 @@ public class GameManager {
             Display.printPrompt();
             userAction = input.nextLine();
             if (userAction.toLowerCase().matches("north|south|east|west")){
-                //TODO needs to ask question first
+                //TODO needs to ask and answer question first
                 Move movement = new Move(mainMaze, userAction);
                 inputGood = movement.checkValidMove();
                 if (!inputGood) {
@@ -93,7 +93,26 @@ public class GameManager {
     }
 
     private static void File() {
-        // Not Yet Implemented
+        Display.fileMenu();
+        boolean inputGood = false;
+        String helpAction;
+        while (!inputGood){
+            Display.printPrompt();
+            helpAction = input.nextLine();
+            if (helpAction.toLowerCase().matches("save game")) {
+                inputGood = true;
+                //TODO save game
+            } else if (helpAction.toLowerCase().matches("load game")) {
+                inputGood = true;
+                loadGame();
+            } else if (helpAction.toLowerCase().matches("exit")) {
+                inputGood = true;
+                input.close();
+                System.exit(0);
+            } else {
+                Display.fileMenuWarning();
+            }
+        }
     }
 
     private static void Help() {
@@ -113,7 +132,7 @@ public class GameManager {
                 inputGood = true;
                 //TODO menu cheats
             } else {
-                Display.menuWarning();
+                Display.helpMenuWarning();
             }
         }
     }

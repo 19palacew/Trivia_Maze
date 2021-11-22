@@ -65,8 +65,12 @@ public class Display {
         System.out.println("Please Type a Valid Direction");
     }
 
-    public static void menuWarning(){
+    public static void helpMenuWarning(){
         System.out.println("Please Type \"about\" or \"instructions\" or \"cheats\" ");
+    }
+
+    public static void fileMenuWarning(){
+        System.out.println("Please Type \"Save Game\" or \"Load Game\" or \"Exit\" ");
     }
 
     public static void helpMenu() {
