@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Database class handles connection to the QuestionAnswer table of
@@ -26,7 +25,7 @@ public class Database {
     /**
      * Counter to iterate through the lists
      */
-    private static int questionIndex = 0;
+    private static int counter = 0;
 
     /**
      * Sets up connection to database and loads table values into ArrayLists
@@ -64,23 +63,35 @@ public class Database {
      * @return question at index counter field is set to
      */
     public static String getQuestion() {
-        randomizeQuestion();
-        return questionBank.get(questionIndex);
+        incrementCounter();
+        return questionBank.get(counter);
     }
 
     /**
      * Getter for answer
      * @return answer at index counter field is set to
      */
-    public static String getAnswer() {
-        return answerBank.get(questionIndex);
+    public static Answer getAnswer() {
+        Answer localAnswer = null;
+        char localDBAns = answerBank.get(counter).charAt(0);
+        switch (localDBAns){
+            case 'A' -> localAnswer = Answer.A;
+            case 'B' -> localAnswer = Answer.B;
+            case 'C' -> localAnswer = Answer.C;
+            case 'D' -> localAnswer = Answer.D;
+        }
+        return localAnswer;
     }
 
     /**
      * Increment counter to get next question
      */
-    public static void randomizeQuestion() {
-        Random rand = new Random();
-        questionIndex = rand.nextInt(questionBank.size());
+    public static void incrementCounter() {
+        if (counter >= questionBank.size()-1){
+            counter = 0;
+        }
+        else {
+            counter++;
+        }
     }
 }
