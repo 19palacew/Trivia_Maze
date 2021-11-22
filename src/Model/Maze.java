@@ -146,7 +146,7 @@ public class Maze {
         //Check to see if the current room is visited, if so return false
         if (!myMaze[theX][theY].getVisited()) {
             //The room corresponding to theX and theY is the destination room
-            if (myMaze[theX][theY] == myMaze[MAX_X][MAX_Y]) {
+            if (theX == MAX_X - 1 && theY == MAX_Y - 1) {
                 return true;
             }
             //Say that this room has now been visited
@@ -156,7 +156,7 @@ public class Maze {
             //Check North (assuming door exists and is not dead)
             if (myMaze[theX][theY].getDoor(0) != null &&
                     !myMaze[theX][theY].getDoor(0).isDead()) {
-                boolean northCheck = isPossibleHelper(theX-1,theY);
+                boolean northCheck = isPossibleHelper(theX,theY-1);
                 if (northCheck) {
                     return true;
                 }
@@ -164,7 +164,7 @@ public class Maze {
             //Check South (assuming door exists and is not dead)
             if (myMaze[theX][theY].getDoor(1) != null &&
                     !myMaze[theX][theY].getDoor(1).isDead()) {
-                boolean southCheck = isPossibleHelper(theX+1,theY);
+                boolean southCheck = isPossibleHelper(theX,theY+1);
                 if (southCheck) {
                     return true;
                 }
@@ -172,7 +172,7 @@ public class Maze {
             //Check East (assuming door exists and is not dead)
             if (myMaze[theX][theY].getDoor(2) != null &&
                     !myMaze[theX][theY].getDoor(2).isDead()) {
-                boolean eastCheck = isPossibleHelper(theX,theY+1);
+                boolean eastCheck = isPossibleHelper(theX+1,theY);
                 if (eastCheck) {
                     return true;
                 }
@@ -180,7 +180,7 @@ public class Maze {
             //Check West (assuming door exists and is not dead)
             if (myMaze[theX][theY].getDoor(3) != null &&
                     !myMaze[theX][theY].getDoor(3).isDead()) {
-                boolean westCheck = isPossibleHelper(theX,theY-1);
+                boolean westCheck = isPossibleHelper(theX-1,theY);
                 if (westCheck) {
                     return true;
                 }
