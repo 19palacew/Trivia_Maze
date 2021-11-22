@@ -24,7 +24,8 @@ public class Display {
                 You are in a maze of rooms and you need to escape by finding the door out.
                 To escape a room you need to answer a question correctly to unlock the door.
                 You can move in a direction by typing North, South, East, or West
-                Questions are multiple choice; answer with A, B, C, or D
+                Multiple choice questions; answer with A, B, C, or D
+                True or False questions; answer with T or F
                 Type "File" to Save Game, Load Game, Exit or type "Help" to access About,
                 Game Play Instructions, Cheats at anytime""");
     }
@@ -45,13 +46,31 @@ public class Display {
                 - Exit""");
     }
 
-    public static void startMsg(){
+    public static void startMsg() {
         System.out.println("- New Game");
         System.out.println("- Load Game");
+        printPrompt();
     }
 
     public static void beginGameWarning(){
         System.out.println("Please Type \"New Game\" or \"Load Game\"");
+        printPrompt();
+    }
+
+    public static void userActionWarning(){
+        System.out.println("Please Type a Direction or \"File\" or \"Help\"");
+    }
+
+    public static void directionWarning(){
+        System.out.println("Please Type a Valid Direction");
+    }
+
+    public static void helpMenuWarning(){
+        System.out.println("Please Type \"about\" or \"instructions\" or \"cheats\" ");
+    }
+
+    public static void fileMenuWarning(){
+        System.out.println("Please Type \"Save Game\" or \"Load Game\" or \"Exit\" ");
     }
 
     public static void helpMenu() {
@@ -61,4 +80,9 @@ public class Display {
                 - Game Play Instructions
                 - Cheats""");
     }
+
+    public static void printPrompt() {
+        System.out.print("Choose: ");
+    }
+
 }

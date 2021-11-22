@@ -110,6 +110,22 @@ public class Maze {
     }
 
     /**
+     * Getter for the Mazes's maximum X
+     * @return MAX_X
+     */
+    public int getMaxX() {
+        return MAX_X;
+    }
+
+    /**
+     * Getter for the Mazes's maximum Y
+     * @return MAX_Y
+     */
+    public int getMaxY() {
+        return MAX_Y;
+    }
+
+    /**
      * Getter that returns the current room the player is in
      * @return the room the player is currently located in
      */
