@@ -13,14 +13,6 @@ public class Move {
      */
     private final int myY;
     /**
-     * Field that holds the Maze's maximum X size
-     */
-    private final int myMaxX;
-    /**
-     * Field that holds the Maze's maximum Y size
-     */
-    private final int myMaxY;
-    /**
      * Field that holds the player's entered direction
      */
     private final String myDirection;
@@ -41,40 +33,24 @@ public class Move {
     public Move(final Maze theMaze, final String theDirection){
         myX = theMaze.getX();
         myY = theMaze.getY();
-        myMaxX = theMaze.getMaxX();
-        myMaxY = theMaze.getMaxY();
         myDirection = theDirection;
         goDirection();
-        if (checkValidMove()) {
-            theMaze.setXAndY(myNewX, myNewY);
-        }
+        theMaze.setXAndY(myNewX, myNewY);
     }
 
     /**
      * Finds the new X or Y coordinate of the Maze based on the direction entered.
      */
     public void goDirection() {
-        myNewX = myX;
-        myNewY = myY;
-        switch (myDirection.toLowerCase()) {
-            case "north" -> myNewY = myY - 1;
-            case "south" -> myNewY = myY + 1;
-            case "east" -> myNewX = myX + 1;
-            case "west" -> myNewX = myX - 1;
+        if ("n".equals(myDirection)) {
+            myNewY = myY + 1;
+        } else if ("s".equals(myDirection)) {
+            myNewY = myY - 1;
+        } else if ("e".equals(myDirection)) {
+            myNewX = myX + 1;
+        } else if ("w".equals(myDirection)) {
+            myNewX = myX - 1;
         }
     }
 
-    /**
-     * checks if the new coordinates are within the boundaries of the maze
-     */
-    public boolean checkValidMove() {
-        return myNewX >= 0 && myNewX < myMaxX && myNewY >= 0 && myNewY < myMaxY;
-    }
-
-    /**
-     * Moves player back to previous room
-     */
-    public void goBack() {
-
-    }
 }

@@ -4,7 +4,7 @@ public class Maze {
     /**
      * Field containing the 2D array of Room Objects that represents the overall maze
      */
-    private final Room[][] myMaze;
+    private Room[][] myMaze;
     /**
      * Field that holds the players X position
      */
@@ -107,22 +107,6 @@ public class Maze {
      */
     public int getY () {
         return myY;
-    }
-
-    /**
-     * Getter for MAX_X
-     * @return MAX_X maximum of x
-     */
-    public int getMaxX () {
-        return MAX_X;
-    }
-
-    /**
-     * Getter for MAX_Y
-     * @return MAX_Y maximum of y
-     */
-    public int getMaxY () {
-        return MAX_Y;
     }
 
     /**
