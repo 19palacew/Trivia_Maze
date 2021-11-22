@@ -66,7 +66,7 @@ public class Maze {
                     // Sets the south door of this room to the north door of the previous room.
                 }
                 //If room is not in a row on the southern edge, there is a east door
-                if (xMazeCoord <= myMaze.length - 1) {
+                if (xMazeCoord < myMaze.length - 1) {
                     east = true;
                 }
                 //If row value above is greater or equal to 0 we know exists west door
@@ -119,6 +119,86 @@ public class Maze {
 
     public boolean isPossible(){
         return true;
+    }
+
+    /**
+     * Returns true when the player reaches the end of the maze
+     * @return Returns a boolean of if the player has reached the end of the maze.
+     */
+    public boolean goalReached(){
+        return false;
+    }
+
+    /**
+     * Method to calculate if the end of the maze can be reached from 
+     * the current position
+     * @return true if possible, else false
+     */
+    public boolean isPossible() {
+        //Clear visited field for all rooms
+        for (int i = 0; i < myMaze.length; i++) {
+            for (int j = 0; j < myMaze[i].length; j++) {
+                myMaze[i][j].setVisited(false);
+            }
+        }
+        //Utilize helper method
+        return isPossibleHelper(myX,myY);
+    }
+
+    /**
+     * Helper method to isPossible that utilizes 4 recursive calls to check for
+     * valid adjacent moves. This method will detect if a path exits by returning
+     * true when the destination is reached, else it will return false to signal game
+     * has been lost.
+     * @param theX x coordinate of room
+     * @param theY y coordinate of room
+     * @return true if destination found, false otherwise
+     */
+    private boolean isPossibleHelper(int theX, int theY) {
+        //Check to see if the current room is visited, if so return false
+        if (!myMaze[theX][theY].getVisited()) {
+            //The room corresponding to theX and theY is the destination room
+            if (theX == MAX_X - 1 && theY == MAX_Y - 1) {
+                return true;
+            }
+            //Say that this room has now been visited
+            myMaze[theX][theY].setVisited(true);
+            //Check adjacent rooms recursively
+
+            //Check North (assuming door exists and is not dead)
+            if (myMaze[theX][theY].getDoor(0) != null &&
+                    !myMaze[theX][theY].getDoor(0).isDead()) {
+                boolean northCheck = isPossibleHelper(theX,theY-1);
+                if (northCheck) {
+                    return true;
+                }
+            }
+            //Check South (assuming door exists and is not dead)
+            if (myMaze[theX][theY].getDoor(1) != null &&
+                    !myMaze[theX][theY].getDoor(1).isDead()) {
+                boolean southCheck = isPossibleHelper(theX,theY+1);
+                if (southCheck) {
+                    return true;
+                }
+            }
+            //Check East (assuming door exists and is not dead)
+            if (myMaze[theX][theY].getDoor(2) != null &&
+                    !myMaze[theX][theY].getDoor(2).isDead()) {
+                boolean eastCheck = isPossibleHelper(theX+1,theY);
+                if (eastCheck) {
+                    return true;
+                }
+            }
+            //Check West (assuming door exists and is not dead)
+            if (myMaze[theX][theY].getDoor(3) != null &&
+                    !myMaze[theX][theY].getDoor(3).isDead()) {
+                boolean westCheck = isPossibleHelper(theX-1,theY);
+                if (westCheck) {
+                    return true;
+                }
+            }
+        }        
+        return false;
     }
 
     /**

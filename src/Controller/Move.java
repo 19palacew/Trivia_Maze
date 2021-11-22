@@ -52,5 +52,4 @@ public class Move {
             myNewX = myX - 1;
         }
     }
-
 }
