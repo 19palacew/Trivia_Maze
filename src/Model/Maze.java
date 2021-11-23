@@ -202,7 +202,7 @@ public class Maze {
      * @return Returns a boolean of if the player has reached the end of the maze.
      */
     public boolean goalReached(){
-        return false;
+        return myX == mazeSize-1 && myY == mazeSize-1;
     }
 
     /**
