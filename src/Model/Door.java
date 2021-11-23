@@ -51,4 +51,12 @@ public class Door {
     public String getQuestion(){
         return  myQuestion.getQuestion();
     }
+
+    /**
+     * Returns the answer
+     * @return Returns a String of the Answer
+     */
+    public String getAnswer(){
+        return  myQuestion.getAnswer();
+    }
 }

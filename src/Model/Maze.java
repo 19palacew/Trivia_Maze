@@ -4,7 +4,7 @@ public class Maze {
     /**
      * Field containing the 2D array of Room Objects that represents the overall maze
      */
-    private Room[][] myMaze;
+    private final Room[][] myMaze;
     /**
      * Field that holds the players X position
      */
@@ -13,14 +13,8 @@ public class Maze {
      * Field that holds the players Y position
      */
     private int myY;
-    /**
-     * Class constant containing the max X-width of the maze
-     */
-    private static final int MAX_X = 8;
-    /**
-     * Class constant containing the max Y-width of the maze
-     */
-    private static final int MAX_Y = 8;
+
+    private final int mazeSize = 8;
 
     /**
      * Constructor that builds the 2D-array representation of the maze.
@@ -31,7 +25,7 @@ public class Maze {
     public Maze() {
         myX = 0;
         myY = 0;
-        myMaze = new Room[MAX_X][MAX_Y];
+        myMaze = new Room[mazeSize][mazeSize];
         roomSetup();
     }
 
@@ -83,21 +77,27 @@ public class Maze {
         }
     }
 
-    /**
-     * Setter to change the players X and Y position
-     * @param theX the next X position the player will be in
-     * @param theY the next Y position the player will be in
-     */
-    public void setXAndY (int theX, int theY) {
-        myX = theX;
-        myY = theY;
+    public void movePlayer (Direction theDirection) {
+        if (canMovePlayer(theDirection)){
+            switch (theDirection) {
+                case NORTH -> myY--;
+                case SOUTH -> myY++;
+                case EAST -> myX++;
+                case WEST -> myX--;
+            }
+        }
+    }
+
+    public boolean canMovePlayer (Direction theDirection) {
+        Door localDoor = getCurrentRoom().getDoor(theDirection);
+        return localDoor != null && !localDoor.isDead();
     }
 
     /**
      * Getter for the player's X position
      * @return myX the current X position
      */
-    public int getX () {
+    public int playerX () {
         return myX;
     }
 
@@ -105,24 +105,16 @@ public class Maze {
      * Getter for the player's Y position
      * @return myY the current Y position
      */
-    public int getY () {
+    public int playerY () {
         return myY;
     }
 
     /**
-     * Getter for the Mazes's maximum X
-     * @return MAX_X
+     * Getter for the maze size
+     * @return the maze width/height size
      */
-    public int getMaxX() {
-        return MAX_X;
-    }
-
-    /**
-     * Getter for the Mazes's maximum Y
-     * @return MAX_Y
-     */
-    public int getMaxY() {
-        return MAX_Y;
+    public int getMazeSize() {
+        return mazeSize;
     }
 
     /**
@@ -162,7 +154,7 @@ public class Maze {
         //Check to see if the current room is visited, if so return false
         if (!myMaze[theX][theY].getVisited()) {
             //The room corresponding to theX and theY is the destination room
-            if (theX == MAX_X - 1 && theY == MAX_Y - 1) {
+            if (theX == mazeSize - 1 && theY == mazeSize - 1) {
                 return true;
             }
             //Say that this room has now been visited
@@ -227,7 +219,7 @@ public class Maze {
             for (int j = 0; j < myMaze[i].length; j++) {
                 if (i == myY && j == myX) {
                     mazeString.append("[PLYR]");
-                } else if(i == MAX_X-1 && j == MAX_Y-1) {
+                } else if(i == mazeSize -1 && j == mazeSize -1) {
                     mazeString.append("[FNSH]");
                 } else if(i == 0 && j == 0) {
                     mazeString.append("[STRT]");

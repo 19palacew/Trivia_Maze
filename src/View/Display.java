@@ -73,12 +73,20 @@ public class Display {
         System.out.println("Please Type \"Save Game\" or \"Load Game\" or \"Exit\" ");
     }
 
+    public static void incorrectAnswer(String correctAnswer){
+        System.out.println("Answer is Incorrect, Correct Answer is: " + correctAnswer);
+    }
+
     public static void helpMenu() {
         System.out.println("""
                 Help:
                 - About
                 - Game Play Instructions
                 - Cheats""");
+    }
+
+    public static void displayQuestion(String theQuestion){
+        System.out.println(theQuestion);
     }
 
     public static void printPrompt() {

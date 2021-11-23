@@ -29,7 +29,7 @@ public class Room {
     
     /**
      * Setter to change the visited status of room
-     * @param visited true if visited, false if else
+     * @param theVisited true if visited, false if else
      */
     public void setVisited(boolean theVisited) {
         this.myVisited = theVisited;
@@ -58,6 +58,17 @@ public class Room {
      */
     public Door getDoor(final int theDoorIndex){
         return myRoomDoors[theDoorIndex];
+    }
+
+    public Door getDoor(final Direction doorDirection){
+        Door localDoor = null;
+        switch (doorDirection) {
+            case NORTH -> localDoor = getDoor(DOOR1_INDEX);
+            case SOUTH -> localDoor = getDoor(DOOR2_INDEX);
+            case EAST -> localDoor = getDoor(DOOR3_INDEX);
+            case WEST -> localDoor = getDoor(DOOR4_INDEX);
+        }
+        return localDoor;
     }
 
     /**

@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.Database;
+import Model.Direction;
+import Model.Door;
 import Model.Maze;
 import View.Display;
 
@@ -64,17 +66,12 @@ public class GameManager {
 
     private static void nextAction(){
         boolean inputGood = false;
-        String userAction;
+        String userAction = "";
         while (!inputGood){
             Display.printPrompt();
             userAction = input.nextLine();
             if (userAction.toLowerCase().matches("north|south|east|west")){
-                //TODO needs to ask and answer question first
-                Move movement = new Move(mainMaze, userAction);
-                inputGood = movement.checkValidMove();
-                if (!inputGood) {
-                    Display.directionWarning();
-                }
+                inputGood = true;
             } else if (userAction.toLowerCase().matches("help")){
                 inputGood = true;
                 Help();
@@ -83,6 +80,31 @@ public class GameManager {
                 File();
             } else {
                 Display.userActionWarning();
+            }
+        }
+        switch (userAction.toLowerCase()) {
+            case "north" -> movePlayer(Direction.NORTH);
+            case "south" -> movePlayer(Direction.SOUTH);
+            case "east" -> movePlayer(Direction.EAST);
+            case "west" -> movePlayer(Direction.WEST);
+        }
+    }
+
+    private static void movePlayer(Direction theDirection){
+        Door localDoor = mainMaze.getCurrentRoom().getDoor(theDirection);
+        if (mainMaze.canMovePlayer(theDirection)){
+            if (localDoor.isLocked()){
+                Display.displayQuestion(localDoor.getQuestion());
+                localDoor.unlock(input.nextLine());
+                if (localDoor.isDead()){
+                    Display.incorrectAnswer(localDoor.getAnswer());
+                }
+                else {
+                    mainMaze.movePlayer(theDirection);
+                }
+            }
+            else {
+                mainMaze.movePlayer(theDirection);
             }
         }
     }
