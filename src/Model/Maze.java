@@ -1,5 +1,8 @@
 package Model;
 
+/**
+ * Maze is the map for the game, it is what the player traverses to reach the goal.
+ */
 public class Maze {
     /**
      * Field containing the 2D array of Room Objects that represents the overall maze
@@ -34,8 +37,8 @@ public class Maze {
      */
     private void roomSetup() {
 
-        for (int xMazeCoord = 0; xMazeCoord < myMaze.length; xMazeCoord++){
-            for (int yMazeCoord = 0; yMazeCoord < myMaze[xMazeCoord].length; yMazeCoord++){
+        for (int xMazeCoord = 0; xMazeCoord < myMaze.length; xMazeCoord++) {
+            for (int yMazeCoord = 0; yMazeCoord < myMaze[xMazeCoord].length; yMazeCoord++) {
                 //We put our directions in the innermost loop, so they reset for each room
                 boolean west = false;
                 boolean south = false;
@@ -48,9 +51,8 @@ public class Maze {
                 //If column is greater than 0 we know there is a north facing door
                 if (yMazeCoord > 0) {
                     north = true;
-                    northDoor = myMaze[xMazeCoord][yMazeCoord-1].getDoor(1);
-                }
-                else {
+                    northDoor = myMaze[xMazeCoord][yMazeCoord - 1].getDoor(1);
+                } else {
                     northDoor = new Door();
                 }
                 /* If column value is 1 less than the inner maze's length - 1 there is a
@@ -64,21 +66,25 @@ public class Maze {
                     east = true;
                 }
                 //If row value above is greater or equal to 0 we know exists west door
-                if (xMazeCoord-1 >= 0) {
+                if (xMazeCoord - 1 >= 0) {
                     west = true;
                     // Sets the west door of this room to the east door of the previous room.
-                    westDoor = myMaze[xMazeCoord-1][yMazeCoord].getDoor(2);
-                }
-                else {
+                    westDoor = myMaze[xMazeCoord - 1][yMazeCoord].getDoor(2);
+                } else {
                     westDoor = new Door();
                 }
-                myMaze[xMazeCoord][yMazeCoord] = new Room(new RoomBlocker(north,south,east,west), northDoor, southDoor, eastDoor, westDoor);
+                myMaze[xMazeCoord][yMazeCoord] = new Room(new RoomBlocker(north, south, east, west), northDoor, southDoor, eastDoor, westDoor);
             }
         }
     }
 
-    public void movePlayer (Direction theDirection) {
-        if (canMovePlayer(theDirection)){
+    /**
+     * Calculates the new player coordinates given a direction that the player moves
+     *
+     * @param theDirection The direction the player wants to move
+     */
+    public void movePlayer(Direction theDirection) {
+        if (canMovePlayer(theDirection)) {
             switch (theDirection) {
                 case NORTH -> myY--;
                 case SOUTH -> myY++;
@@ -88,29 +94,38 @@ public class Maze {
         }
     }
 
-    public boolean canMovePlayer (Direction theDirection) {
+    /**
+     * Boolean value if the player can move in a direction
+     *
+     * @param theDirection The direction the player wants to move
+     * @return Returns true if the player can move in that direction and false otherwise
+     */
+    public boolean canMovePlayer(Direction theDirection) {
         Door localDoor = getCurrentRoom().getDoor(theDirection);
         return localDoor != null && !localDoor.isDead();
     }
 
     /**
      * Getter for the player's X position
+     *
      * @return myX the current X position
      */
-    public int playerX () {
+    public int playerX() {
         return myX;
     }
 
     /**
      * Getter for the player's Y position
+     *
      * @return myY the current Y position
      */
-    public int playerY () {
+    public int playerY() {
         return myY;
     }
 
     /**
      * Getter for the maze size
+     *
      * @return the maze width/height size
      */
     public int getMazeSize() {
@@ -119,15 +134,17 @@ public class Maze {
 
     /**
      * Getter that returns the current room the player is in
+     *
      * @return the room the player is currently located in
      */
-    public Room getCurrentRoom () {
+    public Room getCurrentRoom() {
         return myMaze[myX][myY];
     }
 
     /**
-     * Method to calculate if the end of the maze can be reached from 
+     * Method to calculate if the end of the maze can be reached from
      * the current position
+     *
      * @return true if possible, else false
      */
     public boolean isPossible() {
@@ -138,7 +155,7 @@ public class Maze {
             }
         }
         //Utilize helper method
-        return isPossibleHelper(myX,myY);
+        return isPossibleHelper(myX, myY);
     }
 
     /**
@@ -146,6 +163,7 @@ public class Maze {
      * valid adjacent moves. This method will detect if a path exits by returning
      * true when the destination is reached, else it will return false to signal game
      * has been lost.
+     *
      * @param theX x coordinate of room
      * @param theY y coordinate of room
      * @return true if destination found, false otherwise
@@ -164,7 +182,7 @@ public class Maze {
             //Check North (assuming door exists and is not dead)
             if (myMaze[theX][theY].getDoor(0) != null &&
                     !myMaze[theX][theY].getDoor(0).isDead()) {
-                boolean northCheck = isPossibleHelper(theX,theY-1);
+                boolean northCheck = isPossibleHelper(theX, theY - 1);
                 if (northCheck) {
                     return true;
                 }
@@ -172,7 +190,7 @@ public class Maze {
             //Check South (assuming door exists and is not dead)
             if (myMaze[theX][theY].getDoor(1) != null &&
                     !myMaze[theX][theY].getDoor(1).isDead()) {
-                boolean southCheck = isPossibleHelper(theX,theY+1);
+                boolean southCheck = isPossibleHelper(theX, theY + 1);
                 if (southCheck) {
                     return true;
                 }
@@ -180,7 +198,7 @@ public class Maze {
             //Check East (assuming door exists and is not dead)
             if (myMaze[theX][theY].getDoor(2) != null &&
                     !myMaze[theX][theY].getDoor(2).isDead()) {
-                boolean eastCheck = isPossibleHelper(theX+1,theY);
+                boolean eastCheck = isPossibleHelper(theX + 1, theY);
                 if (eastCheck) {
                     return true;
                 }
@@ -188,26 +206,26 @@ public class Maze {
             //Check West (assuming door exists and is not dead)
             if (myMaze[theX][theY].getDoor(3) != null &&
                     !myMaze[theX][theY].getDoor(3).isDead()) {
-                boolean westCheck = isPossibleHelper(theX-1,theY);
-                if (westCheck) {
-                    return true;
-                }
+                boolean westCheck = isPossibleHelper(theX - 1, theY);
+                return westCheck;
             }
-        }        
+        }
         return false;
     }
 
     /**
      * Returns true when the player reaches the end of the maze
+     *
      * @return Returns a boolean of if the player has reached the end of the maze.
      */
-    public boolean goalReached(){
-        return myX == mazeSize-1 && myY == mazeSize-1;
+    public boolean goalReached() {
+        return myX == mazeSize - 1 && myY == mazeSize - 1;
     }
 
     /**
      * toString displays the overview of the maze, including the player, the rooms,
      * the finish, and the start when the player is not in the start.
+     *
      * @return string representing maze
      */
     @Override
@@ -219,9 +237,9 @@ public class Maze {
             for (int j = 0; j < myMaze[i].length; j++) {
                 if (i == myY && j == myX) {
                     mazeString.append("[PLYR]");
-                } else if(i == mazeSize -1 && j == mazeSize -1) {
+                } else if (i == mazeSize - 1 && j == mazeSize - 1) {
                     mazeString.append("[FNSH]");
-                } else if(i == 0 && j == 0) {
+                } else if (i == 0 && j == 0) {
                     mazeString.append("[STRT]");
                 } else {
                     mazeString.append("[ROOM]");

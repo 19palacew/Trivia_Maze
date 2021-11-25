@@ -39,8 +39,8 @@ public class Database {
         //Set where we want to get our questions and answers from
         String query = "SELECT * FROM QuestionAnswer";
         //Set up the connection
-        try ( Connection conn = ds.getConnection();
-              Statement stmt = conn.createStatement()) {
+        try (Connection conn = ds.getConnection();
+             Statement stmt = conn.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
@@ -49,18 +49,24 @@ public class Database {
                 questionBank.add(question);
                 answerBank.add(answer);
             }
-        } catch ( SQLException e ) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            System.exit( 0 );
+            System.exit(0);
         }
     }
 
-    public static Question genQuestion(){
+    /**
+     * Returns a Question object
+     *
+     * @return Returns a Question object
+     */
+    public static Question genQuestion() {
         return new Question(getQuestion(), getAnswer());
     }
 
     /**
      * Getter for question
+     *
      * @return question at index counter field is set to
      */
     public static String getQuestion() {
@@ -70,6 +76,7 @@ public class Database {
 
     /**
      * Getter for answer
+     *
      * @return answer at index counter field is set to
      */
     public static String getAnswer() {

@@ -1,5 +1,8 @@
 package Model;
 
+/**
+ * Rooms contain Doors in every compass direction that the player has to open to move through
+ */
 public class Room {
     private final Door[] myRoomDoors;
     private final RoomBlocker myBlockedDoors;
@@ -10,25 +13,35 @@ public class Room {
     private static final int DOOR4_INDEX = 3;
     private static final int TOTAL_DOORS = 4;
 
-    public Room(final RoomBlocker theBlocker, Door theNorthDoor, Door theSouthDoor, Door theEastDoor, Door theWestDoor){
+    /**
+     * Creates a new Room
+     *
+     * @param theBlocker   RoomBlocker of un-openable Doors
+     * @param theNorthDoor North Shared or New Door
+     * @param theSouthDoor South Shared or New Door
+     * @param theEastDoor  East Shared or New Door
+     * @param theWestDoor  West Shared or New Door
+     */
+    public Room(final RoomBlocker theBlocker, Door theNorthDoor, Door theSouthDoor, Door theEastDoor, Door theWestDoor) {
         this.myBlockedDoors = theBlocker;
         this.myRoomDoors = new Door[TOTAL_DOORS];
-        if (theBlocker.getNorth()){
+        if (theBlocker.getNorth()) {
             this.myRoomDoors[DOOR1_INDEX] = theNorthDoor;
         }
-        if (theBlocker.getSouth()){
+        if (theBlocker.getSouth()) {
             this.myRoomDoors[DOOR2_INDEX] = theSouthDoor;
         }
-        if (theBlocker.getEast()){
+        if (theBlocker.getEast()) {
             this.myRoomDoors[DOOR3_INDEX] = theEastDoor;
         }
-        if (theBlocker.getWest()){
+        if (theBlocker.getWest()) {
             this.myRoomDoors[DOOR4_INDEX] = theWestDoor;
         }
     }
-    
+
     /**
      * Setter to change the visited status of room
+     *
      * @param theVisited true if visited, false if else
      */
     public void setVisited(boolean theVisited) {
@@ -37,6 +50,7 @@ public class Room {
 
     /**
      * Getter to get the visited status of room
+     *
      * @return myVisited, the field that holds whether room has been visited
      */
     public boolean getVisited() {
@@ -45,6 +59,7 @@ public class Room {
 
     /**
      * Returns which doors are permanently blocked
+     *
      * @return Returns a RoomBlocker
      */
     public RoomBlocker getBlockedDoors() {
@@ -52,15 +67,14 @@ public class Room {
     }
 
     /**
-     *
      * @param theDoorIndex The index of the door
      * @return Returns a door based on the index
      */
-    public Door getDoor(final int theDoorIndex){
+    public Door getDoor(final int theDoorIndex) {
         return myRoomDoors[theDoorIndex];
     }
 
-    public Door getDoor(final Direction doorDirection){
+    public Door getDoor(final Direction doorDirection) {
         Door localDoor = null;
         switch (doorDirection) {
             case NORTH -> localDoor = getDoor(DOOR1_INDEX);
@@ -74,6 +88,7 @@ public class Room {
     /**
      * toString method for the room, includes whether each direction is blocked
      * and shows the player in the center of each room
+     *
      * @return string representing the room
      */
     @Override
@@ -85,7 +100,7 @@ public class Room {
         //Check movement North
         if (myRoomDoors[0] == null) {
             roomString.append("BLOCKED");
-        } else if (myRoomDoors[0].isDead()){
+        } else if (myRoomDoors[0].isDead()) {
             roomString.append("DEAD DOOR");
         } else {
             roomString.append("MOVE NORTH");
@@ -95,7 +110,7 @@ public class Room {
         //Check movement West
         if (myRoomDoors[3] == null) {
             roomString.append("BLOCKED");
-        } else if (myRoomDoors[3].isDead()){
+        } else if (myRoomDoors[3].isDead()) {
             roomString.append("DEAD DOOR");
         } else {
             roomString.append("MOVE WEST");
@@ -105,7 +120,7 @@ public class Room {
         //Check movement East
         if (myRoomDoors[2] == null) {
             roomString.append("BLOCKED");
-        } else if (myRoomDoors[2].isDead()){
+        } else if (myRoomDoors[2].isDead()) {
             roomString.append("DEAD DOOR");
         } else {
             roomString.append("MOVE EAST");
@@ -115,7 +130,7 @@ public class Room {
         //Check movement South
         if (myRoomDoors[1] == null) {
             roomString.append("BLOCKED");
-        } else if (myRoomDoors[1].isDead()){
+        } else if (myRoomDoors[1].isDead()) {
             roomString.append("DEAD DOOR");
         } else {
             roomString.append("MOVE SOUTH");
