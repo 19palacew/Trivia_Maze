@@ -16,9 +16,9 @@ public class GameManager {
     private static final Scanner input = new Scanner(System.in);
     private static Display display;
     private static Maze mainMaze;
-    private static File saveOne = new File("Save1.txt");
-    private static File saveTwo = new File("Save2.txt");
-    private static File saveThree = new File("Save3.txt");
+    private static final File saveOne = new File("Save1.txt");
+    private static final File saveTwo = new File("Save2.txt");
+    private static final File saveThree = new File("Save3.txt");
     private static boolean turnOffQuestions = false;
 
     /**

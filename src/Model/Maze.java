@@ -151,6 +151,7 @@ public class Maze implements Serializable {
 
     /**
      * Sets player to room
+     *
      * @param theX X position
      * @param theY Y position
      */
@@ -167,9 +168,9 @@ public class Maze implements Serializable {
      */
     public boolean isPossible() {
         //Clear visited field for all rooms
-        for (int i = 0; i < myMaze.length; i++) {
-            for (int j = 0; j < myMaze[i].length; j++) {
-                myMaze[i][j].setVisited(false);
+        for (Room[] rooms : myMaze) {
+            for (Room room : rooms) {
+                room.setVisited(false);
             }
         }
         //Utilize helper method
@@ -224,8 +225,7 @@ public class Maze implements Serializable {
             //Check West (assuming door exists and is not dead)
             if (myMaze[theX][theY].getDoor(3) != null &&
                     !myMaze[theX][theY].getDoor(3).isDead()) {
-                boolean westCheck = isPossibleHelper(theX - 1, theY);
-                return westCheck;
+                return isPossibleHelper(theX - 1, theY);
             }
         }
         return false;
