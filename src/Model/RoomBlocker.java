@@ -6,9 +6,21 @@ import java.io.Serializable;
  * RoomBlocker is a contain for a boolean for every direction on a compass
  */
 public class RoomBlocker implements Serializable {
+    /**
+     * Boolean field indicating whether door exists at North
+     */
     private final boolean myNorth;
+    /**
+     * Boolean field indicating whether door exists at South
+     */
     private final boolean mySouth;
+    /**
+     * Boolean field indicating whether door exists at East
+     */
     private final boolean myEast;
+    /**
+     * Boolean field indicating whether door exists at West
+     */
     private final boolean myWest;
 
     /**

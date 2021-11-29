@@ -6,7 +6,13 @@ import java.io.Serializable;
  * Question stores both a question and an answer
  */
 public class Question implements Serializable {
+    /**
+     * Question String
+     */
     private final String myQuestion;
+    /**
+     * Answer String
+     */
     private final String myAnswer;
 
     /**

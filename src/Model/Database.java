@@ -17,15 +17,15 @@ import java.util.Random;
  */
 public class Database implements Serializable {
     /**
-     * ArrayList holding the questions
+     * ArrayList field holding the questions
      */
     private static final ArrayList<String> questionBank = new ArrayList<>();
     /**
-     * ArrayList holding the answers
+     * ArrayList field holding the answers
      */
     private static final ArrayList<String> answerBank = new ArrayList<>();
     /**
-     * Counter to iterate through the lists
+     * Counter int field to iterate through the lists
      */
     private static int questionIndex = 0;
 

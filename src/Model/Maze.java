@@ -7,10 +7,6 @@ import java.io.Serializable;
  */
 public class Maze implements Serializable {
     /**
-     * Field containing the 2D array of Room Objects that represents the overall maze
-     */
-    private final Room[][] myMaze;
-    /**
      * Field that holds the players X position
      */
     private int myX;
@@ -18,9 +14,17 @@ public class Maze implements Serializable {
      * Field that holds the players Y position
      */
     private int myY;
-
+    /**
+     * Field containing the 2D array of Room Objects that represents the overall maze
+     */
+    private final Room[][] myMaze;
+    /**
+     * Field containing the size of the maze
+     */
     private final int mazeSize = 8;
-
+    /**
+     * Serialization UID field
+     */
     private static final long serialversionUID = 535052495445L;
 
     /**

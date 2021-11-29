@@ -3,16 +3,43 @@ package Model;
 import java.io.Serializable;
 
 /**
- * Rooms contain Doors in every compass direction that the player has to open to move through
+ * Rooms contain Doors in every compass direction
+ * that the player has to open to move through
  */
 public class Room implements Serializable {
+    /**
+     * Door array field representing true false values for if the doors
+     * in the room are blocked or not
+     */
     private final Door[] myRoomDoors;
+    /**
+     * RoomBlocker field that holds what sides will need doors
+     */
     private final RoomBlocker myBlockedDoors;
+    /**
+     * Boolean field stating whether room has been visited, used
+     * by the isPossible method of the Maze class
+     */
     private boolean myVisited = false;
+    /**
+     * int field holding index of Door 1
+     */
     private static final int DOOR1_INDEX = 0;
+    /**
+     * int field holding index of Door 2
+     */
     private static final int DOOR2_INDEX = 1;
+    /**
+     * int field holding index of Door 3
+     */
     private static final int DOOR3_INDEX = 2;
+    /**
+     * int field holding index of Door 4
+     */
     private static final int DOOR4_INDEX = 3;
+    /**
+     * int field holding total door value
+     */
     private static final int TOTAL_DOORS = 4;
 
     /**
