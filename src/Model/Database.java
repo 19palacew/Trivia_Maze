@@ -2,6 +2,7 @@ package Model;
 
 import org.sqlite.SQLiteDataSource;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,17 +15,17 @@ import java.util.Random;
  * the Table database and loading the contents into ArrayLists that
  * can be accessed via getters
  */
-public class Database {
+public class Database implements Serializable {
     /**
-     * ArrayList holding the questions
+     * ArrayList field holding the questions
      */
     private static final ArrayList<String> questionBank = new ArrayList<>();
     /**
-     * ArrayList holding the answers
+     * ArrayList field holding the answers
      */
     private static final ArrayList<String> answerBank = new ArrayList<>();
     /**
-     * Counter to iterate through the lists
+     * Counter int field to iterate through the lists
      */
     private static int questionIndex = 0;
 
@@ -39,8 +40,8 @@ public class Database {
         //Set where we want to get our questions and answers from
         String query = "SELECT * FROM QuestionAnswer";
         //Set up the connection
-        try ( Connection conn = ds.getConnection();
-              Statement stmt = conn.createStatement()) {
+        try (Connection conn = ds.getConnection();
+             Statement stmt = conn.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
@@ -49,18 +50,24 @@ public class Database {
                 questionBank.add(question);
                 answerBank.add(answer);
             }
-        } catch ( SQLException e ) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            System.exit( 0 );
+            System.exit(0);
         }
     }
 
-    public static Question genQuestion(){
+    /**
+     * Returns a Question object
+     *
+     * @return Returns a Question object
+     */
+    public static Question genQuestion() {
         return new Question(getQuestion(), getAnswer());
     }
 
     /**
      * Getter for question
+     *
      * @return question at index counter field is set to
      */
     public static String getQuestion() {
@@ -70,6 +77,7 @@ public class Database {
 
     /**
      * Getter for answer
+     *
      * @return answer at index counter field is set to
      */
     public static String getAnswer() {
