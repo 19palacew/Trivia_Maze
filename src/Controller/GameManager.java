@@ -10,7 +10,7 @@ import java.io.*;
 import java.util.Scanner;
 
 /**
- * Trivia Maze Start
+ * Trivia Maze Start.
  */
 public class GameManager {
     private static final Scanner input = new Scanner(System.in);
@@ -19,14 +19,16 @@ public class GameManager {
     private static File saveOne = new File("Save1.txt");
     private static File saveTwo = new File("Save2.txt");
     private static File saveThree = new File("Save3.txt");
+    private static boolean turnOffQuestions = false;
 
     /**
      * Starts Trivia Maze
      *
      * @param args Arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         Database.connectToDatabase();
+        Display.title();
         Display.printInstructions();
         Display.startMsg();
         bootGame();
@@ -156,6 +158,13 @@ public class GameManager {
             } else if (userAction.toLowerCase().matches("file")) {
                 inputGood = true;
                 File();
+            } else if (userAction.toLowerCase().matches("really lazy")) {
+                turnOffQuestions = !turnOffQuestions;
+                Display.cheatActive();
+            } else if (userAction.toLowerCase().matches("really really lazy")) {
+                inputGood = true;
+                Display.cheatActive();
+                mainMaze.setRoom(mainMaze.getMazeSize() - 1, mainMaze.getMazeSize() - 1);
             } else {
                 Display.userActionWarning();
             }
@@ -176,13 +185,18 @@ public class GameManager {
     private static void movePlayer(Direction theDirection) {
         Door localDoor = mainMaze.getCurrentRoom().getDoor(theDirection);
         if (mainMaze.canMovePlayer(theDirection)) {
-            if (localDoor.isLocked()) {
+            if (localDoor.isLocked() && !turnOffQuestions) {
                 Display.displayQuestion(localDoor.getQuestion());
-                localDoor.unlock(input.nextLine());
-                if (localDoor.isDead()) {
-                    Display.incorrectAnswer(localDoor.getAnswer());
+                String userAnswer = input.nextLine().toLowerCase();
+                if (userAnswer.matches("lazy")) {
+                    System.out.println(localDoor.getAnswer());
                 } else {
-                    mainMaze.movePlayer(theDirection);
+                    localDoor.unlock(userAnswer);
+                    if (localDoor.isDead()) {
+                        Display.incorrectAnswer(localDoor.getAnswer());
+                    } else {
+                        mainMaze.movePlayer(theDirection);
+                    }
                 }
             } else {
                 mainMaze.movePlayer(theDirection);
@@ -289,12 +303,14 @@ public class GameManager {
             if (helpAction.toLowerCase().matches("about")) {
                 inputGood = true;
                 //TODO menu about
-            } else if (helpAction.toLowerCase().matches("instructions")) {
+            } else if (helpAction.toLowerCase().matches("game play instructions|instructions")) {
                 inputGood = true;
                 Display.printInstructions();
             } else if (helpAction.toLowerCase().matches("cheats")) {
                 inputGood = true;
-                //TODO menu cheats
+                Display.cheatsMenu();
+                Display.promptForKey();
+                input.nextLine();
             } else {
                 Display.helpMenuWarning();
             }

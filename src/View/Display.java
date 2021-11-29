@@ -134,7 +134,7 @@ public class Display {
         System.out.println("""
                 Help:
                 - About
-                - Game Play Instructions
+                - Game Play Instructions (Instructions)
                 - Cheats""");
     }
 
@@ -171,6 +171,43 @@ public class Display {
 
     public static void loadCompletePrompt() {
         System.out.println("Loaded from save file");
+    /**
+     * Displays the Cheats to the User
+     */
+    public static void cheatsMenu() {
+        System.out.println("""
+                Cheats:
+                - Unblock Dead Doors (open sesame)
+                - See Answer (lazy)
+                - Turn Off Questions (really lazy)
+                - Teleport to End (really really lazy)""");
+    }
+
+    /**
+     * Displays a continue prompt to the User to enter input
+     */
+    public static void promptForKey() {
+        System.out.print("Press any key to return to game... ");
+    }
+
+    /**
+     * Displays Triva Maze title
+     */
+    public static void title() {
+        System.out.println("""
+                 _______     _         _          __  __                 \s
+                |__   __|   (_)       (_)        |  \\/  |                \s
+                   | | _ __  _ __   __ _   __ _  | \\  / |  __ _  ____ ___\s
+                   | || '__|| |\\ \\ / /| | / _` | | |\\/| | / _` ||_  // _ \\
+                   | || |   | | \\ V / | || (_| | | |  | || (_| | / /|  __/
+                   |_||_|   |_|  \\_/  |_| \\__,_| |_|  |_| \\__,_|/___|\\___|""");
+    }
+
+    /**
+     * Displays cheat has been turned on
+     */
+    public static void cheatActive() {
+        System.out.println("Cheat has been activated ");
     }
 
 }

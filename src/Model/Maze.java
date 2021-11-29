@@ -150,6 +150,16 @@ public class Maze implements Serializable {
     }
 
     /**
+     * Sets player to room
+     * @param theX X position
+     * @param theY Y position
+     */
+    public void setRoom(final int theX, final int theY) {
+        myX = theX;
+        myY = theY;
+    }
+
+    /**
      * Method to calculate if the end of the maze can be reached from
      * the current position
      *
