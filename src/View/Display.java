@@ -171,6 +171,8 @@ public class Display {
 
     public static void loadCompletePrompt() {
         System.out.println("Loaded from save file");
+    }
+
     /**
      * Displays the Cheats to the User
      */
