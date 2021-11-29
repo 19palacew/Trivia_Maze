@@ -1,9 +1,11 @@
 package Model;
 
+import java.io.Serializable;
+
 /**
  * Door is obstacle for the player, it can opened by having the player answer a question
  */
-public class Door {
+public class Door implements Serializable {
     private final Question myQuestion;
     private boolean myLocked;
     private boolean myDoorDead;

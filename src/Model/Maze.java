@@ -1,9 +1,11 @@
 package Model;
 
+import java.io.Serializable;
+
 /**
  * Maze is the map for the game, it is what the player traverses to reach the goal.
  */
-public class Maze {
+public class Maze implements Serializable {
     /**
      * Field containing the 2D array of Room Objects that represents the overall maze
      */
@@ -18,6 +20,8 @@ public class Maze {
     private int myY;
 
     private final int mazeSize = 8;
+
+    private static final long serialversionUID = 535052495445L;
 
     /**
      * Constructor that builds the 2D-array representation of the maze.

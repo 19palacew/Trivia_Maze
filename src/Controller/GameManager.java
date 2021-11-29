@@ -6,6 +6,7 @@ import Model.Door;
 import Model.Maze;
 import View.Display;
 
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -15,6 +16,9 @@ public class GameManager {
     private static final Scanner input = new Scanner(System.in);
     private static Display display;
     private static Maze mainMaze;
+    private static File saveOne = new File("Save1.txt");
+    private static File saveTwo = new File("Save2.txt");
+    private static File saveThree = new File("Save3.txt");
 
     /**
      * Starts Trivia Maze
@@ -45,10 +49,11 @@ public class GameManager {
                 Display.beginGameWarning();
             }
         }
+        //Initialize the maze and display
+        gameSetup();
+        //Load from beginning
         if (userGameStartInput.equalsIgnoreCase("load game")) {
             loadGame();
-        } else {
-            newGame();
         }
     }
 
@@ -70,9 +75,9 @@ public class GameManager {
     }
 
     /**
-     * Sets up a New Game
+     * Sets up Maze and Display
      */
-    private static void newGame() {
+    private static void gameSetup() {
         mainMaze = new Maze();
         display = new Display(mainMaze);
     }
@@ -81,7 +86,57 @@ public class GameManager {
      * Loads a Old Game
      */
     private static void loadGame() {
-        // Not Yet Implemented
+        Display.loadPrompt();
+        int loadFileNumber = input.nextInt();
+        try {
+            if (loadFileNumber == 1 && saveOne.length() != 0) {
+                FileInputStream file = new FileInputStream
+                        (saveOne);
+                ObjectInputStream in = new ObjectInputStream
+                        (file);
+
+                // Method for deserialization of object
+                mainMaze = (Maze) in.readObject();
+                display.setMyMaze(mainMaze);
+
+                in.close();
+                file.close();
+                Display.loadCompletePrompt();
+            } else if (loadFileNumber == 2 && saveTwo.length() != 0) {
+                System.out.println("Made it in");
+                FileInputStream file = new FileInputStream
+                        (saveTwo);
+                ObjectInputStream in = new ObjectInputStream
+                        (file);
+
+                // Method for deserialization of object
+                mainMaze = (Maze) in.readObject();
+                display.setMyMaze(mainMaze);
+
+                in.close();
+                file.close();
+                Display.loadCompletePrompt();
+            } else if (loadFileNumber == 3 && saveThree.length() != 0) {
+                FileInputStream file = new FileInputStream
+                        (saveThree);
+                ObjectInputStream in = new ObjectInputStream
+                        (file);
+
+                // Method for deserialization of object
+                mainMaze = (Maze) in.readObject();
+                display.setMyMaze(mainMaze);
+
+                in.close();
+                file.close();
+                Display.loadCompletePrompt();
+            } else {
+                Display.loadErrorPrompt();
+            }
+        } catch (IOException ex) {
+            System.out.println("Save file not found");
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Maze class casting issue");
+        }
     }
 
     /**
@@ -155,7 +210,7 @@ public class GameManager {
             helpAction = input.nextLine();
             if (helpAction.toLowerCase().matches("save game")) {
                 inputGood = true;
-                //TODO save game
+                saveGame();
             } else if (helpAction.toLowerCase().matches("load game")) {
                 inputGood = true;
                 loadGame();
@@ -166,6 +221,58 @@ public class GameManager {
             } else {
                 Display.fileMenuWarning();
             }
+        }
+    }
+
+    private static void saveGame() {
+        Display.saveOptions();
+        int userSaveOption = input.nextInt();
+        try {
+            if (userSaveOption == 1) {
+                // Saving of object in a file
+                FileOutputStream file = new FileOutputStream
+                        (saveOne);
+                ObjectOutputStream out = new ObjectOutputStream
+                        (file);
+
+                // Method for serialization of object
+                out.writeObject(mainMaze);
+
+                out.close();
+                file.close();
+
+            } else if (userSaveOption == 2) {
+                // Saving of object in a file
+                FileOutputStream file = new FileOutputStream
+                        (saveTwo);
+                ObjectOutputStream out = new ObjectOutputStream
+                        (file);
+
+                // Method for serialization of object
+                out.writeObject(mainMaze);
+
+                out.close();
+                file.close();
+
+            } else if (userSaveOption == 3) {
+                // Saving of object in a file
+                FileOutputStream file = new FileOutputStream
+                        (saveThree);
+                ObjectOutputStream out = new ObjectOutputStream
+                        (file);
+
+                // Method for serialization of object
+                out.writeObject(mainMaze);
+
+                out.close();
+                file.close();
+
+            } else {
+                Display.generalWarning();
+            }
+
+        } catch (IOException ex) {
+            System.out.println("Save Files Unreachable");
         }
     }
 

@@ -1,9 +1,11 @@
 package Model;
 
+import java.io.Serializable;
+
 /**
  * RoomBlocker is a contain for a boolean for every direction on a compass
  */
-public class RoomBlocker {
+public class RoomBlocker implements Serializable {
     private final boolean myNorth;
     private final boolean mySouth;
     private final boolean myEast;

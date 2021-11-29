@@ -1,9 +1,11 @@
 package Model;
 
+import java.io.Serializable;
+
 /**
  * Rooms contain Doors in every compass direction that the player has to open to move through
  */
-public class Room {
+public class Room implements Serializable {
     private final Door[] myRoomDoors;
     private final RoomBlocker myBlockedDoors;
     private boolean myVisited = false;

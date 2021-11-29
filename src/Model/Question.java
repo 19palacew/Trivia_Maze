@@ -1,9 +1,11 @@
 package Model;
 
+import java.io.Serializable;
+
 /**
  * Question stores both a question and an answer
  */
-public class Question {
+public class Question implements Serializable {
     private final String myQuestion;
     private final String myAnswer;
 

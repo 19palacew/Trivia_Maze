@@ -6,7 +6,7 @@ import Model.Maze;
  * Display shows the user the output
  */
 public class Display {
-    private final Maze myMaze;
+    private Maze myMaze;
 
     /**
      * Creates a new Display
@@ -15,6 +15,10 @@ public class Display {
      */
     public Display(final Maze theMaze) {
         myMaze = theMaze;
+    }
+
+    public void setMyMaze(Maze theMaze) {
+        this.myMaze = theMaze;
     }
 
     /**
@@ -134,6 +138,10 @@ public class Display {
                 - Cheats""");
     }
 
+    public static void saveOptions() {
+        System.out.println("Save to which save file? Options: 1, 2, 3");
+    }
+
     /**
      * Displays the question to the User
      */
@@ -146,6 +154,23 @@ public class Display {
      */
     public static void printPrompt() {
         System.out.print("Choose: ");
+    }
+
+    public static void generalWarning() {
+        System.out.println("Command not recognized, continue playing or retry command with valid " +
+                "syntax");
+    }
+
+    public static void loadPrompt() {
+        System.out.println("Load which game? Options: 1, 2, 3");
+    }
+
+    public static void loadErrorPrompt() {
+        System.out.println("Sorry that save file is empty");
+    }
+
+    public static void loadCompletePrompt() {
+        System.out.println("Loaded from save file");
     }
 
 }
