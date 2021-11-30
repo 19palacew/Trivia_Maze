@@ -33,6 +33,18 @@ public class GameManager {
         Display.startMsg();
         bootGame();
         runGame();
+        boolean canPlay = true;
+        while (canPlay){
+            if (!mainMaze.isPossible()) {
+                Display.playerLost();
+                canPlay = false;
+            }
+            if (mainMaze.goalReached()) {
+                Display.playerWon();
+                canPlay = false;
+            }
+            runGame();
+        }
         input.close();
     }
 
@@ -65,15 +77,6 @@ public class GameManager {
     private static void runGame() {
         updateScreen();
         nextAction();
-        if (!mainMaze.isPossible()) {
-            Display.playerLost();
-            return;
-        }
-        if (mainMaze.goalReached()) {
-            Display.playerWon();
-            return;
-        }
-        runGame();
     }
 
     /**
