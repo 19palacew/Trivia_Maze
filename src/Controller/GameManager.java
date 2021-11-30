@@ -182,7 +182,7 @@ public class GameManager {
      *
      * @param theDirection Compass Direction to Move
      */
-    private static void movePlayer(Direction theDirection) {
+    private static void movePlayer(final Direction theDirection) {
         Door localDoor = mainMaze.getCurrentRoom().getDoor(theDirection);
         if (mainMaze.canMovePlayer(theDirection)) {
             if (localDoor.isLocked() && !turnOffQuestions) {

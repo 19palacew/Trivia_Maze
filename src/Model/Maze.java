@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -23,9 +24,26 @@ public class Maze implements Serializable {
      */
     private final int mazeSize = 8;
     /**
+     * int field holding index of Door 1
+     */
+    private static final int DOOR1_INDEX = 0;
+    /**
+     * int field holding index of Door 2
+     */
+    private static final int DOOR2_INDEX = 1;
+    /**
+     * int field holding index of Door 3
+     */
+    private static final int DOOR3_INDEX = 2;
+    /**
+     * int field holding index of Door 4
+     */
+    private static final int DOOR4_INDEX = 3;
+    /**
      * Serialization UID field
      */
-    private static final long serialversionUID = 535052495445L;
+    @Serial
+    private static final long serialVersionUID = 535052495445L;
 
     /**
      * Constructor that builds the 2D-array representation of the maze.
@@ -59,7 +77,7 @@ public class Maze implements Serializable {
                 //If column is greater than 0 we know there is a north facing door
                 if (yMazeCoord > 0) {
                     north = true;
-                    northDoor = myMaze[xMazeCoord][yMazeCoord - 1].getDoor(1);
+                    northDoor = myMaze[xMazeCoord][yMazeCoord - 1].getDoor(DOOR2_INDEX);
                 } else {
                     northDoor = new Door();
                 }
@@ -77,7 +95,7 @@ public class Maze implements Serializable {
                 if (xMazeCoord - 1 >= 0) {
                     west = true;
                     // Sets the west door of this room to the east door of the previous room.
-                    westDoor = myMaze[xMazeCoord - 1][yMazeCoord].getDoor(2);
+                    westDoor = myMaze[xMazeCoord - 1][yMazeCoord].getDoor(DOOR3_INDEX);
                 } else {
                     westDoor = new Door();
                 }
@@ -91,7 +109,7 @@ public class Maze implements Serializable {
      *
      * @param theDirection The direction the player wants to move
      */
-    public void movePlayer(Direction theDirection) {
+    public void movePlayer(final Direction theDirection) {
         if (canMovePlayer(theDirection)) {
             switch (theDirection) {
                 case NORTH -> myY--;
@@ -108,7 +126,7 @@ public class Maze implements Serializable {
      * @param theDirection The direction the player wants to move
      * @return Returns true if the player can move in that direction and false otherwise
      */
-    public boolean canMovePlayer(Direction theDirection) {
+    public boolean canMovePlayer(final Direction theDirection) {
         Door localDoor = getCurrentRoom().getDoor(theDirection);
         return localDoor != null && !localDoor.isDead();
     }
@@ -187,7 +205,7 @@ public class Maze implements Serializable {
      * @param theY y coordinate of room
      * @return true if destination found, false otherwise
      */
-    private boolean isPossibleHelper(int theX, int theY) {
+    private boolean isPossibleHelper(final int theX, final int theY) {
         //Check to see if the current room is visited, if so return false
         if (!myMaze[theX][theY].getVisited()) {
             //The room corresponding to theX and theY is the destination room

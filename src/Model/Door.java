@@ -14,9 +14,9 @@ public class Door implements Serializable {
      * Creates a new Door
      */
     public Door() {
-        this.myLocked = true;
-        this.myDoorDead = false;
-        this.myQuestion = Database.genQuestion();
+        myLocked = true;
+        myDoorDead = false;
+        myQuestion = Database.genQuestion();
     }
 
     /**
