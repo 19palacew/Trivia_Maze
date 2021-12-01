@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="MainGUI">
+  <grid id="27dc6" binding="BasePanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties>
+      <background color="-12116195"/>
+      <foreground color="-13429227"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <toolbar id="5bec3" binding="ToolBar">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="20"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-13429227"/>
+          <borderPainted value="true"/>
+          <floatable value="false"/>
+          <margin top="0" left="0" bottom="0" right="0"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="632ed" class="javax.swing.JToolBar$Separator">
+            <constraints/>
+            <properties/>
+          </component>
+          <component id="d6940" class="javax.swing.JButton" binding="fileButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <background color="-13429227"/>
+              <borderPainted value="false"/>
+              <focusPainted value="false"/>
+              <foreground color="-3355444"/>
+              <text value="File"/>
+            </properties>
+            <clientProperties>
+              <hideActionText class="java.lang.Boolean" value="false"/>
+            </clientProperties>
+          </component>
+          <component id="cbb31" class="javax.swing.JToolBar$Separator">
+            <constraints/>
+            <properties/>
+          </component>
+          <component id="58490" class="javax.swing.JButton" binding="helpButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <background color="-13429227"/>
+              <borderPainted value="false"/>
+              <focusPainted value="false"/>
+              <foreground color="-3355444"/>
+              <hideActionText value="false"/>
+              <text value="Help"/>
+            </properties>
+          </component>
+        </children>
+      </toolbar>
+      <grid id="19e7c" binding="MazeDisplay" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-12116195"/>
+          <foreground color="-13429227"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <grid id="877cb" binding="StartPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <visible value="true"/>
+            </properties>
+            <border type="none"/>
+            <children/>
+          </grid>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
