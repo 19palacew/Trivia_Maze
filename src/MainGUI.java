@@ -6,7 +6,6 @@ public class MainGUI extends JFrame{
     private JPanel BasePanel;
     private JToolBar ToolBar;
     private JPanel MazeDisplay;
-    private JPanel StartPanel;
 
     public MainGUI(){
         setTitle("Trivia Maze");
