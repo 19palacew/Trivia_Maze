@@ -10,15 +10,15 @@ public class MainGUI extends JFrame{
     private JPanel BasePanel;
     private JToolBar ToolBar;
     private JPanel MazeDisplay;
-    private PlayScreen playScreen;
+    private final PlayScreen playScreen;
 
-    public MainGUI(){
+    public MainGUI(final PlayScreen thePlayScreen){
         setTitle("Trivia Maze");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(720, 560);
         setContentPane(BasePanel);
         setVisible(true);
-        playScreen = new PlayScreen();
+        playScreen = thePlayScreen;
         fileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -26,9 +26,5 @@ public class MainGUI extends JFrame{
                 setVisible(true);
             }
         });
-    }
-
-    public static void main(String[] args) {
-        MainGUI gui = new MainGUI();
     }
 }
