@@ -1,26 +1,25 @@
 package View;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class MainGUI extends JFrame{
     private JButton fileButton;
     private JButton helpButton;
-    private JPanel BasePanel;
+    private JPanel basePanel;
     private JToolBar ToolBar;
     private JPanel MazeDisplay;
-    private JPopupMenu fileMenu;
-    private JMenuItem menuItemNewGame, menuItemLoadGame, menuItemExitGame;
+    private JPopupMenu fileMenu, helpMenu;
+    private JMenuItem menuItemNewGame, menuItemLoadGame, menuItemExitGame, menuItemAbout, menuItemInstructions, menuItemCheats;
     private final PlayScreen playScreen;
 
-    public MainGUI(final PlayScreen thePlayScreen){
+    public MainGUI(){
         setTitle("Trivia Maze");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(720, 560);
         InitializeElements();
-        playScreen = thePlayScreen;
-        setContentPane(BasePanel);
+        playScreen = new PlayScreen();
+        setContentPane(basePanel);
+        MazeDisplay.add(new StartScreen());
         setVisible(true);
         fileButton.addActionListener(e -> {
             ToolBar.add(fileMenu);
@@ -30,6 +29,11 @@ public class MainGUI extends JFrame{
         });
         menuItemNewGame.addActionListener(e -> {
             System.out.println("asfsf");
+        });
+        helpButton.addActionListener(e -> {
+            ToolBar.add(helpMenu);
+            helpMenu.show(helpMenu, 50, 30);
+            setVisible(true);
         });
     }
 
@@ -41,5 +45,12 @@ public class MainGUI extends JFrame{
         fileMenu.add(menuItemLoadGame);
         menuItemExitGame = new JMenuItem("Exit Game");
         fileMenu.add(menuItemExitGame);
+        helpMenu = new JPopupMenu();
+        menuItemAbout = new JMenuItem("About");
+        helpMenu.add(menuItemAbout);
+        menuItemInstructions = new JMenuItem("Instructions");
+        helpMenu.add(menuItemInstructions);
+        menuItemCheats = new JMenuItem("Cheats");
+        helpMenu.add(menuItemCheats);
     }
 }

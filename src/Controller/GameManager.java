@@ -6,7 +6,6 @@ import Model.Door;
 import Model.Maze;
 import View.Display;
 import View.MainGUI;
-import View.PlayScreen;
 
 import java.io.*;
 import java.util.Scanner;
@@ -29,8 +28,7 @@ public class GameManager {
      * @param args Arguments
      */
     public static void main(final String[] args) {
-        PlayScreen playScreen = new PlayScreen();
-        MainGUI gui = new MainGUI(playScreen);
+        MainGUI gui = new MainGUI();
         /*
         Database.connectToDatabase();
         Display.title();
