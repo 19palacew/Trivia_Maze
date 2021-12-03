@@ -3,20 +3,20 @@ package Model;
 import java.io.Serializable;
 
 /**
- * Question stores both a question and an answer
+ * Question stores both a question and an answer.
  */
 public class Question implements Serializable {
     /**
-     * Question String
+     * Question String.
      */
     private final String myQuestion;
     /**
-     * Answer String
+     * Answer String.
      */
     private final String myAnswer;
 
     /**
-     * Creates a new Question
+     * Creates a new Question.
      *
      * @param theQuestion String of a question
      * @param theAnswer   String of an answer
@@ -27,7 +27,7 @@ public class Question implements Serializable {
     }
 
     /**
-     * Returns the question
+     * Returns the question.
      *
      * @return Returns a String of a Question
      */
@@ -36,7 +36,7 @@ public class Question implements Serializable {
     }
 
     /**
-     * Returns the correct answer
+     * Returns the correct answer.
      *
      * @return Returns an enum (Answer) of the correct answer.
      */

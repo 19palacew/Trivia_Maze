@@ -3,13 +3,16 @@ package View;
 import Model.Maze;
 
 /**
- * Display shows the user the output
+ * Display shows the user the output.
  */
 public class Display {
+    /**
+     *
+     */
     private Maze myMaze;
 
     /**
-     * Creates a new Display
+     * Creates a new Display.
      *
      * @param theMaze The Maze that the User traverses
      */
@@ -18,25 +21,25 @@ public class Display {
     }
 
     public void setMyMaze(Maze theMaze) {
-        this.myMaze = theMaze;
+        myMaze = theMaze;
     }
 
     /**
-     * Displays the Maze to the User
+     * Displays the Maze to the User.
      */
     public void printMaze() {
         System.out.println(myMaze.toString());
     }
 
     /**
-     * Displays the Room to the User
+     * Displays the Room to the User.
      */
     public void printRoom() {
         System.out.println(myMaze.getCurrentRoom().toString());
     }
 
     /**
-     * Displays the Instructions to the User
+     * Displays the Instructions to the User.
      */
     public static void printInstructions() {
         System.out.println("""
@@ -51,21 +54,21 @@ public class Display {
     }
 
     /**
-     * Displays that the Player Won
+     * Displays that the Player Won.
      */
     public static void playerWon() {
         System.out.println("Goal Reached: Congratulations you won!");
     }
 
     /**
-     * Displays that the Player Lost
+     * Displays that the Player Lost.
      */
     public static void playerLost() {
         System.out.println("No Possible Pathways Left: Game Over");
     }
 
     /**
-     * Displays the File Menu options to the User
+     * Displays the File Menu options to the User.
      */
     public static void fileMenu() {
         System.out.println("""
@@ -76,7 +79,7 @@ public class Display {
     }
 
     /**
-     * Displays the Start Message to the User
+     * Displays the Start Message to the User.
      */
     public static void startMsg() {
         System.out.println("- New Game");
@@ -85,7 +88,7 @@ public class Display {
     }
 
     /**
-     * Displays a warning to the User for incorrect input of New or Load Game
+     * Displays a warning to the User for incorrect input of New or Load Game.
      */
     public static void beginGameWarning() {
         System.out.println("Please Type \"New Game\" or \"Load Game\"");
@@ -93,42 +96,50 @@ public class Display {
     }
 
     /**
-     * Displays a warning to the User for incorrect input of an action
+     * Displays a warning to the User for incorrect input of an action.
      */
     public static void userActionWarning() {
         System.out.println("Please Type a Direction or \"File\" or \"Help\"");
     }
 
     /**
-     * Displays a warning to the User for incorrect input of a Direction
+     * Displays a warning to the User for incorrect input of a Direction.
      */
     public static void directionWarning() {
         System.out.println("Please Type a Valid Direction");
     }
 
     /**
-     * Displays a warning to the User for incorrect Help Menu input
+     * Displays a warning to the User for incorrect Help Menu input.
      */
     public static void helpMenuWarning() {
         System.out.println("Please Type \"about\" or \"instructions\" or \"cheats\" ");
     }
 
     /**
-     * Displays a warning to the User for incorrect File Menu input
+     * Displays a warning to the User for incorrect File Menu input.
      */
     public static void fileMenuWarning() {
         System.out.println("Please Type \"Save Game\" or \"Load Game\" or \"Exit\" ");
     }
 
     /**
-     * Displays a warning to the User for incorrect answer input
+     * Displays a message to the User for correct answer input.
      */
-    public static void incorrectAnswer(String correctAnswer) {
+    public static void correctAnswer() {
+        System.out.println("Correct!");
+    }
+
+    /**
+     * Displays a warning to the User for incorrect answer input.
+     * @param correctAnswer
+     */
+    public static void incorrectAnswer(final String correctAnswer) {
         System.out.println("Answer is Incorrect, Correct Answer is: " + correctAnswer);
     }
 
     /**
-     * Displays the Help Menu Options to the User
+     * Displays the Help Menu Options to the User.
      */
     public static void helpMenu() {
         System.out.println("""
@@ -138,43 +149,59 @@ public class Display {
                 - Cheats""");
     }
 
+    /**
+     * Displays options for saving game.
+     */
     public static void saveOptions() {
         System.out.println("Save to which save file? Options: 1, 2, 3");
     }
 
     /**
-     * Displays the question to the User
+     * Displays the question to the User.
+     * @param theQuestion
      */
-    public static void displayQuestion(String theQuestion) {
+    public static void displayQuestion(final String theQuestion) {
         System.out.println(theQuestion);
     }
 
     /**
-     * Displays a prompt to the User to enter input
+     * Displays a prompt to the User to enter input.
      */
     public static void printPrompt() {
         System.out.print("Choose: ");
     }
 
+    /**
+     * Displays a general warning.
+     */
     public static void generalWarning() {
-        System.out.println("Command not recognized, continue playing or retry command with valid " +
-                "syntax");
+        System.out.println("Command not recognized, continue playing or retry command with valid "
+                + "syntax");
     }
 
+    /**
+     * Displays a prompt to select save to load.
+     */
     public static void loadPrompt() {
         System.out.println("Load which game? Options: 1, 2, 3");
     }
 
+    /**
+     * Displays an error when loading an empty file.
+     */
     public static void loadErrorPrompt() {
         System.out.println("Sorry that save file is empty");
     }
 
+    /**
+     * Displays message for successfully loaded game.
+     */
     public static void loadCompletePrompt() {
         System.out.println("Loaded from save file");
     }
 
     /**
-     * Displays the Cheats to the User
+     * Displays the Cheats to the User.
      */
     public static void cheatsMenu() {
         System.out.println("""
@@ -186,14 +213,14 @@ public class Display {
     }
 
     /**
-     * Displays a continue prompt to the User to enter input
+     * Displays a continue prompt to the User to enter input.
      */
     public static void promptForKey() {
         System.out.print("Press any key to return to game... ");
     }
 
     /**
-     * Displays Triva Maze title
+     * Displays Triva Maze title.
      */
     public static void title() {
         System.out.println("""
@@ -206,7 +233,7 @@ public class Display {
     }
 
     /**
-     * Displays cheat has been turned on
+     * Displays when cheat has been turned on.
      */
     public static void cheatActive() {
         System.out.println("Cheat has been activated ");

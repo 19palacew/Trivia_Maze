@@ -13,16 +13,43 @@ import java.util.Scanner;
  * Trivia Maze Start.
  */
 public class GameManager {
-    private static final Scanner input = new Scanner(System.in);
+    /**
+     * Scanner for user input.
+     */
+    private static final Scanner INPUT = new Scanner(System.in);
+
+    /**
+     * The Display.
+     */
     private static Display display;
+
+    /**
+     * The Maze.
+     */
     private static Maze mainMaze;
-    private static final File saveOne = new File("Save1.txt");
-    private static final File saveTwo = new File("Save2.txt");
-    private static final File saveThree = new File("Save3.txt");
+
+    /**
+     * File for first save game.
+     */
+    private static final File SAVE_ONE = new File("Save1.txt");
+
+    /**
+     * File for second save game.
+     */
+    private static final File SAVE_TWO = new File("Save2.txt");
+
+    /**
+     * File for third save game.
+     */
+    private static final File SAVE_THREE = new File("Save3.txt");
+
+    /**
+     * Field for turn off questions cheat status.
+     */
     private static boolean turnOffQuestions = false;
 
     /**
-     * Starts Trivia Maze
+     * Starts Trivia Maze.
      *
      * @param args Arguments
      */
@@ -34,7 +61,7 @@ public class GameManager {
         bootGame();
         runGame();
         boolean canPlay = true;
-        while (canPlay){
+        while (canPlay) {
             if (!mainMaze.isPossible()) {
                 Display.playerLost();
                 canPlay = false;
@@ -45,19 +72,20 @@ public class GameManager {
             }
             runGame();
         }
-        input.close();
+        INPUT.close();
     }
 
     /**
-     * Either Loads or Starts a New Game
+     * Either Loads or Starts a New Game.
      */
     private static void bootGame() {
         // Load Game / Start New Game
         boolean gameStarted = false;
         String userGameStartInput = "";
         while (!gameStarted) {
-            userGameStartInput = input.nextLine();
-            if (userGameStartInput.toLowerCase().matches("load game|new game")) {
+            userGameStartInput = INPUT.nextLine();
+            if (userGameStartInput.toLowerCase().matches(
+                    "load game|new game")) {
                 gameStarted = true;
             } else {
                 Display.beginGameWarning();
@@ -72,7 +100,8 @@ public class GameManager {
     }
 
     /**
-     * Main Game Loop, updates screen and requests next action. Will stop if game is won/lost
+     * Main Game Loop, updates screen and requests next action.
+     * Will stop if game is won/lost.
      */
     private static void runGame() {
         updateScreen();
@@ -80,7 +109,7 @@ public class GameManager {
     }
 
     /**
-     * Sets up Maze and Display
+     * Sets up Maze and Display.
      */
     private static void gameSetup() {
         mainMaze = new Maze();
@@ -88,44 +117,22 @@ public class GameManager {
     }
 
     /**
-     * Loads a Old Game
+     * Loads a saved Game.
      */
-    private static void loadGame() {
+     private static void loadGame() {
         Display.loadPrompt();
-        int loadFileNumber = input.nextInt();
+        int loadFileNumber = INPUT.nextInt();
         try {
-            if (loadFileNumber == 1 && saveOne.length() != 0) {
-                FileInputStream file = new FileInputStream
-                        (saveOne);
-                ObjectInputStream in = new ObjectInputStream
-                        (file);
-
-                // Method for deserialization of object
-                mainMaze = (Maze) in.readObject();
-                display.setMyMaze(mainMaze);
-
-                in.close();
-                file.close();
-                Display.loadCompletePrompt();
-            } else if (loadFileNumber == 2 && saveTwo.length() != 0) {
-                System.out.println("Made it in");
-                FileInputStream file = new FileInputStream
-                        (saveTwo);
-                ObjectInputStream in = new ObjectInputStream
-                        (file);
-
-                // Method for deserialization of object
-                mainMaze = (Maze) in.readObject();
-                display.setMyMaze(mainMaze);
-
-                in.close();
-                file.close();
-                Display.loadCompletePrompt();
-            } else if (loadFileNumber == 3 && saveThree.length() != 0) {
-                FileInputStream file = new FileInputStream
-                        (saveThree);
-                ObjectInputStream in = new ObjectInputStream
-                        (file);
+            File loadFile = switch (loadFileNumber) {
+                case 1 -> SAVE_ONE;
+                case 2 -> SAVE_TWO;
+                case 3 -> SAVE_THREE;
+                default -> throw new IllegalStateException("Unexpected value: "
+                        + loadFileNumber);
+            };
+            FileInputStream file = new FileInputStream(loadFile);
+            if (loadFile.length() != 0) {
+                ObjectInputStream in = new ObjectInputStream(file);
 
                 // Method for deserialization of object
                 mainMaze = (Maze) in.readObject();
@@ -145,29 +152,34 @@ public class GameManager {
     }
 
     /**
-     * Gets the next action from the user, either a direction or a menu request
+     * Gets the next action from the user, either a direction or a menu request.
      */
     private static void nextAction() {
         boolean inputGood = false;
         String userAction = "";
         while (!inputGood) {
             Display.printPrompt();
-            userAction = input.nextLine();
+            userAction = INPUT.nextLine();
             if (userAction.toLowerCase().matches("north|south|east|west")) {
                 inputGood = true;
             } else if (userAction.toLowerCase().matches("help")) {
                 inputGood = true;
-                Help();
+                help();
             } else if (userAction.toLowerCase().matches("file")) {
                 inputGood = true;
-                File();
+                file();
+            } else if (userAction.toLowerCase().matches("open sesame")) {
+                inputGood = true;
+                Display.cheatActive();
+                mainMaze.getCurrentRoom().undeadCheat();
             } else if (userAction.toLowerCase().matches("really lazy")) {
+                inputGood = true;
                 turnOffQuestions = !turnOffQuestions;
                 Display.cheatActive();
             } else if (userAction.toLowerCase().matches("really really lazy")) {
                 inputGood = true;
                 Display.cheatActive();
-                mainMaze.setRoom(mainMaze.getMazeSize() - 1, mainMaze.getMazeSize() - 1);
+                mainMaze.teleportCheat();
             } else {
                 Display.userActionWarning();
             }
@@ -181,7 +193,7 @@ public class GameManager {
     }
 
     /**
-     * Moves the Player based on desired direction
+     * Moves the Player based on desired direction.
      *
      * @param theDirection Compass Direction to Move
      */
@@ -190,16 +202,18 @@ public class GameManager {
         if (mainMaze.canMovePlayer(theDirection)) {
             if (localDoor.isLocked() && !turnOffQuestions) {
                 Display.displayQuestion(localDoor.getQuestion());
-                String userAnswer = input.nextLine().toLowerCase();
+                String userAnswer = INPUT.nextLine().toLowerCase();
                 if (userAnswer.matches("lazy")) {
+                    Display.cheatActive();
                     System.out.println(localDoor.getAnswer());
                 } else {
                     localDoor.unlock(userAnswer);
-                    if (localDoor.isDead()) {
-                        Display.incorrectAnswer(localDoor.getAnswer());
-                    } else {
-                        mainMaze.movePlayer(theDirection);
-                    }
+                }
+                if (localDoor.isDead()) {
+                    Display.incorrectAnswer(localDoor.getAnswer());
+                } else {
+                    Display.correctAnswer();
+                    mainMaze.movePlayer(theDirection);
                 }
             } else {
                 mainMaze.movePlayer(theDirection);
@@ -208,7 +222,7 @@ public class GameManager {
     }
 
     /**
-     * Calls the display to updates the maze and room view
+     * Calls the display to updates the maze and room view.
      */
     private static void updateScreen() {
         display.printMaze();
@@ -216,15 +230,15 @@ public class GameManager {
     }
 
     /**
-     * Opens the File Menu
+     * Opens the File Menu.
      */
-    private static void File() {
+    private static void file() {
         Display.fileMenu();
         boolean inputGood = false;
         String helpAction;
         while (!inputGood) {
             Display.printPrompt();
-            helpAction = input.nextLine();
+            helpAction = INPUT.nextLine();
             if (helpAction.toLowerCase().matches("save game")) {
                 inputGood = true;
                 saveGame();
@@ -233,7 +247,7 @@ public class GameManager {
                 loadGame();
             } else if (helpAction.toLowerCase().matches("exit")) {
                 inputGood = true;
-                input.close();
+                INPUT.close();
                 System.exit(0);
             } else {
                 Display.fileMenuWarning();
@@ -241,52 +255,28 @@ public class GameManager {
         }
     }
 
-    private static void saveGame() {
+    /**
+     * Saves a game.
+     */
+     private static void saveGame() {
         Display.saveOptions();
-        int userSaveOption = input.nextInt();
+        int userSaveOption = INPUT.nextInt();
         try {
-            if (userSaveOption == 1) {
-                // Saving of object in a file
-                FileOutputStream file = new FileOutputStream
-                        (saveOne);
-                ObjectOutputStream out = new ObjectOutputStream
-                        (file);
-
-                // Method for serialization of object
-                out.writeObject(mainMaze);
-
-                out.close();
-                file.close();
-
-            } else if (userSaveOption == 2) {
-                // Saving of object in a file
-                FileOutputStream file = new FileOutputStream
-                        (saveTwo);
-                ObjectOutputStream out = new ObjectOutputStream
-                        (file);
-
-                // Method for serialization of object
-                out.writeObject(mainMaze);
-
-                out.close();
-                file.close();
-
-            } else if (userSaveOption == 3) {
-                // Saving of object in a file
-                FileOutputStream file = new FileOutputStream
-                        (saveThree);
-                ObjectOutputStream out = new ObjectOutputStream
-                        (file);
-
-                // Method for serialization of object
-                out.writeObject(mainMaze);
-
-                out.close();
-                file.close();
-
-            } else {
-                Display.generalWarning();
+            File saveFile = SAVE_ONE;
+            switch (userSaveOption) {
+                case 1 -> saveFile = SAVE_ONE;
+                case 2 -> saveFile = SAVE_TWO;
+                case 3 -> saveFile = SAVE_THREE;
+                default -> Display.generalWarning();
             }
+            FileOutputStream file = new FileOutputStream(saveFile);
+            ObjectOutputStream out = new ObjectOutputStream(file);
+
+            // Method for serialization of object
+            out.writeObject(mainMaze);
+
+            out.close();
+            file.close();
 
         } catch (IOException ex) {
             System.out.println("Save Files Unreachable");
@@ -294,26 +284,27 @@ public class GameManager {
     }
 
     /**
-     * Opens the Help Menu
+     * Opens the Help Menu.
      */
-    private static void Help() {
+    private static void help() {
         Display.helpMenu();
         boolean inputGood = false;
         String helpAction;
         while (!inputGood) {
             Display.printPrompt();
-            helpAction = input.nextLine();
+            helpAction = INPUT.nextLine();
             if (helpAction.toLowerCase().matches("about")) {
                 inputGood = true;
                 //TODO menu about
-            } else if (helpAction.toLowerCase().matches("game play instructions|instructions")) {
+            } else if (helpAction.toLowerCase().matches(
+                    "game play instructions")) {
                 inputGood = true;
                 Display.printInstructions();
             } else if (helpAction.toLowerCase().matches("cheats")) {
                 inputGood = true;
                 Display.cheatsMenu();
                 Display.promptForKey();
-                input.nextLine();
+                INPUT.nextLine();
             } else {
                 Display.helpMenuWarning();
             }

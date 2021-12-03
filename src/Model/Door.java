@@ -3,15 +3,28 @@ package Model;
 import java.io.Serializable;
 
 /**
- * Door is obstacle for the player, it can opened by having the player answer a question
+ * Door is obstacle for the player
+ * it can opened by having the player answer a question.
  */
 public class Door implements Serializable {
+
+    /**
+     * The Question and answer of the Door.
+     */
     private final Question myQuestion;
+
+    /**
+     * Variable for if Door's question has been answered.
+     */
     private boolean myLocked;
+
+    /**
+     * Variable for dead status of Door.
+     */
     private boolean myDoorDead;
 
     /**
-     * Creates a new Door
+     * Creates a new Door.
      */
     public Door() {
         myLocked = true;
@@ -20,7 +33,7 @@ public class Door implements Serializable {
     }
 
     /**
-     * Returns if the door is unlocked or locked
+     * Returns if the door is unlocked or locked.
      *
      * @return Returns a boolean of the state of the Model.Door
      */
@@ -29,7 +42,7 @@ public class Door implements Serializable {
     }
 
     /**
-     * Returns if the door is dead
+     * Returns if the door is dead.
      *
      * @return Returns a boolean of the state of the Model.Door
      */
@@ -39,7 +52,7 @@ public class Door implements Serializable {
 
 
     /**
-     * Unlocks the door when the correct answer is given
+     * Unlocks the door when the correct answer is given.
      *
      * @param theUserAnswer Response that the user gives
      */
@@ -53,7 +66,7 @@ public class Door implements Serializable {
     }
 
     /**
-     * Returns the question
+     * Returns the question.
      *
      * @return Returns a String of the Question
      */
@@ -62,11 +75,18 @@ public class Door implements Serializable {
     }
 
     /**
-     * Returns the answer
+     * Returns the answer.
      *
      * @return Returns a String of the Answer
      */
     public String getAnswer() {
         return myQuestion.getAnswer();
+    }
+
+    /**
+     * Opens a dead door.
+     */
+    public void undead() {
+        myDoorDead = false;
     }
 }

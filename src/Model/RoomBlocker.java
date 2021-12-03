@@ -3,43 +3,44 @@ package Model;
 import java.io.Serializable;
 
 /**
- * RoomBlocker is a contain for a boolean for every direction on a compass
+ * RoomBlocker is a contain for a boolean for every direction on a compass.
  */
 public class RoomBlocker implements Serializable {
     /**
-     * Boolean field indicating whether door exists at North
+     * Boolean field indicating whether door exists at North.
      */
     private final boolean myNorth;
     /**
-     * Boolean field indicating whether door exists at South
+     * Boolean field indicating whether door exists at South.
      */
     private final boolean mySouth;
     /**
-     * Boolean field indicating whether door exists at East
+     * Boolean field indicating whether door exists at East.
      */
     private final boolean myEast;
     /**
-     * Boolean field indicating whether door exists at West
+     * Boolean field indicating whether door exists at West.
      */
     private final boolean myWest;
 
     /**
-     * Creates a new RoomBlocker
+     * Creates a new RoomBlocker.
      *
      * @param theNorth North Boolean
      * @param theSouth South Boolean
      * @param theEast  East Boolean
      * @param theWest  West Boolean
      */
-    public RoomBlocker(final boolean theNorth, final boolean theSouth, final boolean theEast, final boolean theWest) {
-        this.myNorth = theNorth;
-        this.mySouth = theSouth;
-        this.myEast = theEast;
-        this.myWest = theWest;
+    public RoomBlocker(final boolean theNorth, final boolean theSouth,
+                       final boolean theEast, final boolean theWest) {
+        myNorth = theNorth;
+        mySouth = theSouth;
+        myEast = theEast;
+        myWest = theWest;
     }
 
     /**
-     * Returns north boolean
+     * Returns north boolean.
      *
      * @return Returns the north boolean
      */
@@ -48,7 +49,7 @@ public class RoomBlocker implements Serializable {
     }
 
     /**
-     * Returns south boolean
+     * Returns south boolean.
      *
      * @return Returns the south boolean
      */
@@ -57,7 +58,7 @@ public class RoomBlocker implements Serializable {
     }
 
     /**
-     * Returns east boolean
+     * Returns east boolean.
      *
      * @return Returns the east boolean
      */
@@ -66,7 +67,7 @@ public class RoomBlocker implements Serializable {
     }
 
     /**
-     * Returns west boolean
+     * Returns west boolean.
      *
      * @return Returns the west boolean
      */

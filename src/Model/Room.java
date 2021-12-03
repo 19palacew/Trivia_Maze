@@ -4,46 +4,46 @@ import java.io.Serializable;
 
 /**
  * Rooms contain Doors in every compass direction
- * that the player has to open to move through
+ * that the player has to open to move through.
  */
 public class Room implements Serializable {
     /**
      * Door array field representing true false values for if the doors
-     * in the room are blocked or not
+     * in the room are blocked or not.
      */
     private final Door[] myRoomDoors;
     /**
-     * RoomBlocker field that holds what sides will need doors
+     * RoomBlocker field that holds what sides will need doors.
      */
     private final RoomBlocker myBlockedDoors;
     /**
      * Boolean field stating whether room has been visited, used
-     * by the isPossible method of the Maze class
+     * by the isPossible method of the Maze class.
      */
     private boolean myVisited = false;
     /**
-     * int field holding index of Door 1
+     * int field holding index of the north Door.
      */
-    private static final int DOOR1_INDEX = 0;
+    private static final int NORTH_DOOR_INDEX = 0;
     /**
-     * int field holding index of Door 2
+     * int field holding index of the south Door.
      */
-    private static final int DOOR2_INDEX = 1;
+    private static final int SOUTH_DOOR_INDEX = 1;
     /**
-     * int field holding index of Door 3
+     * int field holding index of the east Door.
      */
-    private static final int DOOR3_INDEX = 2;
+    private static final int EAST_DOOR_INDEX = 2;
     /**
-     * int field holding index of Door 4
+     * int field holding index of the west Door.
      */
-    private static final int DOOR4_INDEX = 3;
+    private static final int WEST_DOOR_INDEX = 3;
     /**
-     * int field holding total door value
+     * int field holding total door value.
      */
     private static final int TOTAL_DOORS = 4;
 
     /**
-     * Creates a new Room
+     * Creates a new Room.
      *
      * @param theBlocker   RoomBlocker of un-openable Doors
      * @param theNorthDoor North Shared or New Door
@@ -51,34 +51,34 @@ public class Room implements Serializable {
      * @param theEastDoor  East Shared or New Door
      * @param theWestDoor  West Shared or New Door
      */
-    public Room(final RoomBlocker theBlocker, Door theNorthDoor, Door theSouthDoor, Door theEastDoor, Door theWestDoor) {
-        this.myBlockedDoors = theBlocker;
-        this.myRoomDoors = new Door[TOTAL_DOORS];
+    public Room(final RoomBlocker theBlocker, final Door theNorthDoor, final Door theSouthDoor, final Door theEastDoor, final Door theWestDoor) {
+        myBlockedDoors = theBlocker;
+        myRoomDoors = new Door[TOTAL_DOORS];
         if (theBlocker.getNorth()) {
-            this.myRoomDoors[DOOR1_INDEX] = theNorthDoor;
+            myRoomDoors[NORTH_DOOR_INDEX] = theNorthDoor;
         }
         if (theBlocker.getSouth()) {
-            this.myRoomDoors[DOOR2_INDEX] = theSouthDoor;
+            myRoomDoors[SOUTH_DOOR_INDEX] = theSouthDoor;
         }
         if (theBlocker.getEast()) {
-            this.myRoomDoors[DOOR3_INDEX] = theEastDoor;
+            myRoomDoors[EAST_DOOR_INDEX] = theEastDoor;
         }
         if (theBlocker.getWest()) {
-            this.myRoomDoors[DOOR4_INDEX] = theWestDoor;
+            myRoomDoors[WEST_DOOR_INDEX] = theWestDoor;
         }
     }
 
     /**
-     * Setter to change the visited status of room
+     * Setter to change the visited status of room.
      *
      * @param theVisited true if visited, false if else
      */
-    public void setVisited(boolean theVisited) {
-        this.myVisited = theVisited;
+    public void setVisited(final boolean theVisited) {
+        myVisited = theVisited;
     }
 
     /**
-     * Getter to get the visited status of room
+     * Getter to get the visited status of room.
      *
      * @return myVisited, the field that holds whether room has been visited
      */
@@ -87,7 +87,7 @@ public class Room implements Serializable {
     }
 
     /**
-     * Returns which doors are permanently blocked
+     * Returns which doors are permanently blocked.
      *
      * @return Returns a RoomBlocker
      */
@@ -96,6 +96,7 @@ public class Room implements Serializable {
     }
 
     /**
+     *
      * @param theDoorIndex The index of the door
      * @return Returns a door based on the index
      */
@@ -103,20 +104,25 @@ public class Room implements Serializable {
         return myRoomDoors[theDoorIndex];
     }
 
+    /**
+     *
+     * @param doorDirection
+     * @return
+     */
     public Door getDoor(final Direction doorDirection) {
         Door localDoor = null;
         switch (doorDirection) {
-            case NORTH -> localDoor = getDoor(DOOR1_INDEX);
-            case SOUTH -> localDoor = getDoor(DOOR2_INDEX);
-            case EAST -> localDoor = getDoor(DOOR3_INDEX);
-            case WEST -> localDoor = getDoor(DOOR4_INDEX);
+            case NORTH -> localDoor = getDoor(NORTH_DOOR_INDEX);
+            case SOUTH -> localDoor = getDoor(SOUTH_DOOR_INDEX);
+            case EAST -> localDoor = getDoor(EAST_DOOR_INDEX);
+            case WEST -> localDoor = getDoor(WEST_DOOR_INDEX);
         }
         return localDoor;
     }
 
     /**
      * toString method for the room, includes whether each direction is blocked
-     * and shows the player in the center of each room
+     * and shows the player in the center of each room.
      *
      * @return string representing the room
      */
@@ -126,45 +132,58 @@ public class Room implements Serializable {
         StringBuilder roomString = new StringBuilder();
         //Center the North movement message
         roomString.append("\n\t\t\t");
-        //Check movement North
-        if (myRoomDoors[0] == null) {
-            roomString.append("BLOCKED");
-        } else if (myRoomDoors[0].isDead()) {
-            roomString.append("DEAD DOOR");
-        } else {
-            roomString.append("MOVE NORTH");
-        }
+        checkMovement(NORTH_DOOR_INDEX, roomString);
         //Go to next line for West,Player, and East
         roomString.append("\n\n");
-        //Check movement West
-        if (myRoomDoors[3] == null) {
-            roomString.append("BLOCKED");
-        } else if (myRoomDoors[3].isDead()) {
-            roomString.append("DEAD DOOR");
-        } else {
-            roomString.append("MOVE WEST");
-        }
+        checkMovement(WEST_DOOR_INDEX, roomString);
         //Center the placement of player
         roomString.append("\t\tPlayer\t\t");
-        //Check movement East
-        if (myRoomDoors[2] == null) {
-            roomString.append("BLOCKED");
-        } else if (myRoomDoors[2].isDead()) {
-            roomString.append("DEAD DOOR");
-        } else {
-            roomString.append("MOVE EAST");
-        }
+        checkMovement(EAST_DOOR_INDEX, roomString);
         //Go to next line
         roomString.append("\n\n\t\t\t");
-        //Check movement South
-        if (myRoomDoors[1] == null) {
-            roomString.append("BLOCKED");
-        } else if (myRoomDoors[1].isDead()) {
-            roomString.append("DEAD DOOR");
-        } else {
-            roomString.append("MOVE SOUTH");
-        }
+        checkMovement(SOUTH_DOOR_INDEX, roomString);
         return roomString.toString();
     }
 
+    /**
+     * Helper method for toString to show available directions.
+     * @param theDoorIndex index of the doors for direction
+     * @param theBuilder string builder being appended to
+     */
+    private void checkMovement(final int theDoorIndex,
+                               final StringBuilder theBuilder) {
+        if (myRoomDoors[theDoorIndex] == null) {
+            theBuilder.append("BLOCKED");
+        } else if (myRoomDoors[theDoorIndex].isDead()) {
+            theBuilder.append("DEAD DOOR");
+        } else {
+            String direction = switch (theDoorIndex) {
+                case NORTH_DOOR_INDEX -> Direction.NORTH.toString();
+                case SOUTH_DOOR_INDEX -> Direction.SOUTH.toString();
+                case EAST_DOOR_INDEX -> Direction.EAST.toString();
+                case WEST_DOOR_INDEX -> Direction.WEST.toString();
+                default -> "";
+            };
+            theBuilder.append("MOVE ");
+            theBuilder.append(direction);
+        }
+    }
+
+    /**
+     * Cheat to re-access dead doors.
+     */
+    public void undeadCheat() {
+        if (myBlockedDoors.getNorth()) {
+            getDoor(NORTH_DOOR_INDEX).undead();
+        }
+        if (myBlockedDoors.getSouth()) {
+            getDoor(SOUTH_DOOR_INDEX).undead();
+        }
+        if (myBlockedDoors.getEast()) {
+            getDoor(EAST_DOOR_INDEX).undead();
+        }
+        if (myBlockedDoors.getWest()) {
+            getDoor(WEST_DOOR_INDEX).undead();
+        }
+    }
 }

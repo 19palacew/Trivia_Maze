@@ -8,39 +8,39 @@ import java.io.Serializable;
  */
 public class Maze implements Serializable {
     /**
-     * Field that holds the players X position
+     * Field that holds the players X position.
      */
     private int myX;
     /**
-     * Field that holds the players Y position
+     * Field that holds the players Y position.
      */
     private int myY;
     /**
-     * Field containing the 2D array of Room Objects that represents the overall maze
+     * Field containing the 2D array of Room Objects that represents the overall maze.
      */
     private final Room[][] myMaze;
     /**
-     * Field containing the size of the maze
+     * Field containing the size of the maze.
      */
-    private final int mazeSize = 8;
+    private final int mazeSize = 4;
     /**
-     * int field holding index of Door 1
+     * int field holding index of north Door.
      */
-    private static final int DOOR1_INDEX = 0;
+    private static final int NORTH_DOOR_INDEX = 0;
     /**
-     * int field holding index of Door 2
+     * int field holding index of south Door.
      */
-    private static final int DOOR2_INDEX = 1;
+    private static final int SOUTH_DOOR_INDEX = 1;
     /**
-     * int field holding index of Door 3
+     * int field holding index of east Door.
      */
-    private static final int DOOR3_INDEX = 2;
+    private static final int EAST_DOOR_INDEX = 2;
     /**
-     * int field holding index of Door 4
+     * int field holding index of west Door.
      */
-    private static final int DOOR4_INDEX = 3;
+    private static final int WEST_DOOR_INDEX = 3;
     /**
-     * Serialization UID field
+     * Serialization UID field.
      */
     @Serial
     private static final long serialVersionUID = 535052495445L;
@@ -59,7 +59,7 @@ public class Maze implements Serializable {
     }
 
     /**
-     * Helper method that assigns doors to the rooms depending on the rooms location
+     * Helper method that assigns doors to the rooms depending on the rooms location.
      */
     private void roomSetup() {
 
@@ -77,7 +77,7 @@ public class Maze implements Serializable {
                 //If column is greater than 0 we know there is a north facing door
                 if (yMazeCoord > 0) {
                     north = true;
-                    northDoor = myMaze[xMazeCoord][yMazeCoord - 1].getDoor(DOOR2_INDEX);
+                    northDoor = myMaze[xMazeCoord][yMazeCoord - 1].getDoor(SOUTH_DOOR_INDEX);
                 } else {
                     northDoor = new Door();
                 }
@@ -95,7 +95,7 @@ public class Maze implements Serializable {
                 if (xMazeCoord - 1 >= 0) {
                     west = true;
                     // Sets the west door of this room to the east door of the previous room.
-                    westDoor = myMaze[xMazeCoord - 1][yMazeCoord].getDoor(DOOR3_INDEX);
+                    westDoor = myMaze[xMazeCoord - 1][yMazeCoord].getDoor(EAST_DOOR_INDEX);
                 } else {
                     westDoor = new Door();
                 }
@@ -105,7 +105,7 @@ public class Maze implements Serializable {
     }
 
     /**
-     * Calculates the new player coordinates given a direction that the player moves
+     * Calculates the new player coordinates given a direction that the player moves.
      *
      * @param theDirection The direction the player wants to move
      */
@@ -121,7 +121,7 @@ public class Maze implements Serializable {
     }
 
     /**
-     * Boolean value if the player can move in a direction
+     * Boolean value if the player can move in a direction.
      *
      * @param theDirection The direction the player wants to move
      * @return Returns true if the player can move in that direction and false otherwise
@@ -132,34 +132,7 @@ public class Maze implements Serializable {
     }
 
     /**
-     * Getter for the player's X position
-     *
-     * @return myX the current X position
-     */
-    public int playerX() {
-        return myX;
-    }
-
-    /**
-     * Getter for the player's Y position
-     *
-     * @return myY the current Y position
-     */
-    public int playerY() {
-        return myY;
-    }
-
-    /**
-     * Getter for the maze size
-     *
-     * @return the maze width/height size
-     */
-    public int getMazeSize() {
-        return mazeSize;
-    }
-
-    /**
-     * Getter that returns the current room the player is in
+     * Getter that returns the current room the player is in.
      *
      * @return the room the player is currently located in
      */
@@ -168,19 +141,8 @@ public class Maze implements Serializable {
     }
 
     /**
-     * Sets player to room
-     *
-     * @param theX X position
-     * @param theY Y position
-     */
-    public void setRoom(final int theX, final int theY) {
-        myX = theX;
-        myY = theY;
-    }
-
-    /**
      * Method to calculate if the end of the maze can be reached from
-     * the current position
+     * the current position.
      *
      * @return true if possible, else false
      */
@@ -217,32 +179,32 @@ public class Maze implements Serializable {
             //Check adjacent rooms recursively
 
             //Check North (assuming door exists and is not dead)
-            if (myMaze[theX][theY].getDoor(0) != null &&
-                    !myMaze[theX][theY].getDoor(0).isDead()) {
+            if (myMaze[theX][theY].getDoor(NORTH_DOOR_INDEX) != null &&
+                    !myMaze[theX][theY].getDoor(NORTH_DOOR_INDEX).isDead()) {
                 boolean northCheck = isPossibleHelper(theX, theY - 1);
                 if (northCheck) {
                     return true;
                 }
             }
             //Check South (assuming door exists and is not dead)
-            if (myMaze[theX][theY].getDoor(1) != null &&
-                    !myMaze[theX][theY].getDoor(1).isDead()) {
+            if (myMaze[theX][theY].getDoor(SOUTH_DOOR_INDEX) != null &&
+                    !myMaze[theX][theY].getDoor(SOUTH_DOOR_INDEX).isDead()) {
                 boolean southCheck = isPossibleHelper(theX, theY + 1);
                 if (southCheck) {
                     return true;
                 }
             }
             //Check East (assuming door exists and is not dead)
-            if (myMaze[theX][theY].getDoor(2) != null &&
-                    !myMaze[theX][theY].getDoor(2).isDead()) {
+            if (myMaze[theX][theY].getDoor(EAST_DOOR_INDEX) != null &&
+                    !myMaze[theX][theY].getDoor(EAST_DOOR_INDEX).isDead()) {
                 boolean eastCheck = isPossibleHelper(theX + 1, theY);
                 if (eastCheck) {
                     return true;
                 }
             }
             //Check West (assuming door exists and is not dead)
-            if (myMaze[theX][theY].getDoor(3) != null &&
-                    !myMaze[theX][theY].getDoor(3).isDead()) {
+            if (myMaze[theX][theY].getDoor(WEST_DOOR_INDEX) != null &&
+                    !myMaze[theX][theY].getDoor(WEST_DOOR_INDEX).isDead()) {
                 return isPossibleHelper(theX - 1, theY);
             }
         }
@@ -250,7 +212,7 @@ public class Maze implements Serializable {
     }
 
     /**
-     * Returns true when the player reaches the end of the maze
+     * Returns true when the player reaches the end of the maze.
      *
      * @return Returns a boolean of if the player has reached the end of the maze.
      */
@@ -259,8 +221,8 @@ public class Maze implements Serializable {
     }
 
     /**
-     * toString displays the overview of the maze, including the player, the rooms,
-     * the finish, and the start when the player is not in the start.
+     * toString displays the overview of the maze, including the player,
+     * the rooms, the finish, and the start when the player is not in the start.
      *
      * @return string representing maze
      */
@@ -284,5 +246,13 @@ public class Maze implements Serializable {
             }
         }
         return mazeString.toString();
+    }
+
+    /**
+     * Cheat to teleport player to end of maze.
+     */
+    public void teleportCheat() {
+        myX = mazeSize - 1;
+        myY = mazeSize - 1;
     }
 }
