@@ -11,14 +11,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class DoorTest {
 
     @Test
-    void testIsLockedUnanswered() {
-        Database.connectToDatabase();
+    void testIsLocked() {
         Door testDoor = new Door();
         assertTrue(testDoor.isLocked(), "Door is unlocked");
     }
 
     @Test
-    void testIsLockedAnswered() {
+    void testUnlock() {
         Database.connectToDatabase();
         Door testDoor = new Door();
         testDoor.unlock(testDoor.getAnswer());
@@ -27,14 +26,12 @@ public class DoorTest {
 
     @Test
     void testIsDeadUnanswered() {
-        Database.connectToDatabase();
         Door testDoor = new Door();
         assertFalse(testDoor.isDead(), "Door is dead");
     }
 
     @Test
     void testIsDeadAnsweredWrong() {
-        Database.connectToDatabase();
         Door testDoor = new Door();
         testDoor.unlock("");
         assertTrue(testDoor.isDead(), "Door is not dead");

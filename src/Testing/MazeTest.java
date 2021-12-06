@@ -36,7 +36,6 @@ public class MazeTest {
 
     @Test
     void testIsPossibleAllDoorsOpen() {
-        Database.connectToDatabase();
         Maze testMaze = new Maze();
         assertTrue(testMaze.isPossible(), "Maze isPossible failed");
     }
@@ -68,7 +67,6 @@ public class MazeTest {
 
     @Test
     void testMoveNorth() {
-        Database.connectToDatabase();
         Maze testMaze = new Maze();
         testMaze.setX(TEST_X);
         testMaze.setY(TEST_Y);
@@ -79,7 +77,6 @@ public class MazeTest {
 
     @Test
     void testMoveSouth() {
-        Database.connectToDatabase();
         Maze testMaze = new Maze();
         testMaze.setX(TEST_X);
         testMaze.setY(TEST_Y);
@@ -90,7 +87,6 @@ public class MazeTest {
 
     @Test
     void testMoveEast() {
-        Database.connectToDatabase();
         Maze testMaze = new Maze();
         testMaze.setX(TEST_X);
         testMaze.setY(TEST_Y);
@@ -101,7 +97,6 @@ public class MazeTest {
 
     @Test
     void testMoveWest() {
-        Database.connectToDatabase();
         Maze testMaze = new Maze();
         testMaze.setX(TEST_X);
         testMaze.setY(TEST_Y);
@@ -112,7 +107,6 @@ public class MazeTest {
 
     @Test
     void testGoalReached() {
-        Database.connectToDatabase();
         Maze testMaze = new Maze();
         testMaze.moveToEnd();
         assertTrue(testMaze.goalReached(), "Maze goalReach failed");
