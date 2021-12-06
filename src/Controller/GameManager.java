@@ -55,9 +55,7 @@ public class GameManager {
      */
     public static void main(final String[] args) {
         Database.connectToDatabase();
-        Display.title();
-        Display.printInstructions();
-        Display.startMsg();
+        Display.startMessageSequence();
         bootGame();
         runGame();
         boolean canPlay = true;
@@ -70,7 +68,14 @@ public class GameManager {
                 Display.playerWon();
                 canPlay = false;
             }
-            runGame();
+            if(canPlay){
+                runGame();
+            }
+            if(!canPlay) {
+                Display.startMessageSequence();
+                bootGame();
+                runGame();
+            }
         }
         INPUT.close();
     }

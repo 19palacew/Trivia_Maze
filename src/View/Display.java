@@ -1,6 +1,8 @@
 package View;
 
 import Model.Maze;
+import Model.SoundPlayer;
+import java.io.File;
 
 /**
  * Display shows the user the output.
@@ -10,6 +12,14 @@ public class Display {
      *
      */
     private Maze myMaze;
+
+    private final static File CORRECT_SOUND = new File("Correct.wav");
+
+    private final static File INCORRECT_SOUND = new File("Incorrect.wav");
+
+    private final static File WON_GAME_SOUND = new File("WonGame.wav");
+
+    private final static File LOST_GAME_SOUND = new File("LostGame.wav");
 
     /**
      * Creates a new Display.
@@ -38,17 +48,25 @@ public class Display {
         System.out.println(myMaze.getCurrentRoom().toString());
     }
 
+    public static void startMessageSequence() {
+        title();
+        printInstructions();
+        startMsg();
+    }
     /**
      * Displays the Instructions to the User.
      */
     public static void printInstructions() {
         System.out.println("""
                 How to Play:
+                
                 You are in a maze of rooms and you need to escape by finding the door out.
                 To escape a room you need to answer a question correctly to unlock the door.
                 You can move in a direction by typing North, South, East, or West
+                
                 Multiple choice questions; answer with A, B, C, or D
                 True or False questions; answer with T or F
+                
                 Type "File" to Save Game, Load Game, Exit or type "Help" to access About,
                 Game Play Instructions, Cheats at anytime""");
     }
@@ -57,7 +75,9 @@ public class Display {
      * Displays that the Player Won.
      */
     public static void playerWon() {
+
         System.out.println("Goal Reached: Congratulations you won!");
+        SoundPlayer.PlaySound(WON_GAME_SOUND);
     }
 
     /**
@@ -65,6 +85,7 @@ public class Display {
      */
     public static void playerLost() {
         System.out.println("No Possible Pathways Left: Game Over");
+        SoundPlayer.PlaySound(LOST_GAME_SOUND);
     }
 
     /**
@@ -128,6 +149,7 @@ public class Display {
      */
     public static void correctAnswer() {
         System.out.println("Correct!");
+        SoundPlayer.PlaySound(CORRECT_SOUND);
     }
 
     /**
@@ -136,6 +158,8 @@ public class Display {
      */
     public static void incorrectAnswer(final String correctAnswer) {
         System.out.println("Answer is Incorrect, Correct Answer is: " + correctAnswer);
+        SoundPlayer.PlaySound(INCORRECT_SOUND);
+
     }
 
     /**
