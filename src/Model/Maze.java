@@ -81,9 +81,6 @@ public class Maze implements Serializable {
      *
      * @return the maze width/height size
      */
-    public int getMazeSize() {
-        return mazeSize;
-    }
 
     /**
      * Setter for X.
@@ -107,8 +104,10 @@ public class Maze implements Serializable {
     private void roomSetup() {
 
         for (int xMazeCoord = 0; xMazeCoord < myMaze.length; xMazeCoord++) {
-            for (int yMazeCoord = 0; yMazeCoord < myMaze[xMazeCoord].length; yMazeCoord++) {
-                //We put our directions in the innermost loop, so they reset for each room
+            for (int yMazeCoord = 0; yMazeCoord < myMaze[xMazeCoord].length;
+                 yMazeCoord++) {
+                /*We put our directions in the innermost loop, so they reset
+                 for each room */
                 boolean west = false;
                 boolean south = false;
                 boolean east = false;
@@ -120,7 +119,8 @@ public class Maze implements Serializable {
                 //If column is greater than 0 we know there is a north facing door
                 if (yMazeCoord > 0) {
                     north = true;
-                    northDoor = myMaze[xMazeCoord][yMazeCoord - 1].getDoor(SOUTH_DOOR_INDEX);
+                    northDoor = myMaze[xMazeCoord][yMazeCoord - 1]
+                            .getDoor(SOUTH_DOOR_INDEX);
                 } else {
                     northDoor = new Door();
                 }
@@ -128,7 +128,8 @@ public class Maze implements Serializable {
                    south facing door */
                 if (yMazeCoord < myMaze[xMazeCoord].length - 1) {
                     south = true;
-                    // Sets the south door of this room to the north door of the previous room.
+                    /* Sets the south door of this room to the north door
+                    of the previous room. */
                 }
                 //If room is not in a row on the southern edge, there is a east door
                 if (xMazeCoord < myMaze.length - 1) {
@@ -137,12 +138,15 @@ public class Maze implements Serializable {
                 //If row value above is greater or equal to 0 we know exists west door
                 if (xMazeCoord - 1 >= 0) {
                     west = true;
-                    // Sets the west door of this room to the east door of the previous room.
+                    /* Sets the west door of this room to the east
+                    door of the previous room. */
                     westDoor = myMaze[xMazeCoord - 1][yMazeCoord].getDoor(EAST_DOOR_INDEX);
                 } else {
                     westDoor = new Door();
                 }
-                myMaze[xMazeCoord][yMazeCoord] = new Room(new RoomBlocker(north, south, east, west), northDoor, southDoor, eastDoor, westDoor);
+                myMaze[xMazeCoord][yMazeCoord] =
+                        new Room(new RoomBlocker(north, south, east, west),
+                                northDoor, southDoor, eastDoor, westDoor);
             }
         }
     }

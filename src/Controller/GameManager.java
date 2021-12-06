@@ -233,8 +233,9 @@ public class GameManager {
                     Display.cheatActive();
                     System.out.println(localDoor.getAnswer());
                 } else {
-                    localDoor.unlock(userAnswer);
+                    attemptUnlock(userAnswer,localDoor);
                 }
+
                 if (localDoor.isDead()) {
                     Display.incorrectAnswer(localDoor.getAnswer());
                 } else {
@@ -247,6 +248,9 @@ public class GameManager {
         }
     }
 
+    private static void attemptUnlock(final String theUserAnswer, final Door theLocalDoor) {
+        theLocalDoor.unlock(theUserAnswer);
+    }
     /**
      * Calls the display to updates the maze and room view.
      */

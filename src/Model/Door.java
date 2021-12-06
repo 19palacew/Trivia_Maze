@@ -57,7 +57,8 @@ public class Door implements Serializable {
      * @param theUserAnswer Response that the user gives
      */
     public void unlock(final String theUserAnswer) {
-        // When the door is still unlockable and the correct answer is given, the door will unlock
+        /* When the door is still unlockable and the correct answer is given,
+        the door will unlock */
         if (!myDoorDead && theUserAnswer.equalsIgnoreCase(myQuestion.getAnswer())) {
             myLocked = false;
         } else {

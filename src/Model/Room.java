@@ -51,7 +51,9 @@ public class Room implements Serializable {
      * @param theEastDoor  East Shared or New Door
      * @param theWestDoor  West Shared or New Door
      */
-    public Room(final RoomBlocker theBlocker, final Door theNorthDoor, final Door theSouthDoor, final Door theEastDoor, final Door theWestDoor) {
+    public Room(final RoomBlocker theBlocker, final Door theNorthDoor,
+                final Door theSouthDoor, final Door theEastDoor,
+                final Door theWestDoor) {
         myBlockedDoors = theBlocker;
         myRoomDoors = new Door[TOTAL_DOORS];
         if (theBlocker.getNorth()) {
@@ -91,9 +93,6 @@ public class Room implements Serializable {
      *
      * @return Returns a RoomBlocker
      */
-    public RoomBlocker getBlockedDoors() {
-        return myBlockedDoors;
-    }
 
     /**
      * Getter for Door at index.

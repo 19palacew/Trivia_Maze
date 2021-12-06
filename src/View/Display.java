@@ -9,16 +9,24 @@ import java.io.File;
  */
 public class Display {
     /**
-     *
+     *The maze being displayed by the display
      */
     private Maze myMaze;
-
+    /**
+     * A file representing the sound for when a user gets a sound correct
+     */
     private final static File CORRECT_SOUND = new File("Correct.wav");
-
+    /**
+     * A file representing the sound for when a user gets a sound incorrect
+     */
     private final static File INCORRECT_SOUND = new File("Incorrect.wav");
-
+    /**
+     * A file representing the sound for when a user wins
+     */
     private final static File WON_GAME_SOUND = new File("WonGame.wav");
-
+    /**
+     * A file representing the sound for when a user loses
+     */
     private final static File LOST_GAME_SOUND = new File("LostGame.wav");
     /**
      * Creates a new Display.
@@ -29,6 +37,10 @@ public class Display {
         myMaze = theMaze;
     }
 
+    /**
+     * Setter to change the maze the display is showing
+     * @param theMaze the maze to display
+     */
     public void setMyMaze(Maze theMaze) {
         myMaze = theMaze;
     }
@@ -65,7 +77,8 @@ public class Display {
                 
                 During the game:
                 Type "File" to Save Game, Load Game, Exit
-                Type "Help" to access About, Game Play Instructions, or Cheats at any time""");
+                Type "Help" to access About, Game Play Instructions, or Cheats 
+                at any time""");
         printPrompt();
     }
 
@@ -74,9 +87,10 @@ public class Display {
      */
     public static void printAbout() {
         System.out.println("""
-                You are in a maze of rooms and you need to escape by finding the door out.
-                To escape a room you need to answer a question correctly to unlock the door.
-                You can move in a direction by typing North, South, East, or West.
+                You are in a maze of rooms and you need to escape by finding the door
+                out. To escape a room you need to answer a question correctly to unlock 
+                the door. You can move in a direction by typing North, South, 
+                East, or West.
                 """);
     }
 
@@ -207,7 +221,8 @@ public class Display {
      * Displays a general warning.
      */
     public static void generalWarning() {
-        System.out.println("Command not recognized, continue playing or retry command with valid "
+        System.out.println("Command not recognized, continue playing or retry " +
+                "command with valid "
                 + "syntax");
     }
 
