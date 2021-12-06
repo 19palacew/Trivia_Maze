@@ -44,19 +44,32 @@ public class GameManager {
     private static final File SAVE_THREE = new File("Save3.txt");
 
     /**
+     * Int for first save file when saving or loading.
+     */
+    private static final int FILE_NUMBER_ONE = 1;
+
+    /**
+     * Int for second save file when saving or loading.
+     */
+    private static final int FILE_NUMBER_TWO = 2;
+
+    /**
+     * Int for third save file when saving or loading.
+     */
+    private static final int FILE_NUMBER_THREE = 3;
+
+    /**
      * Field for turn off questions cheat status.
      */
     private static boolean turnOffQuestions = false;
 
     /**
      * Starts Trivia Maze.
-     *
      * @param args Arguments
      */
     public static void main(final String[] args) {
         Database.connectToDatabase();
         Display.title();
-        Display.printInstructions();
         Display.startMsg();
         bootGame();
         runGame();
@@ -81,21 +94,25 @@ public class GameManager {
     private static void bootGame() {
         // Load Game / Start New Game
         boolean gameStarted = false;
-        String userGameStartInput = "";
+        String userGameStartInput;
         while (!gameStarted) {
             userGameStartInput = INPUT.nextLine();
-            if (userGameStartInput.toLowerCase().matches(
-                    "load game|new game")) {
+            if (userGameStartInput.equalsIgnoreCase("new game")) {
+                //Initialize the maze and display
                 gameStarted = true;
+                gameSetup();
+            } else if (userGameStartInput.equalsIgnoreCase("load game")) {
+                //Initialize the maze and display
+                gameSetup();
+                //Load from beginning
+                if (loadGame()) {
+                    gameStarted = true;
+                }
+            } else if (userGameStartInput.equalsIgnoreCase("instructions")) {
+                Display.printInstructions();
             } else {
                 Display.beginGameWarning();
             }
-        }
-        //Initialize the maze and display
-        gameSetup();
-        //Load from beginning
-        if (userGameStartInput.equalsIgnoreCase("load game")) {
-            loadGame();
         }
     }
 
@@ -118,15 +135,17 @@ public class GameManager {
 
     /**
      * Loads a saved Game.
+     * @return Boolean for if game is loaded
      */
-     private static void loadGame() {
+     private static Boolean loadGame() {
         Display.loadPrompt();
         int loadFileNumber = INPUT.nextInt();
+        boolean loadedGame = false;
         try {
             File loadFile = switch (loadFileNumber) {
-                case 1 -> SAVE_ONE;
-                case 2 -> SAVE_TWO;
-                case 3 -> SAVE_THREE;
+                case FILE_NUMBER_ONE -> SAVE_ONE;
+                case FILE_NUMBER_TWO -> SAVE_TWO;
+                case FILE_NUMBER_THREE -> SAVE_THREE;
                 default -> throw new IllegalStateException("Unexpected value: "
                         + loadFileNumber);
             };
@@ -141,6 +160,7 @@ public class GameManager {
                 in.close();
                 file.close();
                 Display.loadCompletePrompt();
+                loadedGame = true;
             } else {
                 Display.loadErrorPrompt();
             }
@@ -149,6 +169,7 @@ public class GameManager {
         } catch (ClassNotFoundException ex) {
             System.out.println("Maze class casting issue");
         }
+        return loadedGame;
     }
 
     /**
@@ -262,11 +283,11 @@ public class GameManager {
         Display.saveOptions();
         int userSaveOption = INPUT.nextInt();
         try {
-            File saveFile = SAVE_ONE;
+            File saveFile = null;
             switch (userSaveOption) {
-                case 1 -> saveFile = SAVE_ONE;
-                case 2 -> saveFile = SAVE_TWO;
-                case 3 -> saveFile = SAVE_THREE;
+                case FILE_NUMBER_ONE -> saveFile = SAVE_ONE;
+                case FILE_NUMBER_TWO -> saveFile = SAVE_TWO;
+                case FILE_NUMBER_THREE -> saveFile = SAVE_THREE;
                 default -> Display.generalWarning();
             }
             FileOutputStream file = new FileOutputStream(saveFile);
@@ -277,7 +298,6 @@ public class GameManager {
 
             out.close();
             file.close();
-
         } catch (IOException ex) {
             System.out.println("Save Files Unreachable");
         }
@@ -295,11 +315,12 @@ public class GameManager {
             helpAction = INPUT.nextLine();
             if (helpAction.toLowerCase().matches("about")) {
                 inputGood = true;
-                //TODO menu about
-            } else if (helpAction.toLowerCase().matches(
-                    "game play instructions")) {
+                Display.printAbout();
+            } else if (helpAction.toLowerCase().matches("instructions")) {
                 inputGood = true;
                 Display.printInstructions();
+                Display.promptForKey();
+                INPUT.nextLine();
             } else if (helpAction.toLowerCase().matches("cheats")) {
                 inputGood = true;
                 Display.cheatsMenu();

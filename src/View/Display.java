@@ -44,13 +44,23 @@ public class Display {
     public static void printInstructions() {
         System.out.println("""
                 How to Play:
+                On maze screen; enter direction of door to go that way
+                For Multiple choice questions; answer with A, B, C, or D
+                For True or False questions; answer with T or F
+                Type "File" to Save Game, Load Game, Exit
+                Type "Help" to access About, Game Play Instructions, or Cheats at any time""");
+        printPrompt();
+    }
+
+    /**
+     * Displays info about the game.
+     */
+    public static void printAbout() {
+        System.out.println("""
                 You are in a maze of rooms and you need to escape by finding the door out.
                 To escape a room you need to answer a question correctly to unlock the door.
-                You can move in a direction by typing North, South, East, or West
-                Multiple choice questions; answer with A, B, C, or D
-                True or False questions; answer with T or F
-                Type "File" to Save Game, Load Game, Exit or type "Help" to access About,
-                Game Play Instructions, Cheats at anytime""");
+                You can move in a direction by typing North, South, East, or West.
+                """);
     }
 
     /**
@@ -84,6 +94,7 @@ public class Display {
     public static void startMsg() {
         System.out.println("- New Game");
         System.out.println("- Load Game");
+        System.out.println("- Instructions");
         printPrompt();
     }
 
@@ -132,7 +143,7 @@ public class Display {
 
     /**
      * Displays a warning to the User for incorrect answer input.
-     * @param correctAnswer
+     * @param correctAnswer the correct answer to be shown
      */
     public static void incorrectAnswer(final String correctAnswer) {
         System.out.println("Answer is Incorrect, Correct Answer is: " + correctAnswer);
@@ -145,7 +156,7 @@ public class Display {
         System.out.println("""
                 Help:
                 - About
-                - Game Play Instructions (Instructions)
+                - Instructions
                 - Cheats""");
     }
 
@@ -158,7 +169,7 @@ public class Display {
 
     /**
      * Displays the question to the User.
-     * @param theQuestion
+     * @param theQuestion The question being displayed
      */
     public static void displayQuestion(final String theQuestion) {
         System.out.println(theQuestion);

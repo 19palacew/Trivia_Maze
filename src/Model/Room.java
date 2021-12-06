@@ -96,7 +96,7 @@ public class Room implements Serializable {
     }
 
     /**
-     *
+     * Getter for Door at index.
      * @param theDoorIndex The index of the door
      * @return Returns a door based on the index
      */
@@ -105,9 +105,9 @@ public class Room implements Serializable {
     }
 
     /**
-     *
-     * @param doorDirection
-     * @return
+     * Getter for Door at direction.
+     * @param doorDirection the direction.
+     * @return the Door
      */
     public Door getDoor(final Direction doorDirection) {
         Door localDoor = null;
@@ -170,7 +170,7 @@ public class Room implements Serializable {
     }
 
     /**
-     * Cheat to re-activate dead doors.
+     * Cheat to re-activate all dead doors in Room.
      */
     public void undeadRoom() {
         if (myBlockedDoors.getNorth()) {
