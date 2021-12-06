@@ -69,10 +69,8 @@ public class GameManager {
      */
     public static void main(final String[] args) {
         Database.connectToDatabase();
-        Display.title();
-        Display.startMsg();
+        Display.startMessageSequence();
         bootGame();
-        runGame();
         boolean canPlay = true;
         while (canPlay) {
             if (!mainMaze.isPossible()) {
@@ -83,7 +81,14 @@ public class GameManager {
                 Display.playerWon();
                 canPlay = false;
             }
-            runGame();
+            if(canPlay){
+                runGame();
+            }
+            if(!canPlay) {
+                Display.startMessageSequence();
+                bootGame();
+                runGame();
+            }
         }
         INPUT.close();
     }
@@ -178,8 +183,8 @@ public class GameManager {
     private static void nextAction() {
         boolean inputGood = false;
         String userAction = "";
+        Display.printPrompt();
         while (!inputGood) {
-            Display.printPrompt();
             userAction = INPUT.nextLine();
             if (userAction.toLowerCase().matches("north|south|east|west")) {
                 inputGood = true;
@@ -201,7 +206,7 @@ public class GameManager {
                 inputGood = true;
                 Display.cheatActive();
                 mainMaze.moveToEnd();
-            } else {
+            } else if (!userAction.toLowerCase().matches("")) {
                 Display.userActionWarning();
             }
         }
@@ -316,6 +321,8 @@ public class GameManager {
             if (helpAction.toLowerCase().matches("about")) {
                 inputGood = true;
                 Display.printAbout();
+                Display.promptForKey();
+                INPUT.nextLine();
             } else if (helpAction.toLowerCase().matches("instructions")) {
                 inputGood = true;
                 Display.printInstructions();

@@ -1,6 +1,8 @@
 package View;
 
 import Model.Maze;
+import Model.SoundPlay;
+import java.io.File;
 
 /**
  * Display shows the user the output.
@@ -11,6 +13,13 @@ public class Display {
      */
     private Maze myMaze;
 
+    private final static File CORRECT_SOUND = new File("Correct.wav");
+
+    private final static File INCORRECT_SOUND = new File("Incorrect.wav");
+
+    private final static File WON_GAME_SOUND = new File("WonGame.wav");
+
+    private final static File LOST_GAME_SOUND = new File("LostGame.wav");
     /**
      * Creates a new Display.
      *
@@ -23,7 +32,6 @@ public class Display {
     public void setMyMaze(Maze theMaze) {
         myMaze = theMaze;
     }
-
     /**
      * Displays the Maze to the User.
      */
@@ -38,15 +46,24 @@ public class Display {
         System.out.println(myMaze.getCurrentRoom().toString());
     }
 
+    public static void startMessageSequence() {
+        title();
+        startMsg();
+    }
+
     /**
      * Displays the Instructions to the User.
      */
     public static void printInstructions() {
+        System.out.println();
         System.out.println("""
                 How to Play:
+                
                 On maze screen; enter direction of door to go that way
                 For Multiple choice questions; answer with A, B, C, or D
                 For True or False questions; answer with T or F
+                
+                During the game:
                 Type "File" to Save Game, Load Game, Exit
                 Type "Help" to access About, Game Play Instructions, or Cheats at any time""");
         printPrompt();
@@ -67,6 +84,7 @@ public class Display {
      * Displays that the Player Won.
      */
     public static void playerWon() {
+        SoundPlay.PlaySound(WON_GAME_SOUND);
         System.out.println("Goal Reached: Congratulations you won!");
     }
 
@@ -74,6 +92,7 @@ public class Display {
      * Displays that the Player Lost.
      */
     public static void playerLost() {
+        SoundPlay.PlaySound(LOST_GAME_SOUND);
         System.out.println("No Possible Pathways Left: Game Over");
     }
 
@@ -92,7 +111,7 @@ public class Display {
      * Displays the Start Message to the User.
      */
     public static void startMsg() {
-        System.out.println("- New Game");
+        System.out.println("\n- New Game");
         System.out.println("- Load Game");
         System.out.println("- Instructions");
         printPrompt();
@@ -138,6 +157,7 @@ public class Display {
      * Displays a message to the User for correct answer input.
      */
     public static void correctAnswer() {
+        SoundPlay.PlaySound(CORRECT_SOUND);
         System.out.println("Correct!");
     }
 
@@ -146,6 +166,7 @@ public class Display {
      * @param correctAnswer the correct answer to be shown
      */
     public static void incorrectAnswer(final String correctAnswer) {
+        SoundPlay.PlaySound(INCORRECT_SOUND);
         System.out.println("Answer is Incorrect, Correct Answer is: " + correctAnswer);
     }
 
