@@ -171,7 +171,7 @@ public class GameManager {
             } else if (userAction.toLowerCase().matches("open sesame")) {
                 inputGood = true;
                 Display.cheatActive();
-                mainMaze.getCurrentRoom().undeadCheat();
+                mainMaze.undeadAllRooms();
             } else if (userAction.toLowerCase().matches("really lazy")) {
                 inputGood = true;
                 turnOffQuestions = !turnOffQuestions;

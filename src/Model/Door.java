@@ -84,7 +84,7 @@ public class Door implements Serializable {
     }
 
     /**
-     * Opens a dead door.
+     * Activates a dead door.
      */
     public void undead() {
         myDoorDead = false;

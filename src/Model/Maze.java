@@ -298,4 +298,15 @@ public class Maze implements Serializable {
         setX(mazeSize - 1);
         setY(mazeSize - 1);
     }
+
+    /**
+     * Cheat to set all dead Doors to undead.
+     */
+    public void undeadAllRooms() {
+        for (Room[] rooms : myMaze) {
+            for (Room room : rooms) {
+                room.undeadRoom();
+            }
+        }
+    }
 }

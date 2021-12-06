@@ -170,9 +170,9 @@ public class Room implements Serializable {
     }
 
     /**
-     * Cheat to re-access dead doors.
+     * Cheat to re-activate dead doors.
      */
-    public void undeadCheat() {
+    public void undeadRoom() {
         if (myBlockedDoors.getNorth()) {
             getDoor(NORTH_DOOR_INDEX).undead();
         }
