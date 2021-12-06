@@ -59,6 +59,49 @@ public class Maze implements Serializable {
     }
 
     /**
+     * Getter for the player's X position.
+     *
+     * @return myX the current X position
+     */
+    public int getX() {
+        return myX;
+    }
+
+    /**
+     * Getter for the player's Y position.
+     *
+     * @return myY the current Y position
+     */
+    public int getY() {
+        return myY;
+    }
+
+    /**
+     * Getter for the maze size.
+     *
+     * @return the maze width/height size
+     */
+    public int getMazeSize() {
+        return mazeSize;
+    }
+
+    /**
+     * Setter for X.
+     * @param theX new X position
+     */
+    public void setX(final int theX) {
+        myX = theX;
+    }
+
+    /**
+     * Setter for Y.
+     * @param theY new Y position
+     */
+    public void setY(final int theY) {
+        myY = theY;
+    }
+
+    /**
      * Helper method that assigns doors to the rooms depending on the rooms location.
      */
     private void roomSetup() {
@@ -251,8 +294,8 @@ public class Maze implements Serializable {
     /**
      * Cheat to teleport player to end of maze.
      */
-    public void teleportCheat() {
-        myX = mazeSize - 1;
-        myY = mazeSize - 1;
+    public void moveToEnd() {
+        setX(mazeSize - 1);
+        setY(mazeSize - 1);
     }
 }

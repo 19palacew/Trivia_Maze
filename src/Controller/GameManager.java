@@ -179,7 +179,7 @@ public class GameManager {
             } else if (userAction.toLowerCase().matches("really really lazy")) {
                 inputGood = true;
                 Display.cheatActive();
-                mainMaze.teleportCheat();
+                mainMaze.moveToEnd();
             } else {
                 Display.userActionWarning();
             }
