@@ -44,19 +44,19 @@ public class GameManager {
     private static final File SAVE_THREE = new File("Save3.txt");
 
     /**
-     * Int for first save file when saving or loading.
+     * String for selecting first save file when saving or loading.
      */
-    private static final int FILE_NUMBER_ONE = 1;
+    private static final String FILE_NUMBER_ONE = "1";
 
     /**
-     * Int for second save file when saving or loading.
+     * String for selecting second save file when saving or loading.
      */
-    private static final int FILE_NUMBER_TWO = 2;
+    private static final String FILE_NUMBER_TWO = "2";
 
     /**
-     * Int for third save file when saving or loading.
+     * String for selecting third save file when saving or loading.
      */
-    private static final int FILE_NUMBER_THREE = 3;
+    private static final String FILE_NUMBER_THREE = "3";
 
     /**
      * Field for turn off questions cheat status.
@@ -85,10 +85,10 @@ public class GameManager {
                 Display.playerWon();
                 canPlay = false;
             }
-            if(canPlay){
+            if (canPlay) {
                 runGame();
             }
-            if(!canPlay) {
+            if (!canPlay) {
                 gameLoop();
             }
         }
@@ -112,6 +112,8 @@ public class GameManager {
                 //Load from beginning
                 if (loadGame()) {
                     gameStarted = true;
+                } else {
+                    Display.startMsg();
                 }
             } else if (userGameStartInput.equalsIgnoreCase("instructions")) {
                 Display.printInstructions();
@@ -144,15 +146,14 @@ public class GameManager {
      */
      private static Boolean loadGame() {
         Display.loadPrompt();
-        int loadFileNumber = INPUT.nextInt();
+        String loadFileNumber = INPUT.nextLine();
         boolean loadedGame = false;
         try {
             File loadFile = switch (loadFileNumber) {
                 case FILE_NUMBER_ONE -> SAVE_ONE;
                 case FILE_NUMBER_TWO -> SAVE_TWO;
                 case FILE_NUMBER_THREE -> SAVE_THREE;
-                default -> throw new IllegalStateException("Unexpected value: "
-                        + loadFileNumber);
+                default -> throw new IOException("Save file not found");
             };
             FileInputStream file = new FileInputStream(loadFile);
             if (loadFile.length() != 0) {
@@ -290,14 +291,14 @@ public class GameManager {
      */
      private static void saveGame() {
         Display.saveOptions();
-        int userSaveOption = INPUT.nextInt();
+        String userSaveOption = INPUT.nextLine();
         try {
-            File saveFile = null;
+            File saveFile;
             switch (userSaveOption) {
                 case FILE_NUMBER_ONE -> saveFile = SAVE_ONE;
                 case FILE_NUMBER_TWO -> saveFile = SAVE_TWO;
                 case FILE_NUMBER_THREE -> saveFile = SAVE_THREE;
-                default -> Display.generalWarning();
+                default -> throw new IOException();
             }
             assert saveFile != null;
             FileOutputStream file = new FileOutputStream(saveFile);
