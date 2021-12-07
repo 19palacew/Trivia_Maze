@@ -68,6 +68,10 @@ public class GameManager {
      * @param args Arguments
      */
     public static void main(final String[] args) {
+        gameLoop();
+    }
+
+    public static void gameLoop() {
         Database.connectToDatabase();
         Display.startMessageSequence();
         bootGame();
@@ -85,14 +89,10 @@ public class GameManager {
                 runGame();
             }
             if(!canPlay) {
-                Display.startMessageSequence();
-                bootGame();
-                runGame();
+                gameLoop();
             }
         }
-        INPUT.close();
     }
-
     /**
      * Either Loads or Starts a New Game.
      */
@@ -299,6 +299,7 @@ public class GameManager {
                 case FILE_NUMBER_THREE -> saveFile = SAVE_THREE;
                 default -> Display.generalWarning();
             }
+            assert saveFile != null;
             FileOutputStream file = new FileOutputStream(saveFile);
             ObjectOutputStream out = new ObjectOutputStream(file);
 
