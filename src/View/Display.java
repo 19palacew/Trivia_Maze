@@ -86,8 +86,8 @@ public class Display {
                 How to Play:
                 
                 On maze screen; enter direction of door to go that way
-                For Multiple choice questions; answer with A, B, C, or D
-                For True or False questions; answer with T or F
+                For Multiple choice questions; answer with "A", "B", "C", or "D"
+                For True or False questions; answer with "True" or "False"
                 
                 During the game:
                 Type "File" to Save Game, Load Game, Exit
