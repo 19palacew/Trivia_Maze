@@ -1,14 +1,10 @@
 package Testing;
 
-import Model.Database;
-import Model.Direction;
-import Model.Maze;
+import Model.*;
 import View.Display;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MazeTest {
 
@@ -110,5 +106,17 @@ public class MazeTest {
         Maze testMaze = new Maze();
         testMaze.moveToEnd();
         assertTrue(testMaze.goalReached(), "Maze goalReach failed");
+    }
+
+    @Test
+    void questionGenerated() {
+        Database.connectToDatabase();
+        assertNotEquals(Database.genQuestion().getQuestion(), "");
+    }
+
+    @Test
+    void answerGenerated() {
+        Database.connectToDatabase();
+        assertNotEquals(Database.genQuestion().getAnswer(), "");
     }
 }
