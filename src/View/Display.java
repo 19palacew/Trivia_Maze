@@ -9,37 +9,38 @@ import java.io.File;
  */
 public class Display {
     /**
-     *The maze being displayed by the display
+     *The maze being displayed by the display.
      */
     private Maze myMaze;
     /**
-     * A file representing the sound for when a user gets a sound correct
+     * A file representing the sound for when a user gets a sound correct.
      */
     private final static File CORRECT_SOUND = new File("Correct.wav");
     /**
-     * A file representing the sound for when a user gets a sound incorrect
+     * A file representing the sound for when a user gets a sound incorrect.
      */
     private final static File INCORRECT_SOUND = new File("Incorrect.wav");
     /**
-     * A file representing the sound for when a user wins
+     * A file representing the sound for when a user wins.
      */
     private final static File WON_GAME_SOUND = new File("WonGame.wav");
     /**
-     * A file representing the sound for when a user loses
+     * A file representing the sound for when a user loses.
      */
     private final static File LOST_GAME_SOUND = new File("LostGame.wav");
     /**
-     * A file representing the sound for when game starts and user is in
+     * A file representing the sound for when game starts and user is in.
      */
     private final static File IN_GAME_SOUND = new File("Instruction.wav");
     /**
-     * A file representing the sound for when a user opens a menu
+     * A file representing the sound for when a user opens a menu.
      */
     private final static File POP_GAME_SOUND = new File("Pops.wav");
     /**
-     * A file representing the sound for when a user opens a menu
+     * A file representing the sound for when a user opens a menu.
      */
     private final static File ERROR_GAME_SOUND = new File("Errors.wav");
+
     /**
      * Creates a new Display.
      *
@@ -50,7 +51,7 @@ public class Display {
     }
 
     /**
-     * Setter to change the maze the display is showing
+     * Setter to change the maze the display is showing.
      * @param theMaze the maze to display
      */
     public void setMyMaze(Maze theMaze) {
@@ -85,11 +86,12 @@ public class Display {
         System.out.println("""
                 How to Play:
                 
-                On maze screen; enter direction of door to go that way
+                On maze screen; You can move in a direction by typing North, South, East, or West.
                 For Multiple choice questions; answer with "A", "B", "C", or "D"
                 For True or False questions; answer with "True" or "False"
                 
                 During the game:
+                
                 Type "File" to Save Game, Load Game, Exit
                 Type "Help" to access About, Game Play Instructions, or Cheats 
                 at any time""");
@@ -104,8 +106,7 @@ public class Display {
         System.out.println("""
                 You are in a maze of rooms and you need to escape by finding the door
                 out. To escape a room you need to answer a question correctly to unlock 
-                the door. You can move in a direction by typing North, South, 
-                East, or West.
+                the door.
                 """);
     }
 
@@ -163,6 +164,7 @@ public class Display {
         SoundPlay.PlaySound(ERROR_GAME_SOUND);
         System.out.println(
                 "Please Type a Direction or \"File\" or \"Help\"");
+        printPrompt();
     }
 
     /**
@@ -238,9 +240,8 @@ public class Display {
      */
     public static void generalWarning() {
         SoundPlay.PlaySound(ERROR_GAME_SOUND);
-        System.out.println("Command not recognized, continue playing or retry " +
-                "command with valid "
-                + "syntax");
+        System.out.println("Command not recognized, continue playing or retry "
+                + "command with valid syntax");
     }
 
     /**
