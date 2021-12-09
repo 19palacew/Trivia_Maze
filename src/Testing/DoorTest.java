@@ -12,6 +12,7 @@ public class DoorTest {
 
     @Test
     void testIsLocked() {
+        Database.connectToDatabase();
         Door testDoor = new Door();
         assertTrue(testDoor.isLocked(), "Door is unlocked");
     }
@@ -26,12 +27,14 @@ public class DoorTest {
 
     @Test
     void testIsDeadUnanswered() {
+        Database.connectToDatabase();
         Door testDoor = new Door();
         assertFalse(testDoor.isDead(), "Door is dead");
     }
 
     @Test
     void testIsDeadAnsweredWrong() {
+        Database.connectToDatabase();
         Door testDoor = new Door();
         testDoor.unlock("");
         assertTrue(testDoor.isDead(), "Door is not dead");
