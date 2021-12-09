@@ -76,6 +76,33 @@ public class Database implements Serializable {
     }
 
     /**
+     * Getter for question at index of arraylist
+     *
+     * @return question at specific index of question arraylist
+     */
+    public static String getQuestionAtIndex(final int theQuestion) {
+        return questionBank.get(theQuestion);
+    }
+
+    /**
+     * Getter for answer at index of arraylist
+     *
+     * @return answer at specific index of question arraylist
+     */
+    public static String getAnswerAtIndex(final int theAnswer) {
+        return questionBank.get(theAnswer);
+    }
+
+    /**
+     * Getter for question index (used for testing)
+     *
+     * @return index counter
+     */
+    public static int getQuestionIndex() {
+        return questionIndex;
+    }
+
+    /**
      * Getter for answer
      *
      * @return answer at index counter field is set to
