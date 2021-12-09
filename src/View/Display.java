@@ -15,31 +15,31 @@ public class Display {
     /**
      * A file representing the sound for when a user gets a sound correct.
      */
-    private final static File CORRECT_SOUND = new File("Correct.wav");
+    private static final File CORRECT_SOUND = new File("Correct.wav");
     /**
      * A file representing the sound for when a user gets a sound incorrect.
      */
-    private final static File INCORRECT_SOUND = new File("Incorrect.wav");
+    private static final File INCORRECT_SOUND = new File("Incorrect.wav");
     /**
      * A file representing the sound for when a user wins.
      */
-    private final static File WON_GAME_SOUND = new File("WonGame.wav");
+    private static final File WON_GAME_SOUND = new File("WonGame.wav");
     /**
      * A file representing the sound for when a user loses.
      */
-    private final static File LOST_GAME_SOUND = new File("LostGame.wav");
+    private static final File LOST_GAME_SOUND = new File("LostGame.wav");
     /**
      * A file representing the sound for when game starts and user is in.
      */
-    private final static File IN_GAME_SOUND = new File("Instruction.wav");
+    private static final File IN_GAME_SOUND = new File("Instruction.wav");
     /**
      * A file representing the sound for when a user opens a menu.
      */
-    private final static File POP_GAME_SOUND = new File("Pops.wav");
+    private static final File POP_GAME_SOUND = new File("Pops.wav");
     /**
      * A file representing the sound for when a user opens a menu.
      */
-    private final static File ERROR_GAME_SOUND = new File("Errors.wav");
+    private static final File ERROR_GAME_SOUND = new File("Errors.wav");
 
     /**
      * Creates a new Display.
@@ -54,7 +54,7 @@ public class Display {
      * Setter to change the maze the display is showing.
      * @param theMaze the maze to display
      */
-    public void setMyMaze(Maze theMaze) {
+    public void setMyMaze(final Maze theMaze) {
         myMaze = theMaze;
     }
     /**
@@ -71,8 +71,11 @@ public class Display {
         System.out.println(myMaze.getCurrentRoom().toString());
     }
 
+    /**
+     * Plays start sound, Displays Title and Start Message to the User.
+     */
     public static void startMessageSequence() {
-        SoundPlay.PlaySound(IN_GAME_SOUND);
+        SoundPlay.playSound(IN_GAME_SOUND);
         title();
         startMsg();
     }
@@ -81,20 +84,21 @@ public class Display {
      * Displays the Instructions to the User.
      */
     public static void printInstructions() {
-        SoundPlay.PlaySound(POP_GAME_SOUND);
+        SoundPlay.playSound(POP_GAME_SOUND);
         System.out.println();
         System.out.println("""
                 How to Play:
-                
                 On maze screen; You can move in a direction by typing North, South, East, or West.
                 For Multiple choice questions; answer with "A", "B", "C", or "D"
                 For True or False questions; answer with "True" or "False"
-                
-                During the game:
-                
-                Type "File" to Save Game, Load Game, Exit
-                Type "Help" to access About, Game Play Instructions, or Cheats 
-                at any time""");
+                """);
+        System.out.println();
+        System.out.println("""
+            During the game:
+            Type "File" to Save Game, Load Game, Exit
+            Type "Help" to access About, Game Play Instructions, or Cheats
+            at any time
+            """);
         printPrompt();
     }
 
@@ -102,10 +106,10 @@ public class Display {
      * Displays info about the game.
      */
     public static void printAbout() {
-        SoundPlay.PlaySound(POP_GAME_SOUND);
+        SoundPlay.playSound(POP_GAME_SOUND);
         System.out.println("""
                 You are in a maze of rooms and you need to escape by finding the door
-                out. To escape a room you need to answer a question correctly to unlock 
+                out. To escape a room you need to answer a question correctly to unlock
                 the door.
                 """);
     }
@@ -114,7 +118,7 @@ public class Display {
      * Displays that the Player Won.
      */
     public static void playerWon() {
-        SoundPlay.PlaySound(WON_GAME_SOUND);
+        SoundPlay.playSound(WON_GAME_SOUND);
         System.out.println("Goal Reached: Congratulations you won!");
     }
 
@@ -122,7 +126,7 @@ public class Display {
      * Displays that the Player Lost.
      */
     public static void playerLost() {
-        SoundPlay.PlaySound(LOST_GAME_SOUND);
+        SoundPlay.playSound(LOST_GAME_SOUND);
         System.out.println("No Possible Pathways Left: Game Over");
     }
 
@@ -130,7 +134,7 @@ public class Display {
      * Displays the File Menu options to the User.
      */
     public static void fileMenu() {
-        SoundPlay.PlaySound(POP_GAME_SOUND);
+        SoundPlay.playSound(POP_GAME_SOUND);
         System.out.println("""
                 File:
                 - Save Game
@@ -152,7 +156,7 @@ public class Display {
      * Displays a warning to the User for incorrect input of New or Load Game.
      */
     public static void beginGameWarning() {
-        SoundPlay.PlaySound(ERROR_GAME_SOUND);
+        SoundPlay.playSound(ERROR_GAME_SOUND);
         System.out.println("Please Type \"New Game\" or \"Load Game\"");
         printPrompt();
     }
@@ -161,7 +165,7 @@ public class Display {
      * Displays a warning to the User for incorrect input of an action.
      */
     public static void userActionWarning() {
-        SoundPlay.PlaySound(ERROR_GAME_SOUND);
+        SoundPlay.playSound(ERROR_GAME_SOUND);
         System.out.println(
                 "Please Type a Direction or \"File\" or \"Help\"");
         printPrompt();
@@ -171,23 +175,25 @@ public class Display {
      * Displays a warning to the User for incorrect Help Menu input.
      */
     public static void helpMenuWarning() {
-        SoundPlay.PlaySound(ERROR_GAME_SOUND);
-        System.out.println("Please Type \"about\" or \"instructions\" or \"cheats\" ");
+        SoundPlay.playSound(ERROR_GAME_SOUND);
+        System.out.println("Please Type \"about\" or \"instructions\" or "
+                + "\"cheats\" ");
     }
 
     /**
      * Displays a warning to the User for incorrect File Menu input.
      */
     public static void fileMenuWarning() {
-        SoundPlay.PlaySound(ERROR_GAME_SOUND);
-        System.out.println("Please Type \"Save Game\" or \"Load Game\" or \"Exit\" ");
+        SoundPlay.playSound(ERROR_GAME_SOUND);
+        System.out.println("Please Type \"Save Game\" or \"Load Game\" or "
+                + "\"Exit\" ");
     }
 
     /**
      * Displays a message to the User for correct answer input.
      */
     public static void correctAnswer() {
-        SoundPlay.PlaySound(CORRECT_SOUND);
+        SoundPlay.playSound(CORRECT_SOUND);
         System.out.println("Correct!");
     }
 
@@ -196,7 +202,7 @@ public class Display {
      * @param correctAnswer the correct answer to be shown
      */
     public static void incorrectAnswer(final String correctAnswer) {
-        SoundPlay.PlaySound(INCORRECT_SOUND);
+        SoundPlay.playSound(INCORRECT_SOUND);
         System.out.println("Answer is Incorrect, Correct Answer is: " + correctAnswer);
     }
 
@@ -204,7 +210,7 @@ public class Display {
      * Displays the Help Menu Options to the User.
      */
     public static void helpMenu() {
-        SoundPlay.PlaySound(POP_GAME_SOUND);
+        SoundPlay.playSound(POP_GAME_SOUND);
         System.out.println("""
                 Help:
                 - About
@@ -216,7 +222,7 @@ public class Display {
      * Displays options for saving game.
      */
     public static void saveOptions() {
-        SoundPlay.PlaySound(POP_GAME_SOUND);
+        SoundPlay.playSound(POP_GAME_SOUND);
         System.out.println("Save to which save file? Options: 1, 2, 3");
     }
 
@@ -225,7 +231,7 @@ public class Display {
      * @param theQuestion The question being displayed
      */
     public static void displayQuestion(final String theQuestion) {
-        SoundPlay.PlaySound(POP_GAME_SOUND);
+        SoundPlay.playSound(POP_GAME_SOUND);
         System.out.println(theQuestion);
     }
 
@@ -235,20 +241,12 @@ public class Display {
     public static void printPrompt() {
         System.out.print("Choose: ");
     }
-    /**
-     * Displays a general warning.
-     */
-    public static void generalWarning() {
-        SoundPlay.PlaySound(ERROR_GAME_SOUND);
-        System.out.println("Command not recognized, continue playing or retry "
-                + "command with valid syntax");
-    }
 
     /**
      * Displays a prompt to select save to load.
      */
     public static void loadPrompt() {
-        SoundPlay.PlaySound(POP_GAME_SOUND);
+        SoundPlay.playSound(POP_GAME_SOUND);
         System.out.println("Load which game? Options: 1, 2, 3");
     }
 
@@ -256,7 +254,7 @@ public class Display {
      * Displays an error when loading an empty file.
      */
     public static void loadErrorPrompt() {
-        SoundPlay.PlaySound(ERROR_GAME_SOUND);
+        SoundPlay.playSound(ERROR_GAME_SOUND);
         System.out.println("Sorry that save file is empty");
     }
 
@@ -264,7 +262,7 @@ public class Display {
      * Displays message for successfully loaded game.
      */
     public static void loadCompletePrompt() {
-        SoundPlay.PlaySound(POP_GAME_SOUND);
+        SoundPlay.playSound(POP_GAME_SOUND);
         System.out.println("Loaded from save file");
     }
 
@@ -272,7 +270,7 @@ public class Display {
      * Displays the Cheats to the User.
      */
     public static void cheatsMenu() {
-        SoundPlay.PlaySound(POP_GAME_SOUND);
+        SoundPlay.playSound(POP_GAME_SOUND);
         System.out.println("""
                 Cheats:
                 - Unblock Dead Doors (open sesame)
@@ -282,14 +280,14 @@ public class Display {
     }
 
     /**
-     * Displays a continue prompt to the User to enter input.
+     * Displays a prompt to continue to the User to enter input.
      */
     public static void promptForKey() {
         System.out.print("Press any key to return to game... ");
     }
 
     /**
-     * Displays Triva Maze title.
+     * Displays Trivia Maze title.
      */
     public static void title() {
         System.out.println("""
@@ -305,7 +303,7 @@ public class Display {
      * Displays when cheat has been turned on.
      */
     public static void cheatActive() {
-        SoundPlay.PlaySound(POP_GAME_SOUND);
+        SoundPlay.playSound(POP_GAME_SOUND);
         System.out.println("Cheat has been activated ");
     }
 

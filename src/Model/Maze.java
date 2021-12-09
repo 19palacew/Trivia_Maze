@@ -4,7 +4,8 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * Maze is the map for the game, it is what the player traverses to reach the goal.
+ * Maze is the map for the game,
+ * it is what the player traverses to reach the goal.
  */
 public class Maze implements Serializable {
     /**
@@ -16,7 +17,8 @@ public class Maze implements Serializable {
      */
     private int myY;
     /**
-     * Field containing the 2D array of Room Objects that represents the overall maze.
+     * Field containing the 2D array of Room Objects
+     * that represents the overall maze.
      */
     private final Room[][] myMaze;
     /**
@@ -77,12 +79,6 @@ public class Maze implements Serializable {
     }
 
     /**
-     * Getter for the maze size.
-     *
-     * @return the maze width/height size
-     */
-
-    /**
      * Setter for X.
      * @param theX new X position
      */
@@ -99,7 +95,8 @@ public class Maze implements Serializable {
     }
 
     /**
-     * Helper method that assigns doors to the rooms depending on the rooms location.
+     * Helper method that assigns doors to the
+     * rooms depending on the room's location.
      */
     private void roomSetup() {
 
@@ -152,7 +149,8 @@ public class Maze implements Serializable {
     }
 
     /**
-     * Calculates the new player coordinates given a direction that the player moves.
+     * Calculates the new player coordinates
+     * given a direction that the player moves.
      *
      * @param theDirection The direction the player wants to move
      */
@@ -171,7 +169,8 @@ public class Maze implements Serializable {
      * Boolean value if the player can move in a direction.
      *
      * @param theDirection The direction the player wants to move
-     * @return Returns true if the player can move in that direction and false otherwise
+     * @return Returns true if the player can move in that direction
+     * and false otherwise
      */
     public boolean canMovePlayer(final Direction theDirection) {
         Door localDoor = getCurrentRoom().getDoor(theDirection);
@@ -206,9 +205,10 @@ public class Maze implements Serializable {
 
     /**
      * Helper method to isPossible that utilizes 4 recursive calls to check for
-     * valid adjacent moves. This method will detect if a path exits by returning
-     * true when the destination is reached, else it will return false to signal game
-     * has been lost.
+     * valid adjacent moves.
+     * This method will detect if a path exits by returning
+     * true when the destination is reached,
+     * else it will return false to signal game has been lost.
      *
      * @param theX x coordinate of room
      * @param theY y coordinate of room
@@ -226,32 +226,32 @@ public class Maze implements Serializable {
             //Check adjacent rooms recursively
 
             //Check North (assuming door exists and is not dead)
-            if (myMaze[theX][theY].getDoor(NORTH_DOOR_INDEX) != null &&
-                    !myMaze[theX][theY].getDoor(NORTH_DOOR_INDEX).isDead()) {
+            if (myMaze[theX][theY].getDoor(NORTH_DOOR_INDEX) != null
+                    && !myMaze[theX][theY].getDoor(NORTH_DOOR_INDEX).isDead()) {
                 boolean northCheck = isPossibleHelper(theX, theY - 1);
                 if (northCheck) {
                     return true;
                 }
             }
             //Check South (assuming door exists and is not dead)
-            if (myMaze[theX][theY].getDoor(SOUTH_DOOR_INDEX) != null &&
-                    !myMaze[theX][theY].getDoor(SOUTH_DOOR_INDEX).isDead()) {
+            if (myMaze[theX][theY].getDoor(SOUTH_DOOR_INDEX) != null
+                    && !myMaze[theX][theY].getDoor(SOUTH_DOOR_INDEX).isDead()) {
                 boolean southCheck = isPossibleHelper(theX, theY + 1);
                 if (southCheck) {
                     return true;
                 }
             }
             //Check East (assuming door exists and is not dead)
-            if (myMaze[theX][theY].getDoor(EAST_DOOR_INDEX) != null &&
-                    !myMaze[theX][theY].getDoor(EAST_DOOR_INDEX).isDead()) {
+            if (myMaze[theX][theY].getDoor(EAST_DOOR_INDEX) != null
+                    && !myMaze[theX][theY].getDoor(EAST_DOOR_INDEX).isDead()) {
                 boolean eastCheck = isPossibleHelper(theX + 1, theY);
                 if (eastCheck) {
                     return true;
                 }
             }
             //Check West (assuming door exists and is not dead)
-            if (myMaze[theX][theY].getDoor(WEST_DOOR_INDEX) != null &&
-                    !myMaze[theX][theY].getDoor(WEST_DOOR_INDEX).isDead()) {
+            if (myMaze[theX][theY].getDoor(WEST_DOOR_INDEX) != null
+                    && !myMaze[theX][theY].getDoor(WEST_DOOR_INDEX).isDead()) {
                 return isPossibleHelper(theX - 1, theY);
             }
         }
@@ -261,7 +261,7 @@ public class Maze implements Serializable {
     /**
      * Returns true when the player reaches the end of the maze.
      *
-     * @return Returns a boolean of if the player has reached the end of the maze.
+     * @return Returns if the player has reached the end of the maze.
      */
     public boolean goalReached() {
         return myX == mazeSize - 1 && myY == mazeSize - 1;

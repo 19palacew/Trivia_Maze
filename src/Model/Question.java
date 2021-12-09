@@ -22,8 +22,8 @@ public class Question implements Serializable {
      * @param theAnswer   String of an answer
      */
     public Question(final String theQuestion, final String theAnswer) {
-        this.myQuestion = theQuestion;
-        this.myAnswer = theAnswer;
+        myQuestion = theQuestion;
+        myAnswer = theAnswer;
     }
 
     /**

@@ -1,14 +1,16 @@
 package Testing;
 
-import Model.*;
-import View.Display;
+import Model.Database;
+import Model.Direction;
+import Model.Maze;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class MazeTest {
-
-    private static Display display;
 
     /**
      * int field holding index of north Door.
@@ -26,8 +28,13 @@ public class MazeTest {
      * int field holding index of west Door.
      */
     private static final int WEST_DOOR_INDEX = 3;
-
+    /**
+     * int to testing X coordinate.
+     */
     private static final int TEST_X = 1;
+    /**
+     * int to testing Y coordinate.
+     */
     private static final int TEST_Y = 1;
 
     @Test
@@ -111,12 +118,14 @@ public class MazeTest {
     @Test
     void questionGenerated() {
         Database.connectToDatabase();
-        assertNotEquals(Database.genQuestion().getQuestion(), "");
+        assertNotEquals(Database.genQuestion().getQuestion(), "",
+                "Question not generated");
     }
 
     @Test
     void answerGenerated() {
         Database.connectToDatabase();
-        assertNotEquals(Database.genQuestion().getAnswer(), "");
+        assertNotEquals(Database.genQuestion().getAnswer(), "",
+                "Answer not generated");
     }
 }

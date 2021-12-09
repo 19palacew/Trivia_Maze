@@ -13,7 +13,8 @@ public class DatabaseTest {
         Question testQuestionObject = Database.genQuestion();
         int currentQuestionIndex = Database.getQuestionIndex();
         String questionAtIndexFromObject = testQuestionObject.getQuestion();
-        String questionAtIndexFromArrayList = Database.getQuestionAtIndex(currentQuestionIndex);
+        String questionAtIndexFromArrayList =
+                Database.getQuestionAtIndex(currentQuestionIndex);
         assertEquals(questionAtIndexFromArrayList, questionAtIndexFromObject);
     }
     @Test
@@ -22,7 +23,8 @@ public class DatabaseTest {
         Question testQuestionObject = Database.genQuestion();
         int currentAnswerIndex = Database.getQuestionIndex();
         String answerAtIndexFromObject = testQuestionObject.getQuestion();
-        String answerAtIndexFromArrayList = Database.getQuestionAtIndex(currentAnswerIndex);
+        String answerAtIndexFromArrayList =
+                Database.getQuestionAtIndex(currentAnswerIndex);
         assertEquals(answerAtIndexFromArrayList, answerAtIndexFromObject);
     }
 }

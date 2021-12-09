@@ -13,24 +13,24 @@ import java.util.Random;
 /**
  * Database class handles connection to the QuestionAnswer table of
  * the Table database and loading the contents into ArrayLists that
- * can be accessed via getters
+ * can be accessed via getters.
  */
 public class Database implements Serializable {
     /**
-     * ArrayList field holding the questions
+     * ArrayList field holding the questions.
      */
-    private static final ArrayList<String> questionBank = new ArrayList<>();
+    private static final ArrayList<String> QUESTION_BANK = new ArrayList<>();
     /**
-     * ArrayList field holding the answers
+     * ArrayList field holding the answers.
      */
-    private static final ArrayList<String> answerBank = new ArrayList<>();
+    private static final ArrayList<String> ANSWER_BANK = new ArrayList<>();
     /**
-     * Counter int field to iterate through the lists
+     * Counter int field to iterate through the lists.
      */
     private static int questionIndex = 0;
 
     /**
-     * Sets up connection to database and loads table values into ArrayLists
+     * Sets up connection to database and loads table values into ArrayLists.
      */
     public static void connectToDatabase() {
         //Create DataSource object
@@ -47,8 +47,8 @@ public class Database implements Serializable {
             while (rs.next()) {
                 String question = rs.getString("Question");
                 String answer = rs.getString("Answer");
-                questionBank.add(question);
-                answerBank.add(answer);
+                QUESTION_BANK.add(question);
+                ANSWER_BANK.add(answer);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -57,7 +57,7 @@ public class Database implements Serializable {
     }
 
     /**
-     * Returns a Question object
+     * Returns a Question object.
      *
      * @return Returns a Question object
      */
@@ -66,35 +66,37 @@ public class Database implements Serializable {
     }
 
     /**
-     * Getter for question
+     * Getter for question.
      *
      * @return question at index counter field is set to
      */
     public static String getQuestion() {
         randomizeQuestion();
-        return questionBank.get(questionIndex);
+        return QUESTION_BANK.get(questionIndex);
     }
 
     /**
-     * Getter for question at index of arraylist
+     * Getter for question at index of arraylist.
      *
+     * @param theQuestion index of the question
      * @return question at specific index of question arraylist
      */
     public static String getQuestionAtIndex(final int theQuestion) {
-        return questionBank.get(theQuestion);
+        return QUESTION_BANK.get(theQuestion);
     }
 
     /**
-     * Getter for answer at index of arraylist
+     * Getter for answer at index of arraylist.
      *
-     * @return answer at specific index of question arraylist
+     * @param theAnswer index of the answer
+     * @return answer at specific index of question arraylist.
      */
     public static String getAnswerAtIndex(final int theAnswer) {
-        return questionBank.get(theAnswer);
+        return QUESTION_BANK.get(theAnswer);
     }
 
     /**
-     * Getter for question index (used for testing)
+     * Getter for question index (used for testing).
      *
      * @return index counter
      */
@@ -103,19 +105,19 @@ public class Database implements Serializable {
     }
 
     /**
-     * Getter for answer
+     * Getter for answer.
      *
      * @return answer at index counter field is set to
      */
     public static String getAnswer() {
-        return answerBank.get(questionIndex);
+        return ANSWER_BANK.get(questionIndex);
     }
 
     /**
-     * Increment counter to get next question
+     * Increment counter to get next question.
      */
     public static void randomizeQuestion() {
         Random rand = new Random();
-        questionIndex = rand.nextInt(questionBank.size());
+        questionIndex = rand.nextInt(QUESTION_BANK.size());
     }
 }

@@ -89,12 +89,6 @@ public class Room implements Serializable {
     }
 
     /**
-     * Returns which doors are permanently blocked.
-     *
-     * @return Returns a RoomBlocker
-     */
-
-    /**
      * Getter for Door at index.
      * @param theDoorIndex The index of the door
      * @return Returns a door based on the index
@@ -109,14 +103,12 @@ public class Room implements Serializable {
      * @return the Door
      */
     public Door getDoor(final Direction doorDirection) {
-        Door localDoor = null;
-        switch (doorDirection) {
-            case NORTH -> localDoor = getDoor(NORTH_DOOR_INDEX);
-            case SOUTH -> localDoor = getDoor(SOUTH_DOOR_INDEX);
-            case EAST -> localDoor = getDoor(EAST_DOOR_INDEX);
-            case WEST -> localDoor = getDoor(WEST_DOOR_INDEX);
-        }
-        return localDoor;
+        return switch (doorDirection) {
+            case NORTH -> getDoor(NORTH_DOOR_INDEX);
+            case SOUTH -> getDoor(SOUTH_DOOR_INDEX);
+            case EAST -> getDoor(EAST_DOOR_INDEX);
+            case WEST -> getDoor(WEST_DOOR_INDEX);
+        };
     }
 
     /**

@@ -71,6 +71,9 @@ public class GameManager {
         gameLoop();
     }
 
+    /**
+     * Loop to keep game running until lose or win.
+     */
     public static void gameLoop() {
         Database.connectToDatabase();
         Display.startMessageSequence();
@@ -234,7 +237,7 @@ public class GameManager {
                     Display.cheatActive();
                     System.out.println(localDoor.getAnswer());
                 } else {
-                    attemptUnlock(userAnswer,localDoor);
+                    attemptUnlock(userAnswer, localDoor);
                 }
 
                 if (localDoor.isDead()) {
@@ -249,7 +252,8 @@ public class GameManager {
         }
     }
 
-    private static void attemptUnlock(final String theUserAnswer, final Door theLocalDoor) {
+    private static void attemptUnlock(final String theUserAnswer,
+                                      final Door theLocalDoor) {
         theLocalDoor.unlock(theUserAnswer);
     }
     /**
@@ -293,14 +297,12 @@ public class GameManager {
         Display.saveOptions();
         String userSaveOption = INPUT.nextLine();
         try {
-            File saveFile;
-            switch (userSaveOption) {
-                case FILE_NUMBER_ONE -> saveFile = SAVE_ONE;
-                case FILE_NUMBER_TWO -> saveFile = SAVE_TWO;
-                case FILE_NUMBER_THREE -> saveFile = SAVE_THREE;
+            File saveFile = switch (userSaveOption) {
+                case FILE_NUMBER_ONE -> SAVE_ONE;
+                case FILE_NUMBER_TWO -> SAVE_TWO;
+                case FILE_NUMBER_THREE -> SAVE_THREE;
                 default -> throw new IOException();
-            }
-            assert saveFile != null;
+            };
             FileOutputStream file = new FileOutputStream(saveFile);
             ObjectOutputStream out = new ObjectOutputStream(file);
 
