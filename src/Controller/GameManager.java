@@ -105,11 +105,11 @@ public class GameManager {
         String userGameStartInput;
         while (!gameStarted) {
             userGameStartInput = INPUT.nextLine();
-            if (userGameStartInput.equalsIgnoreCase("new game")) {
+            if ("new game".equalsIgnoreCase(userGameStartInput)) {
                 //Initialize the maze and display
                 gameStarted = true;
                 gameSetup();
-            } else if (userGameStartInput.equalsIgnoreCase("load game")) {
+            } else if ("load game".equalsIgnoreCase(userGameStartInput)) {
                 //Initialize the maze and display
                 gameSetup();
                 //Load from beginning
@@ -118,7 +118,7 @@ public class GameManager {
                 } else {
                     Display.startMsg();
                 }
-            } else if (userGameStartInput.equalsIgnoreCase("instructions")) {
+            } else if ("instructions".equalsIgnoreCase(userGameStartInput)) {
                 Display.printInstructions();
             } else {
                 Display.beginGameWarning();
@@ -190,27 +190,27 @@ public class GameManager {
         Display.printPrompt();
         while (!inputGood) {
             userAction = INPUT.nextLine();
-            if (userAction.toLowerCase().matches("north|south|east|west")) {
+            if ("north|south|east|west".equalsIgnoreCase(userAction)) {
                 inputGood = true;
-            } else if (userAction.toLowerCase().matches("help")) {
+            } else if ("help".equalsIgnoreCase(userAction)) {
                 inputGood = true;
                 help();
-            } else if (userAction.toLowerCase().matches("file")) {
+            } else if ("file".equalsIgnoreCase(userAction)) {
                 inputGood = true;
                 file();
-            } else if (userAction.toLowerCase().matches("open sesame")) {
+            } else if ("open sesame".equalsIgnoreCase(userAction)) {
                 inputGood = true;
                 Display.cheatActive();
                 mainMaze.undeadAllRooms();
-            } else if (userAction.toLowerCase().matches("really lazy")) {
+            } else if ("really lazy".equalsIgnoreCase(userAction)) {
                 inputGood = true;
                 turnOffQuestions = !turnOffQuestions;
                 Display.cheatActive();
-            } else if (userAction.toLowerCase().matches("really really lazy")) {
+            } else if ("really really lazy".equalsIgnoreCase(userAction)) {
                 inputGood = true;
                 Display.cheatActive();
                 mainMaze.moveToEnd();
-            } else if (!userAction.toLowerCase().matches("")) {
+            } else {
                 Display.userActionWarning();
             }
         }
@@ -236,6 +236,7 @@ public class GameManager {
                 if (userAnswer.matches("lazy")) {
                     Display.cheatActive();
                     System.out.println(localDoor.getAnswer());
+                    attemptUnlock(localDoor.getAnswer(), localDoor);
                 } else {
                     attemptUnlock(userAnswer, localDoor);
                 }
@@ -252,6 +253,11 @@ public class GameManager {
         }
     }
 
+    /**
+     * Helper method to enter answers to Door questions.
+     * @param theUserAnswer entered response
+     * @param theLocalDoor the Door being opened
+     */
     private static void attemptUnlock(final String theUserAnswer,
                                       final Door theLocalDoor) {
         theLocalDoor.unlock(theUserAnswer);
@@ -312,7 +318,7 @@ public class GameManager {
             out.close();
             file.close();
         } catch (IOException ex) {
-            System.out.println("Save Files Unreachable");
+            Display.saveUnreachable();
         }
     }
 
@@ -326,17 +332,17 @@ public class GameManager {
         while (!inputGood) {
             Display.printPrompt();
             helpAction = INPUT.nextLine();
-            if (helpAction.toLowerCase().matches("about")) {
+            if ("about".equalsIgnoreCase(helpAction)) {
                 inputGood = true;
                 Display.printAbout();
                 Display.promptForKey();
                 INPUT.nextLine();
-            } else if (helpAction.toLowerCase().matches("instructions")) {
+            } else if ("instructions".equalsIgnoreCase(helpAction)) {
                 inputGood = true;
                 Display.printInstructions();
                 Display.promptForKey();
                 INPUT.nextLine();
-            } else if (helpAction.toLowerCase().matches("cheats")) {
+            } else if ("cheats".equalsIgnoreCase(helpAction)) {
                 inputGood = true;
                 Display.cheatsMenu();
                 Display.promptForKey();

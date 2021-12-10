@@ -259,6 +259,13 @@ public class Display {
     }
 
     /**
+     * Displays an error when saving to an invalid file.
+     */
+    public static void saveUnreachable() {
+        System.out.println("Save Files Unreachable");
+    }
+
+    /**
      * Displays message for successfully loaded game.
      */
     public static void loadCompletePrompt() {
