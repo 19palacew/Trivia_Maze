@@ -71,9 +71,6 @@ public class GameManager {
         gameLoop();
     }
 
-    /**
-     * Loop to keep game running until lose or win.
-     */
     public static void gameLoop() {
         Database.connectToDatabase();
         Display.startMessageSequence();
@@ -105,11 +102,11 @@ public class GameManager {
         String userGameStartInput;
         while (!gameStarted) {
             userGameStartInput = INPUT.nextLine();
-            if ("new game".equalsIgnoreCase(userGameStartInput)) {
+            if (userGameStartInput.equalsIgnoreCase("new game")) {
                 //Initialize the maze and display
                 gameStarted = true;
                 gameSetup();
-            } else if ("load game".equalsIgnoreCase(userGameStartInput)) {
+            } else if (userGameStartInput.equalsIgnoreCase("load game")) {
                 //Initialize the maze and display
                 gameSetup();
                 //Load from beginning
@@ -118,7 +115,7 @@ public class GameManager {
                 } else {
                     Display.startMsg();
                 }
-            } else if ("instructions".equalsIgnoreCase(userGameStartInput)) {
+            } else if (userGameStartInput.equalsIgnoreCase("instructions")) {
                 Display.printInstructions();
             } else {
                 Display.beginGameWarning();
@@ -147,7 +144,7 @@ public class GameManager {
      * Loads a saved Game.
      * @return Boolean for if game is loaded
      */
-     private static Boolean loadGame() {
+    private static Boolean loadGame() {
         Display.loadPrompt();
         String loadFileNumber = INPUT.nextLine();
         boolean loadedGame = false;
@@ -190,27 +187,27 @@ public class GameManager {
         Display.printPrompt();
         while (!inputGood) {
             userAction = INPUT.nextLine();
-            if ("north|south|east|west".equalsIgnoreCase(userAction)) {
+            if (userAction.toLowerCase().matches("north|south|east|west")) {
                 inputGood = true;
-            } else if ("help".equalsIgnoreCase(userAction)) {
+            } else if (userAction.toLowerCase().matches("help")) {
                 inputGood = true;
                 help();
-            } else if ("file".equalsIgnoreCase(userAction)) {
+            } else if (userAction.toLowerCase().matches("file")) {
                 inputGood = true;
                 file();
-            } else if ("open sesame".equalsIgnoreCase(userAction)) {
+            } else if (userAction.toLowerCase().matches("open sesame")) {
                 inputGood = true;
                 Display.cheatActive();
                 mainMaze.undeadAllRooms();
-            } else if ("really lazy".equalsIgnoreCase(userAction)) {
+            } else if (userAction.toLowerCase().matches("really lazy")) {
                 inputGood = true;
                 turnOffQuestions = !turnOffQuestions;
                 Display.cheatActive();
-            } else if ("really really lazy".equalsIgnoreCase(userAction)) {
+            } else if (userAction.toLowerCase().matches("really really lazy")) {
                 inputGood = true;
                 Display.cheatActive();
                 mainMaze.moveToEnd();
-            } else {
+            } else if (!userAction.toLowerCase().matches("")) {
                 Display.userActionWarning();
             }
         }
@@ -236,9 +233,8 @@ public class GameManager {
                 if (userAnswer.matches("lazy")) {
                     Display.cheatActive();
                     System.out.println(localDoor.getAnswer());
-                    attemptUnlock(localDoor.getAnswer(), localDoor);
                 } else {
-                    attemptUnlock(userAnswer, localDoor);
+                    attemptUnlock(userAnswer,localDoor);
                 }
 
                 if (localDoor.isDead()) {
@@ -253,13 +249,7 @@ public class GameManager {
         }
     }
 
-    /**
-     * Helper method to enter answers to Door questions.
-     * @param theUserAnswer entered response
-     * @param theLocalDoor the Door being opened
-     */
-    private static void attemptUnlock(final String theUserAnswer,
-                                      final Door theLocalDoor) {
+    private static void attemptUnlock(final String theUserAnswer, final Door theLocalDoor) {
         theLocalDoor.unlock(theUserAnswer);
     }
     /**
@@ -299,16 +289,17 @@ public class GameManager {
     /**
      * Saves a game.
      */
-     private static void saveGame() {
+    private static void saveGame() {
         Display.saveOptions();
         String userSaveOption = INPUT.nextLine();
         try {
-            File saveFile = switch (userSaveOption) {
-                case FILE_NUMBER_ONE -> SAVE_ONE;
-                case FILE_NUMBER_TWO -> SAVE_TWO;
-                case FILE_NUMBER_THREE -> SAVE_THREE;
+            File saveFile;
+            switch (userSaveOption) {
+                case FILE_NUMBER_ONE -> saveFile = SAVE_ONE;
+                case FILE_NUMBER_TWO -> saveFile = SAVE_TWO;
+                case FILE_NUMBER_THREE -> saveFile = SAVE_THREE;
                 default -> throw new IOException();
-            };
+            }
             FileOutputStream file = new FileOutputStream(saveFile);
             ObjectOutputStream out = new ObjectOutputStream(file);
 
@@ -332,17 +323,17 @@ public class GameManager {
         while (!inputGood) {
             Display.printPrompt();
             helpAction = INPUT.nextLine();
-            if ("about".equalsIgnoreCase(helpAction)) {
+            if (helpAction.toLowerCase().matches("about")) {
                 inputGood = true;
                 Display.printAbout();
                 Display.promptForKey();
                 INPUT.nextLine();
-            } else if ("instructions".equalsIgnoreCase(helpAction)) {
+            } else if (helpAction.toLowerCase().matches("instructions")) {
                 inputGood = true;
                 Display.printInstructions();
                 Display.promptForKey();
                 INPUT.nextLine();
-            } else if ("cheats".equalsIgnoreCase(helpAction)) {
+            } else if (helpAction.toLowerCase().matches("cheats")) {
                 inputGood = true;
                 Display.cheatsMenu();
                 Display.promptForKey();
